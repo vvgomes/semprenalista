@@ -1,0 +1,8 @@
+get info from cabaret
+haml layout
+integration tests
+acceptance tests
+rspec 2 task to run unit/integration/acceptance
+scheduler
+persistence
+some css
