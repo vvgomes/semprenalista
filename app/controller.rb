@@ -6,10 +6,10 @@ Bundler.require :default
 
 Dir.glob(File.expand_path(File.dirname(__FILE__)+'/models/*.rb')).each{|f| require f}
 
+enable :sessions
 set :app_file, __FILE__
 set :public, File.dirname(__FILE__)+'/../public'
 set :views, File.dirname(__FILE__)+'/views'
-enable :sessions
 
 # startup:
 @subscriber = Subscriber.new
@@ -26,10 +26,11 @@ post '/subscribe' do
   
   raver = Nightclubber.new params[:name], params[:email]
   params[:friends].values.each do |friend|
-    raver.take friend
+    raver.take friend if !friend.empty?
   end
-  @subscriber.subscribe raver
-  @subscriber.add raver
+  #@subscriber.subscribe raver
+  #@subscriber.add raver
+  pp raver
   
   redirect to '/done'
 end
