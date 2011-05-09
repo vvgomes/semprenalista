@@ -1,8 +1,5 @@
-get info from cabaret
-haml layout
-integration tests
-acceptance tests
-rspec 2 task to run unit/integration/acceptance
 scheduler
+haml layout
+rspec 2 task to run unit/integration/acceptance
 persistence
-some css
+fix the messy mocks at nightclub spec

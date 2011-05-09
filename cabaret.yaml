@@ -1,0 +1,8 @@
+--- 
+:home_page: http://www.cabaretpoa.com.br
+:links: !ruby/regexp /lista-/
+:service: http://www.cabaretpoa.com.br/syscabaret/cadastra.php
+:param_names: 
+  :friends: !ruby/regexp /amigo/
+  :name: name
+  :email: email

@@ -1,4 +1,65 @@
+body {
+	color: grey;
+	font-family: Verdana;
+	font-size: normal;
+}
+
+legend {
+	font-size: 150%;
+}
+
+p {
+	width: 100%;
+}
+
+a:link {
+	text-decoration: none;
+	color: blue;
+}
+
+a:visited {
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover {
+	text-decoration: underline; 
+	color: blue;
+}
+
+a:active {
+	text-decoration: none;
+}
+
+fieldset {
+	border: 1px solid grey;
+	width: 40%;
+}
+
+label {
+	width: 25%;
+	float: left;
+	text-align: right;
+	margin-right: 0.5em;
+	display: block;
+}
+
 label.error { 
-	color: red; 
-	padding-left: 10px; 
-} 
+	color: red;
+	float: right;
+	width: 3%;
+	text-align: left;
+}
+
+input[type="text"] {
+	width: 65%;
+	background-color: white; 
+	border: 1px solid grey;
+}
+
+input[type="submit"] {
+	margin-left: 76.5%;
+	width: 15%;
+	background-color: white; 
+	border: 1px solid grey;
+}

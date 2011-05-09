@@ -8,8 +8,4 @@ task :server do
   ruby 'app/controller.rb'
 end
 
-task :deploy do
-  #run the heroko stuff
-end
-
 task :default => :spec
