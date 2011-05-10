@@ -6,16 +6,21 @@ Bundler.require :default
 
 Dir.glob(File.expand_path(File.dirname(__FILE__)+'/models/*.rb')).each{|f| require f}
 
-enable :sessions
-set :app_file, __FILE__
-set :public, File.dirname(__FILE__)+'/../public'
-set :views, File.dirname(__FILE__)+'/views'
+configure do
+  enable :sessions
+  set :app_file, __FILE__
+  set :public, File.dirname(__FILE__)+'/../public'
+  set :views, File.dirname(__FILE__)+'/views'
+  
+  @@subscriber = Subscriber.new
+end
 
-# startup:
-@subscriber = Subscriber.new
-@subscriber.add_nightclub Nightclub.new YAML::load_file 'cabaret.yaml'
-@subscriber.add_nightclub Nightclub.new YAML::load_file 'beco.yaml'
-# the scheduller tell @subscriber.subscribe_everybody every monday
+before do
+  # startup:
+  @@subscriber.add_nightclub Nightclub.new YAML::load_file 'cabaret.yaml'
+  @@subscriber.add_nightclub Nightclub.new YAML::load_file 'beco.yaml'
+  # the scheduller tell @subscriber.subscribe_everybody every monday
+end
 
 get '/' do
   haml  :index
@@ -29,8 +34,7 @@ post '/subscribe' do
     raver.take friend if !friend.empty?
   end
   #@subscriber.subscribe raver
-  #@subscriber.add raver
-  pp raver
+  @@subscriber.add raver
   
   redirect to '/done'
 end

@@ -1,8 +1,8 @@
+!!!
 %html
 	%head
 		%title Sempre na Lista!
 		%link{:href => "styles.css", :rel => "stylesheet", :type => "text/css"}
-		%script{:src => "javascripts.js"}
 	%body
 		%form{:action => "/subscribe", :method => "post"}
 			%fieldset
@@ -15,7 +15,7 @@
 					%a{:href => "http://www.beco203.com.br"} Beco
 					pra sempre :)	
 				%p	
-					%input{:name => "name", :type => "text", :placeholder => "Seu nome", :required => "true"}
+					%input{:name => "name", :type => "text", :placeholder => "Seu nome", :required => "true", :autofocus=> "true"}
 				%p
 					%input{:name => "email", :type => "text", :placeholder => "Seu email", :required => "true"}
 				%p
