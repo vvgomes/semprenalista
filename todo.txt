@@ -1,5 +1,7 @@
-scheduler
 haml layout
+scheduler
 rspec 2 task to run unit/integration/acceptance
 persistence
+show parties of the week
+stop service feature
 fix the messy mocks at nightclub spec
