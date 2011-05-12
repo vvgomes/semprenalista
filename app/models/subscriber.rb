@@ -7,7 +7,6 @@ class Subscriber
   
   def add clubber
     @nightclubbers << clubber
-    puts 'added: ' + clubber.name
   end
   
   def add_nightclub club

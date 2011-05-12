@@ -1,4 +1,5 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../app/models/nightclub')
+require 'yaml'
 
 describe 'Nightclub' do
   
@@ -17,26 +18,32 @@ describe 'Nightclub' do
       once.with(:name => /friend/).
       and_return [friend_field]
     
-    party_link = mock
-    party_link.stub! :click
+    list_link = mock
+    list_link.stub! :click
+    list_link.stub! :href
     
     page = mock
     page.should_receive(:links_with).
       with(:href => /list/).
-      and_return [party_link]
+      and_return [list_link]
 
     page.should_receive(:form_with).
       once.with(:action => 'www.party.com/list').
       and_return form
     
+    response = mock
+    response.stub!(:code).and_return 200
+    
     agent = mock
     agent.should_receive(:get).with 'www.party.com'
     agent.stub!(:page).and_return page
-    agent.should_receive(:submit).with form
+    agent.should_receive(:submit).with(form).
+      and_return response
     
     Mechanize.stub!(:new).and_return agent
     
     party_place = Nightclub.new config
+    party_place.turn_logger_off
     party_place.add_to_available_lists nightclubber
   end
   
