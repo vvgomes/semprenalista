@@ -3,19 +3,13 @@ require 'bundler'
 require 'yaml'
 
 Bundler.require :default
-
 Dir.glob(File.expand_path(File.dirname(__FILE__)+'/models/*.rb')).each{|f| require f}
 
 @@subscriber = Subscriber.new
 @@subscriber.add_nightclub Nightclub.new YAML::load_file 'cabaret.yml'
 @@subscriber.add_nightclub Nightclub.new YAML::load_file 'beco.yml'
-# the scheduller tell @subscriber.subscribe_everybody every monday
-
-@@count = 0
-scheduler = Rufus::Scheduler.start_new
-scheduler.every '5s' do
-    @@count += 1
-    #puts "count: #{@@count} (#{Time.now.to_s})"
+Rufus::Scheduler.start_new.cron '0 12 * * 1' do
+    @@subscriber.subscribe_everybody
 end
 
 configure do
@@ -31,7 +25,7 @@ helpers do
     params[:friends].values.each do |friend|
       raver.take friend if !friend.empty?
     end
-    #@@subscriber.subscribe raver
+    @@subscriber.subscribe raver
     @@subscriber.add raver
   end
 end

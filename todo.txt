@@ -1,4 +1,3 @@
-scheduler
 rspec 2 task to run unit/integration/acceptance
 persistence
 show parties of the week
