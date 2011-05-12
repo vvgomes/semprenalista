@@ -33,33 +33,22 @@ a:active {
 
 fieldset {
 	border: 1px solid grey;
-	width: 40%;
+	width: 30%;
 }
 
-label {
-	width: 25%;
-	float: left;
-	text-align: right;
-	margin-right: 0.5em;
-	display: block;
-}
-
-label.error { 
-	color: red;
-	float: right;
-	width: 3%;
-	text-align: left;
+input {
+	border: 1px solid grey;
 }
 
 input[type="text"] {
-	width: 65%;
-	background-color: white; 
-	border: 1px solid grey;
+	width: 100%;
+	height: 20px;
+	font-size: large;
 }
 
 input[type="submit"] {
-	margin-left: 76.5%;
+	margin-left: 86%;
 	width: 15%;
-	background-color: white; 
-	border: 1px solid grey;
+	height: 20px;
+	background-color: white;
 }

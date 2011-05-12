@@ -1,38 +1,26 @@
-%html
-	%head
-		%title Sempre na Lista!
-		%link{:href => "styles.css", :rel => "stylesheet", :type => "text/css"}
-		%script{:src => "http://code.jquery.com/jquery-latest.js"}
-		%script{:src => "http://ajax.aspnetcdn.com/ajax/jquery.validate/1.8/jquery.validate.js"}
-		%script{:src => "javascripts.js"}
-	%body
-		%form{:action => "/subscribe", :method => "post"}
-			%fieldset
-				%legend Sempre na Lista!
-				%p
-					Oi. Preencha o formulario abaixo e eu vou, generosamente, colocar voce e seus amigos
-					na lista de desconto de todas as festas do
-					%a{:href => "http://www.cabaretpoa.com.br"} Cabaret
-					e do
-					%a{:href => "http://www.beco203.com.br"} Beco
-					pra sempre :)	
-				%p	
-					%label{:for => "name"} Seu nome:
-					%input{:name => "name", :type => "text"}
-				%p
-					%label{:for => "email"} Seu email:
-					%input{:name => "email", :type => "text"}
-				%p
-					%label{:for => "friends[0]"} Um amigo:
-					%input{:name => "friends[0]", :type => "text"}
-				%p
-					%label{:for => "friends[1]"} Outro amigo:
-					%input{:name => "friends[1]", :type => "text"}
-				%p
-					%label{:for => "friends[2]"} Mais um:
-					%input{:name => "friends[2]", :type => "text"}
-				%p
-					%label{:for => "friends[3]"} O ultimo:
-					%input{:name => "friends[3]", :type => "text"}
-				%p
-					%input{:name => "submit", :type => "submit", :value => "OK"}
+%form{:action => "/subscribe", :method => "post"}
+	%fieldset
+		%legend Sempre na Lista!
+		%p
+			Ol&aacute;. Preencha o formulario abaixo para colocar voce e seus amigos
+			na lista de descontos de todas as festas do
+			%a{:href => "http://www.cabaretpoa.com.br"} Cabaret
+			e do
+			%a{:href => "http://www.beco203.com.br"} Beco
+			pra sempre :)	
+		%p	
+			%input{:name => "name", :type => "text", :placeholder => "Seu nome", :required => "true"}
+		%p
+			%input{:name => "email", :type => "text", :placeholder => "Seu email", :required => "true"}
+		%p
+			%input{:name => "friends[0]", :type => "text", :placeholder => "Um amigo"}
+		%p
+			%input{:name => "friends[1]", :type => "text", :placeholder => "Outro amigo"}
+		%p
+			%input{:name => "friends[2]", :type => "text", :placeholder => "Mais um"}
+		%p
+			%input{:name => "friends[3]", :type => "text", :placeholder => "O último"}
+		%p
+			%input{:name => "submit", :type => "submit", :value => "OK"}
+
+%script{:src => "javascripts.js"}
