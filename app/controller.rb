@@ -17,8 +17,8 @@ end
 
 before do
   # startup:
-  @@subscriber.add_nightclub Nightclub.new YAML::load_file 'cabaret.yaml'
-  @@subscriber.add_nightclub Nightclub.new YAML::load_file 'beco.yaml'
+  @@subscriber.add_nightclub Nightclub.new YAML::load_file 'cabaret.yml'
+  @@subscriber.add_nightclub Nightclub.new YAML::load_file 'beco.yml'
   # the scheduller tell @subscriber.subscribe_everybody every monday
 end
 
