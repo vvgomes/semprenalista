@@ -5,11 +5,21 @@ require 'yaml'
 Bundler.require :default
 Dir.glob(File.expand_path(File.dirname(__FILE__)+'/models/*.rb')).each{|f| require f}
 
+Mongoid.configure do |config|
+  if ENV['MONGOHQ_URL']
+    conn = Mongo::Connection.from_uri(ENV['MONGOHQ_URL'])
+    uri = URI.parse(ENV['MONGOHQ_URL'])
+    config.master = conn.db(uri.path.gsub(/^\//, ''))
+  else
+    config.master = Mongo::Connection.from_uri("mongodb://localhost:27017").db('semprenalista')
+  end
+end
+
 @@subscriber = Subscriber.new
 @@subscriber.add_nightclub Nightclub.new YAML::load_file 'cabaret.yml'
 @@subscriber.add_nightclub Nightclub.new YAML::load_file 'beco.yml'
 Rufus::Scheduler.start_new.cron '0 12 * * 1' do
-    @@subscriber.subscribe_everybody
+  @@subscriber.subscribe_everybody
 end
 
 configure do
@@ -21,11 +31,11 @@ end
 
 helpers do
   def subscribe_new_nightclubber params
-    raver = Nightclubber.new params[:name], params[:email]
-    params[:friends].values.each do |friend|
-      raver.take friend if !friend.empty?
-    end
-    @@subscriber.subscribe raver
+    name = params[:name]
+    email = params[:email]
+    friends = params[:friends].values.map{ |f| f if !f.empty? }
+    raver = Nightclubber.new name, email, friends
+    #@@subscriber.subscribe raver
     @@subscriber.add raver
   end
 end

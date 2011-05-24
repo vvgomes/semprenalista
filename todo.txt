@@ -1,5 +1,6 @@
-rspec 2 task to run unit/integration/acceptance
-persistence
-show parties of the week
+save the clubber in subscribe.add
 stop service feature
 fix the messy mocks at nightclub spec
+cleanup controller mess
+rspec 2 task to run unit/integration/acceptance
+show parties of the week
