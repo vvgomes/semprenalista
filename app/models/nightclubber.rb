@@ -1,21 +1,13 @@
-class Nightclubber 
+require 'mongoid'
+
+class Nightclubber
+  include Mongoid::Document 
+  field :name, :type => String
+  field :email, :type => String
+  field :friends, :type => Array, :default => []
   
-  attr_reader :name
-  attr_reader :email
-  attr_reader :friends
-  
-  def initialize name, email
-    @name = name
-    @email = email
-    @friends = []
-  end
-  
-  def take friend
-    @friends << friend
-  end
-  
-  def alone?
-    @friends.empty?
+  def initialize name, email, friends
+    super :name => name, :email => email, :friends => friends
   end
   
 end
