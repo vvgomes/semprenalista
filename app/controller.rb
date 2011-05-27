@@ -35,7 +35,7 @@ helpers do
     email = params[:email]
     friends = params[:friends].values.map{ |f| f if !f.empty? }
     raver = Nightclubber.new name, email, friends
-    #@@subscriber.subscribe raver
+    @@subscriber.subscribe raver
     @@subscriber.add raver
   end
 end

@@ -14,14 +14,16 @@ class Nightclub
     agent.page.links_with(:href => @config[:links]).each do |list_link|
       list_link.click
       form = agent.page.form_with :action => @config[:service]
-      form[@config[:param_names][:name]] = clubber.name
-      form[@config[:param_names][:email]] = clubber.email
-      fields_for_friends = form.fields_with :name => @config[:param_names][:friends]
-      clubber.friends.each_with_index do |friend, i|
-        fields_for_friends[i].value = friend
+      if form then
+        form[@config[:param_names][:name]] = clubber.name
+        form[@config[:param_names][:email]] = clubber.email
+        fields_for_friends = form.fields_with :name => @config[:param_names][:friends]
+        clubber.friends.each_with_index do |friend, i|
+          fields_for_friends[i].value = friend
+        end
+        response = agent.submit form
+        log list_link.href, clubber, response.code
       end
-      response = agent.submit form
-      log list_link.href, clubber, response.code
     end
   end
   
