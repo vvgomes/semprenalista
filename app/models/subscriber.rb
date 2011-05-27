@@ -2,11 +2,10 @@ class Subscriber
   
   def initialize
     @nightclubs = []
-    @nightclubbers = []
   end
   
   def add clubber
-    @nightclubbers << clubber
+    clubber.save
   end
   
   def add_nightclub club
@@ -20,7 +19,7 @@ class Subscriber
   end
   
   def subscribe_everybody
-    @nightclubbers.each do |clubber|
+    Nightclubber.all.each do |clubber|
       subscribe clubber
     end
   end
