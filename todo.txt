@@ -1,4 +1,3 @@
-save the clubber in subscribe.add
 stop service feature
 fix the messy mocks at nightclub spec
 cleanup controller mess
