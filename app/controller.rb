@@ -56,3 +56,8 @@ get '/done' do
   session[:subscribed] = false
   haml :done
 end
+
+get '/subscribe_everybody' do
+  @@subscriber.subscribe_everybody
+  'Done! Check out the server logs.'
+end
