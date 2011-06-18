@@ -2,12 +2,12 @@ require 'mechanize'
 require 'logger'
 
 class Nightclub
-  
+
   def initialize config
     @config = config
     @logger = Logger.new STDOUT
   end
-  
+
   def add_to_available_lists clubber
     agent = Mechanize.new
     agent.get @config[:home_page]
@@ -26,15 +26,15 @@ class Nightclub
       end
     end
   end
-  
+
   def turn_logger_off
     @logger = nil
   end
-  
+
   private
-  
+
   def log list, clubber, code
     @logger.info "Added #{clubber.name} (#{clubber.email}) in #{list}: #{code}" if @logger
   end
-  
+
 end

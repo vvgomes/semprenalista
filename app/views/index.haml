@@ -1,26 +1,26 @@
 %form{:action => "/subscribe", :method => "post"}
-	%fieldset
-		%legend Sempre na Lista!
-		%p
-			Ol&aacute;. Preencha o formulario abaixo para colocar voce e seus amigos
-			na lista de descontos de todas as festas do
-			%a{:href => "http://www.cabaretpoa.com.br"} Cabaret
-			e do
-			%a{:href => "http://www.beco203.com.br"} Beco
-			pra sempre :)	
-		%p	
-			%input{:name => "name", :type => "text", :placeholder => "Seu nome", :required => "true"}
-		%p
-			%input{:name => "email", :type => "text", :placeholder => "Seu email", :required => "true"}
-		%p
-			%input{:name => "friends[0]", :type => "text", :placeholder => "Um amigo"}
-		%p
-			%input{:name => "friends[1]", :type => "text", :placeholder => "Outro amigo"}
-		%p
-			%input{:name => "friends[2]", :type => "text", :placeholder => "Mais um"}
-		%p
-			%input{:name => "friends[3]", :type => "text", :placeholder => "O último"}
-		%p
-			%input{:name => "submit", :type => "submit", :value => "OK"}
+  %fieldset
+    %legend Sempre na Lista!
+    %p
+      Ol&aacute;. Preencha o formulario abaixo para colocar voce e seus amigos
+      na lista de descontos de todas as festas do
+      %a{:href => "http://www.cabaretpoa.com.br"} Cabaret
+      e do
+      %a{:href => "http://www.beco203.com.br"} Beco
+      pra sempre :)	
+    %p	
+      %input{:name => "name", :type => "text", :placeholder => "Seu nome", :required => "true"}
+    %p
+      %input{:name => "email", :type => "text", :placeholder => "Seu email", :required => "true"}
+    %p
+      %input{:name => "friends[0]", :type => "text", :placeholder => "Um amigo"}
+    %p
+      %input{:name => "friends[1]", :type => "text", :placeholder => "Outro amigo"}
+    %p
+      %input{:name => "friends[2]", :type => "text", :placeholder => "Mais um"}
+    %p
+      %input{:name => "friends[3]", :type => "text", :placeholder => "O último"}
+    %p
+      %input{:name => "submit", :type => "submit", :value => "OK"}
 
 %script{:src => "javascripts.js"}
