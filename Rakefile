@@ -9,3 +9,4 @@ task :server do
 end
 
 task :default => :spec
+

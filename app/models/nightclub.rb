@@ -11,9 +11,12 @@ class Nightclub
   def add_to_available_lists clubber
     agent = Mechanize.new
     agent.get @config[:home_page]
-    agent.page.links_with(:href => @config[:links]).each do |list_link|
+
+    links = agent.page.links_with(:href => @config[:links])
+    puts links.size
+    links.each do |list_link|
       list_link.click
-      form = agent.page.form_with :action => @config[:service]
+      form = agent.page.forms.first
       if form then
         form[@config[:param_names][:name]] = clubber.name
         form[@config[:param_names][:email]] = clubber.email
@@ -21,8 +24,8 @@ class Nightclub
         clubber.friends.each_with_index do |friend, i|
           fields_for_friends[i].value = friend
         end
-        response = agent.submit form
-        log list_link.href, clubber, response.code
+        #response = agent.submit form
+        #log list_link.href, clubber, response.code
       end
     end
   end
@@ -38,3 +41,4 @@ class Nightclub
   end
 
 end
+

@@ -25,3 +25,4 @@ class Subscriber
   end
 
 end
+

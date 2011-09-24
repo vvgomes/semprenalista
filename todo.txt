@@ -1,5 +1,0 @@
-stop service feature
-fix the messy mocks at nightclub spec
-cleanup controller mess
-rspec 2 task to run unit/integration/acceptance
-show parties of the week
