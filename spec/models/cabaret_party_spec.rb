@@ -7,35 +7,23 @@ describe 'Cabaret::Party' do
     agent = mock
     agent.stub!(:get).and_return @page
     Mechanize.stub!(:new).and_return agent
-
-    url = 'http://cabaretpoa.com.br/london-calling.htm'
-    @london_calling = Cabaret::Party.new url
+    @london_calling = Cabaret::Party.new 'london-calling.htm'
   end
 
-  it 'should give me its name based on site structure' do
+  it 'should give me its name based on page structure' do
     title = mock
     title.stub!(:text).and_return 'LONDON CALLING'
-
-    @page.should_receive(:search).
-      with('div#texto > h2').
-      and_return [title]
-
+    @page.should_receive(:search).with('div#texto > h2').and_return [title]
     @london_calling.name.should be_eql 'LONDON CALLING'
   end
 
   it 'should not be a nice party when there is no discount list' do
-    @page.should_receive(:link_with).
-      with(:text => /enviar nome para a lista/i).
-      and_return nil
-
+    @page.should_receive(:link_with).with(:text => /enviar nome para a lista/i).and_return nil
     @london_calling.should_not be_nice
   end
 
   it 'should be a nice party when there is a discount list' do
-    @page.should_receive(:link_with).
-      with(:text => /enviar nome para a lista/i).
-      and_return mock
-
+    @page.should_receive(:link_with).with(:text => /enviar nome para a lista/i).and_return mock
     @london_calling.should be_nice
   end
 
