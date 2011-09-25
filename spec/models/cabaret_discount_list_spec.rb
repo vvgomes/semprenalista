@@ -44,8 +44,7 @@ describe 'Cabaret::DiscountList' do
   # TODO: response tests:
   # - 200
   # - some success message from response body
-  # - failure code
-  # - some failure message from response body
+  # - there is no failure code for cabaret
 
   def sabella
     sabella = mock
