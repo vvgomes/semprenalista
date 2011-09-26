@@ -8,10 +8,9 @@ module Cabaret
   end
 
   class Party
-    include Cabaret
 
-    def initialize url
-      @page = agent.get url
+    def initialize page
+      @page = page
     end
 
     def name
@@ -27,8 +26,8 @@ module Cabaret
   class DiscountList
     include Cabaret
 
-    def initialize url
-      @page = agent.get url
+    def initialize page
+      @page = page
       @form = @page.form_with(:action => /cadastra.php/i)
     end
 
@@ -38,11 +37,10 @@ module Cabaret
 
     def add clubber
       return if !nice?
-      @form[:name] = clubber.name
-      @form[:email] = clubber.email
+      @form['name'] = clubber.name
+      @form['email'] = clubber.email
       add_friends clubber
-      #response = agent.submit form
-      #log list_link.href, clubber, response.code
+      agent.submit @form
     end
 
     private
@@ -52,6 +50,18 @@ module Cabaret
       clubber.friends.each_with_index do |friend, i|
         fields_for_friends[i].value = friend
       end
+    end
+
+  end
+
+  class EmptyResponse
+
+    def message
+      'empty response'
+    end
+
+    def code
+      0
     end
 
   end

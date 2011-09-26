@@ -4,10 +4,7 @@ describe 'Cabaret::Party' do
 
   before :each do
     @page = mock
-    agent = mock
-    agent.stub!(:get).and_return @page
-    Mechanize.stub!(:new).and_return agent
-    @london_calling = Cabaret::Party.new 'london-calling.htm'
+    @london_calling = Cabaret::Party.new @page
   end
 
   it 'should give me its name based on page structure' do
