@@ -11,6 +11,7 @@ module Cabaret
 
     def initialize page
       @page = page
+      @list_link = @page.link_with(:text => /enviar nome para a lista/i)
     end
 
     def name
@@ -18,7 +19,13 @@ module Cabaret
     end
 
     def nice?
-      !@page.link_with(:text => /enviar nome para a lista/i).nil?
+      !@list_link.nil?
+    end
+
+    def add_to_list clubber
+      return EmptyResponse.new('There is no discount list!') if !nice?
+      list = DiscountList.new @list_link.click
+      list.add clubber
     end
 
   end
@@ -36,7 +43,7 @@ module Cabaret
     end
 
     def add clubber
-      return EmptyResponse.new if !nice?
+      return EmptyResponse.new('Form not found!') if !nice?
       fill_form_with clubber
       submit
     end
@@ -77,12 +84,16 @@ module Cabaret
 
   class EmptyResponse
 
+    def initialize reason
+      @reason = reason
+    end
+
     def code
       0
     end
 
     def body
-      'empty response'
+      @reason
     end
 
   end

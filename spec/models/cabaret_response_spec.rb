@@ -5,7 +5,7 @@ describe 'Cabaret::Response' do
   context 'that is empty' do
 
     before :each do
-      @response = Cabaret::EmptyResponse.new
+      @response = Cabaret::EmptyResponse.new 'Form not found!'
     end
 
     it 'should not be nice' do
@@ -13,7 +13,7 @@ describe 'Cabaret::Response' do
     end
 
     it 'should give me an emptiness message' do
-      @response.body.should be_eql 'empty response'
+      @response.body.should be_eql 'Form not found!'
     end
 
   end
