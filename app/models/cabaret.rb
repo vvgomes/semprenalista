@@ -7,6 +7,20 @@ module Cabaret
     @agent
   end
 
+  #class HomePage :)
+
+  class Agenda
+
+    def initialize page
+      @page = page
+    end
+
+    def parties
+      @page.links_with(:text => /saiba mais/i).map{ |l| Party.new l.click }
+    end
+
+  end
+
   class Party
 
     def initialize page
@@ -44,13 +58,13 @@ module Cabaret
 
     def add clubber
       return EmptyResponse.new('Form not found!') if !nice?
-      fill_form_with clubber
+      fill_form clubber
       submit
     end
 
     private
 
-    def fill_form_with clubber
+    def fill_form clubber
       @form['name'] = clubber.name
       @form['email'] = clubber.email
       fields_for_friends = @form.fields_with(:name => /amigo/)

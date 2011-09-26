@@ -1,10 +1,9 @@
 require 'rubygems'
+require './app/models/cabaret'
 
-page = Mechanize.new.get 'http://www.cabaretpoa.com.br/agenda.htm'
-
-list = Cabaret::DiscountList.new page
-response = list.add fulvio
-puts 'hey'
-require 'ruby-debug';debugger
-puts 'hey'
+agent = Mechanize.new
+agenda = Cabaret::Agenda.new agent.get 'http://www.cabaretpoa.com.br/agenda.htm'
+agenda.parties.each do |party|
+  puts party.name
+end
 
