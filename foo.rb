@@ -7,8 +7,13 @@ fulvio = Nightclubber.new 'Fulvio Silas', 'fulvio@gmail.com', ['Jairo Silva', 'G
 page = Mechanize.new.get 'http://cabaretpoa.com.br/lista-start-me-up.htm'
 
 list = Cabaret::DiscountList.new page
-r = list.add fulvio
-pp r
+response = list.add fulvio
+puts 'hey'
+require 'ruby-debug';debugger
+puts 'hey'
+
+#response.search('body').first.text.gsub('Voltar', '')
+#Nome(s) adicionado(s) a lista. Confira seu email para maiores informações. Voltar
 
 =begin
 agent = Mechanize.new

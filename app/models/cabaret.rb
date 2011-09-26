@@ -36,32 +36,53 @@ module Cabaret
     end
 
     def add clubber
-      return if !nice?
-      @form['name'] = clubber.name
-      @form['email'] = clubber.email
-      add_friends clubber
-      agent.submit @form
+      return EmptyResponse.new if !nice?
+      fill_form_with clubber
+      submit
     end
 
     private
 
-    def add_friends clubber
+    def fill_form_with clubber
+      @form['name'] = clubber.name
+      @form['email'] = clubber.email
       fields_for_friends = @form.fields_with(:name => /amigo/)
       clubber.friends.each_with_index do |friend, i|
         fields_for_friends[i].value = friend
       end
     end
 
+    def submit
+      response_page = agent.submit @form
+      Response.new response_page
+    end
+
+  end
+
+  class Response
+
+    def initialize page
+      @page = page
+    end
+
+    def code
+      @page.code
+    end
+
+    def body
+      @page.search('body').first.text
+    end
+
   end
 
   class EmptyResponse
 
-    def message
-      'empty response'
-    end
-
     def code
       0
+    end
+
+    def body
+      'empty response'
     end
 
   end
