@@ -1,8 +1,0 @@
----
-:home_page: http://www.cabaretpoa.com.br
-:links: !ruby/regexp /lista-/
-:param_names:
-  :friends: !ruby/regexp /amigo/
-  :name: name
-  :email: email
-

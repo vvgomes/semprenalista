@@ -7,12 +7,21 @@ module Cabaret
     @agent
   end
 
+  def get url
+    agent.get url
+  end
+
+  def submit
+
+  end
+
   class HomePage
     include Cabaret
 
     def initialize
-      page = agent.get 'http://www.cabaretpoa.com.br/'
-      @agenda = Agenda.new page.link_with(:href => 'agenda.htm')
+      page = get 'http://www.cabaretpoa.com.br/'
+      agenda_page = page.link_with(:href => 'agenda.htm').click
+      @agenda = Agenda.new agenda_page
     end
 
     def parties

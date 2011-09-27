@@ -5,7 +5,6 @@ require 'rspec/core/rake_task'
 task :default => :spec
 
 n = namespace :spec do
-
   RSpec::Core::RakeTask.new(:models) do |spec|
     spec.pattern = 'spec/models/*_spec.rb'
   end
