@@ -15,7 +15,7 @@ describe 'Cabaret::Party' do
       @london_calling.should be_nice
     end
 
-    it 'should ask its discount list to add a nightclubber' do
+    it 'should add a nightclubber to its discount list' do
       list = mock
       sabella = mock
       expected_response = mock

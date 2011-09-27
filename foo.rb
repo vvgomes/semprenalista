@@ -1,9 +1,10 @@
 require 'rubygems'
-require './app/models/cabaret'
+require 'mechanize'
 
 agent = Mechanize.new
-agenda = Cabaret::Agenda.new agent.get 'http://www.cabaretpoa.com.br/agenda.htm'
-agenda.parties.each do |party|
-  puts party.name
-end
+home = agent.get 'http://www.cabaretpoa.com.br'
+link = home.link_with(:href => 'agenda.htm')
+puts '##'
+require 'ruby-debug';debugger
+puts '##'
 
