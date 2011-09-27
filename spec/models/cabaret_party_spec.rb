@@ -7,7 +7,11 @@ describe 'Cabaret::Party' do
     before :each do
       @list_link = mock
       page = mock
-      page.should_receive(:link_with).with(:text => /enviar nome para a lista/i).and_return @list_link
+
+      page.stub!(:link_with).
+      with(:text => /enviar nome para a lista/i).
+      and_return @list_link
+
       @london_calling = Cabaret::Party.new page
     end
 
@@ -16,16 +20,22 @@ describe 'Cabaret::Party' do
     end
 
     it 'should add a nightclubber to its discount list' do
-      list = mock
+      london_calling_list = mock
+      london_calling_list_page = mock
+      response = mock
       sabella = mock
-      expected_response = mock
-      list.should_receive(:add).with(sabella).and_return expected_response
 
-      Cabaret::DiscountList.stub!(:new).and_return list
-      @list_link.stub!(:click).and_return mock
+      @list_link.stub!(:click).
+      and_return london_calling_list_page
 
-      response = @london_calling.add_to_list sabella
-      response.should be_eql expected_response
+      london_calling_list.should_receive(:add).
+      with(sabella).and_return response
+
+      Cabaret::DiscountList.should_receive(:new).
+      with(london_calling_list_page).
+      and_return london_calling_list
+
+      @london_calling.add_to_list(sabella).should be_eql response
     end
 
   end
@@ -34,7 +44,11 @@ describe 'Cabaret::Party' do
 
     before :each do
       page = mock
-      page.should_receive(:link_with).with(:text => /enviar nome para a lista/i).and_return nil
+
+      page.should_receive(:link_with).
+      with(:text => /enviar nome para a lista/i).
+      and_return nil
+
       @london_calling = Cabaret::Party.new page
     end
 
@@ -48,7 +62,9 @@ describe 'Cabaret::Party' do
     end
 
     it 'should set a reason when failed to add a new nightclubber' do
-      Cabaret::EmptyResponse.should_receive(:new).with('There is no discount list!')
+      Cabaret::EmptyResponse.should_receive(:new).
+      with('There is no discount list!')
+
       @london_calling.add_to_list mock
     end
 
@@ -56,11 +72,13 @@ describe 'Cabaret::Party' do
 
   it 'should give me its name based on page structure' do
     title = mock
-    title.stub!(:text).and_return 'LONDON CALLING'
-
     page = mock
-    page.stub! :link_with
-    page.should_receive(:search).with('div#texto > h2').and_return [title]
+
+    title.stub!(:text).and_return 'LONDON CALLING'
+    page.stub!(:link_with)
+
+    page.should_receive(:search).
+    with('div#texto > h2').and_return [title]
 
     london_calling = Cabaret::Party.new page
     london_calling.name.should be_eql 'LONDON CALLING'
