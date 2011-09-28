@@ -17,7 +17,7 @@ module Cabaret
     end
 
     def parties
-      @agenda.parties
+      @agenda.parties.find_all { |p| p.nice? }
     end
   end
 

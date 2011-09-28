@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../../app/models/cabaret')
 
 describe 'Cabaret::Agenda' do
 
-  it 'should give me the available parties' do
+  it 'should give me all the available parties' do
     agenda_page = mock
     amnesia_link = mock
     amnesia_page = mock
