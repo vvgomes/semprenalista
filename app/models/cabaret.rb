@@ -12,12 +12,13 @@ module Cabaret
 
     def initialize
       page = agent.get 'http://www.cabaretpoa.com.br/'
-      agenda_page = page.link_with(:href => 'agenda.htm').click
+      agenda_link = page.link_with :href => 'agenda.htm'
+      agenda_page = agenda_link.click
       @agenda = Agenda.new agenda_page
     end
 
     def parties
-      @agenda.parties.find_all { |p| p.nice? }
+      @agenda.parties.find_all{ |p| p.nice? }
     end
   end
 
@@ -28,7 +29,8 @@ module Cabaret
     end
 
     def parties
-      @page.links_with(:text => /saiba mais/i).map{ |l| Party.new l.click }
+      links = @page.links_with :text => /saiba mais/i
+      links.map { |l| Party.new l.click }
     end
 
   end
@@ -37,7 +39,7 @@ module Cabaret
 
     def initialize page
       @page = page
-      @list_link = @page.link_with(:text => /enviar nome para a lista/i)
+      @list_link = @page.link_with :text => /enviar nome para a lista/i
     end
 
     def name
@@ -49,7 +51,6 @@ module Cabaret
     end
 
     def add_to_list clubber
-      return EmptyResponse.new('There is no discount list!') if !nice?
       list = DiscountList.new @list_link.click
       list.add clubber
     end
@@ -61,11 +62,7 @@ module Cabaret
 
     def initialize page
       @page = page
-      @form = @page.form_with(:action => /cadastra.php/i)
-    end
-
-    def nice?
-      !@form.nil?
+      @form = @page.form_with :action => /cadastra.php/i
     end
 
     def add clubber
@@ -75,6 +72,10 @@ module Cabaret
     end
 
     private
+
+    def nice?
+      !@form.nil?
+    end
 
     def fill_form_with clubber
       @form['name'] = clubber.name
@@ -86,8 +87,7 @@ module Cabaret
     end
 
     def submit_form
-      response_page = agent.submit @form
-      Response.new response_page
+      Response.new(agent.submit(@form))
     end
 
   end

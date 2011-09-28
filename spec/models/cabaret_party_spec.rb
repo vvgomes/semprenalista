@@ -56,18 +56,6 @@ describe 'Cabaret::Party' do
       @london_calling.should_not be_nice
     end
 
-    it 'should not be able to add a nightclubber to the list' do
-      response = @london_calling.add_to_list mock
-      response.should be_an_instance_of Cabaret::EmptyResponse
-    end
-
-    it 'should set a reason when failed to add a new nightclubber' do
-      Cabaret::EmptyResponse.should_receive(:new).
-      with('There is no discount list!')
-
-      @london_calling.add_to_list mock
-    end
-
   end
 
   it 'should give me its name based on page structure' do
