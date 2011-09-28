@@ -8,10 +8,10 @@ describe 'Cabaret' do
   end
 
   it 'should reflect the actual web site structure' do
-    home = Cabaret::HomePage.new
-    parties = home.parties
-    parties.each do |p|
+    home = Cabaret::HomePage.new.parties.each do |p|
       response = p.add_to_list sabella
+
+      response.code.should be 200
       response.body.should be_eql 'ok'
     end
   end
@@ -26,6 +26,7 @@ describe 'Cabaret' do
 
     page = mock
     page.stub!(:search).and_return [body]
+    page.stub!(:code).and_return 200
 
     agent = Mechanize.new
     agent.stub!(:submit).and_return page
