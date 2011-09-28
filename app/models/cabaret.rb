@@ -7,19 +7,11 @@ module Cabaret
     @agent
   end
 
-  def get url
-    agent.get url
-  end
-
-  def submit
-
-  end
-
   class HomePage
     include Cabaret
 
     def initialize
-      page = get 'http://www.cabaretpoa.com.br/'
+      page = agent.get 'http://www.cabaretpoa.com.br/'
       agenda_page = page.link_with(:href => 'agenda.htm').click
       @agenda = Agenda.new agenda_page
     end
@@ -78,13 +70,13 @@ module Cabaret
 
     def add clubber
       return EmptyResponse.new('Form not found!') if !nice?
-      fill_form clubber
-      submit
+      fill_form_with clubber
+      submit_form
     end
 
     private
 
-    def fill_form clubber
+    def fill_form_with clubber
       @form['name'] = clubber.name
       @form['email'] = clubber.email
       fields_for_friends = @form.fields_with(:name => /amigo/)
@@ -93,7 +85,7 @@ module Cabaret
       end
     end
 
-    def submit
+    def submit_form
       response_page = agent.submit @form
       Response.new response_page
     end
