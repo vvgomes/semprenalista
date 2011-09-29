@@ -1,0 +1,3 @@
+- remove duplication for data setup in specs
+- find a better way to setup stubs
+

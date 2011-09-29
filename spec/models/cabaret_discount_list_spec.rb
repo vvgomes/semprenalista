@@ -9,10 +9,6 @@ describe 'Cabaret::DiscountList' do
       amnesia_list.add(sabella).should be_an_instance_of Cabaret::EmptyResponse
     end
 
-    def page_without_form
-      page_with nil
-    end
-
   end
 
   context 'that has a form' do
@@ -40,7 +36,16 @@ describe 'Cabaret::DiscountList' do
       amnesia_list.add(sabella).should be_an_instance_of Cabaret::Response
     end
 
-    def dumb_form
+  end
+
+  def page_with form
+    page = mock
+    page.should_receive(:form_with).
+    with(:action => /cadastra.php/i).and_return form
+    page
+  end
+
+  def dumb_form
       friend_input = mock
       friend_input.stub!(:value=)
 
@@ -52,14 +57,9 @@ describe 'Cabaret::DiscountList' do
       form
     end
 
-  end
-
-  def page_with form
-    page = mock
-    page.should_receive(:form_with).
-    with(:action => /cadastra.php/i).and_return form
-    page
-  end
+  def page_without_form
+      page_with nil
+    end
 
   def sabella
     sabella = mock
