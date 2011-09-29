@@ -2,74 +2,69 @@ require File.expand_path(File.dirname(__FILE__) + '/../../app/models/cabaret')
 
 describe 'Cabaret::Party' do
 
-  context 'that has a discount list' do
-
-    before :each do
-      @list_link = mock
-      page = mock
-
-      page.stub!(:link_with).
-      with(:text => /enviar nome para a lista/i).
-      and_return @list_link
-
-      @london_calling = Cabaret::Party.new page
-    end
-
-    it 'should be a nice party when there is a discount list' do
-      @london_calling.should be_nice
-    end
-
-    it 'should add a nightclubber to its discount list' do
-      london_calling_list = mock
-      london_calling_list_page = mock
-      response = mock
-      sabella = mock
-
-      @list_link.stub!(:click).
-      and_return london_calling_list_page
-
-      london_calling_list.should_receive(:add).
-      with(sabella).and_return response
-
-      Cabaret::DiscountList.should_receive(:new).
-      with(london_calling_list_page).
-      and_return london_calling_list
-
-      @london_calling.add_to_list(sabella).should be_eql response
-    end
-
+  it 'should give me its name' do
+    page = party_page 'Amnesia'
+    amnesia = Cabaret::Party.new page
+    amnesia.name.should be_eql 'Amnesia'
   end
 
   context 'that does not have a discount list' do
 
-    before :each do
-      page = mock
-
-      page.should_receive(:link_with).
-      with(:text => /enviar nome para a lista/i).
-      and_return nil
-
-      @london_calling = Cabaret::Party.new page
-    end
-
     it 'should not be a nice party when there is no discount list' do
-      @london_calling.should_not be_nice
+      page = not_nice(party_page('London Calling'))
+      london_calling = Cabaret::Party.new page
+      london_calling.should_not be_nice
     end
 
   end
 
-  it 'should give me its name based on page structure' do
-    title = mock
+  context 'that has a discount list' do
+
+    it 'should be nice' do
+      page = party_page 'Amnesia'
+      amnesia = Cabaret::Party.new page
+      amnesia.should be_nice
+    end
+
+    it 'should add a nightclubber to its discount list' do
+      clubber = sabella
+      response = mock
+      london_calling_list = mock
+      london_calling_list.should_receive(:add).with(clubber).and_return response
+
+      Cabaret::DiscountList.stub!(:new).and_return london_calling_list
+
+      page = party_page 'Amnesia'
+      amnesia = Cabaret::Party.new page
+      amnesia.add_to_list(clubber).should be_eql response
+    end
+
+  end
+
+  def party_page name
+    name_element = mock
+    name_element.stub(:text).and_return name
+
+    list_link = mock
+    list_link.stub!(:click).and_return mock
+
     page = mock
+    page.stub!(:search).with('div#texto > h2').and_return [name_element]
+    page.stub!(:link_with).with(:text => /enviar nome para a lista/i).and_return list_link
+    page
+  end
 
-    title.stub!(:text).and_return 'LONDON CALLING'
-    page.stub!(:link_with)
+  def not_nice page
+    page.stub!(:link_with).with(:text => /enviar nome para a lista/i).and_return nil
+    page
+  end
 
-    page.should_receive(:search).
-    with('div#texto > h2').and_return [title]
-
-    london_calling = Cabaret::Party.new page
-    london_calling.name.should be_eql 'LONDON CALLING'
+  def sabella
+    sabella = mock
+    sabella.stub!(:name).and_return 'Filipe Sabella'
+    sabella.stub!(:email).and_return 'sabella@gmail.com'
+    sabella.stub!(:friends).and_return ['Marano']
+    sabella
   end
 
 end
