@@ -18,7 +18,7 @@ end
 @@subscriber = Subscriber.new
 #@@subscriber.add_nightclub Nightclub.new YAML::load_file 'cabaret.yml'
 #@@subscriber.add_nightclub Nightclub.new YAML::load_file 'beco.yml'
-@@subscriber.add_nightclub Nightclub.new YAML::load_file 'casadolado.yml'
+#@@subscriber.add_nightclub Nightclub.new YAML::load_file 'casadolado.yml'
 
 every_monday_midday = '0 12 * * 1'
 Rufus::Scheduler.start_new.cron every_monday_midday do
@@ -38,7 +38,7 @@ helpers do
     email = params[:email]
     friends = params[:friends].values.map{ |f| f if !f.empty? }
     raver = Nightclubber.new name, email, friends
-    @@subscriber.subscribe raver
+#    @@subscriber.subscribe raver
 #    @@subscriber.add raver
   end
 end

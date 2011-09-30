@@ -1,11 +1,12 @@
 body {
 	color: grey;
-	font-family: Verdana, sans-serif;
-	font-size: normal;
+	font-family: Purisa, sans-serif;
+	font-size: big;
+	font-weight: bold;
 }
 
 legend {
-	font-size: 150%;
+	font-size: 250%;
 }
 
 p {
@@ -16,8 +17,8 @@ a:link {
 	text-decoration: none;
 	color: blue;
 }
-
 a:visited {
+
 	text-decoration: none;
 	color: blue;
 }
@@ -32,24 +33,29 @@ a:active {
 }
 
 fieldset {
-	border: 1px solid grey;
-	width: 30%;
+	border: 3px solid grey;
+	border-radius: 15px;
+	margin-top: 50px;
+	margin-left: 30%;
+	margin-right: 30%;
 }
 
 input {
-	border: 1px solid grey;
+	border: 3px solid grey;
+	border-radius: 15px;
+	height: 30px;
+	font-family: Purisa, sans-serif;
+	font-weight: bold;
 }
 
 input[type="text"] {
 	width: 100%;
-	height: 20px;
 	font-size: large;
 }
 
 input[type="submit"] {
 	margin-left: 86%;
 	width: 15%;
-	height: 20px;
 	background-color: white;
 }
 
