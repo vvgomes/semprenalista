@@ -7,7 +7,7 @@ module Cabaret
     @agent
   end
 
-  class HomePage
+  class Home
     include Cabaret
 
     def initialize

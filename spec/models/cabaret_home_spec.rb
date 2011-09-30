@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../app/models/cabaret')
 
-describe 'Cabaret::HomePage' do
+describe 'Cabaret::Home' do
 
   it 'should give me all the parties with discount list' do
     Mechanize.stub!(:new).and_return fake_agent
@@ -12,7 +12,7 @@ describe 'Cabaret::HomePage' do
     agenda.should_receive(:parties).and_return [amnesia, london_calling]
     Cabaret::Agenda.stub!(:new).and_return agenda
 
-    home = Cabaret::HomePage.new
+    home = Cabaret::Home.new
     home.parties.should be_eql [london_calling]
   end
 
@@ -33,7 +33,7 @@ describe 'Cabaret::HomePage' do
 
   def party niceness
     party = mock
-    party.should_receive(:nice?).and_return (niceness == :nice)
+    party.stub!(:nice?).and_return (niceness == :nice)
     party
   end
 

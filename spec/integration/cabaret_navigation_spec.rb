@@ -8,7 +8,7 @@ describe 'Cabaret' do
   end
 
   it 'should reflect the actual web site structure' do
-    home = Cabaret::HomePage.new.parties.each do |p|
+    home = Cabaret::Home.new.parties.each do |p|
       response = p.add_to_list sabella
 
       response.code.should be 200
