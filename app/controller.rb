@@ -58,6 +58,14 @@ get '/done' do
   haml :done
 end
 
+get '/results' do
+  haml :results
+end
+
+get '/nightclubbers' do
+  haml :nightclubbers
+end
+
 get '/about' do
   haml :about
 end
