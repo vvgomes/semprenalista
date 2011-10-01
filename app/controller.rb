@@ -58,8 +58,7 @@ get '/done' do
   haml :done
 end
 
-get '/subscribe_everybody' do
-  @@subscriber.subscribe_everybody
-  'Done! Check out the server logs.'
+get '/about' do
+  haml :about
 end
 

@@ -36,7 +36,6 @@ p#submit {
 
 input[type="submit"] {
 	border: 3px solid grey;
-	/*margin-left: 86%;*/
 	width: 15%;
 	background-color: grey;
 	font-weight: bold;
@@ -84,5 +83,16 @@ footer ul {
 
 footer ul li {
 	display: inline;
+}
+
+#avatar {
+	float: left;
+	border: 2px solid white;
+	border-radius: 15px;
+	margin-right: 15px;
+}
+
+#about {
+
 }
 
