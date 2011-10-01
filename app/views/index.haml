@@ -2,12 +2,14 @@
   %fieldset
     %legend Sempre na Lista!
     %p
-      Oi, preencha o formulario abaixo para colocar voce e seus amigos
-      na lista de descontos de todas as festas do
-      %a{:href => "http://www.cabaretpoa.com.br"} Cabaret
-      e do
-      %a{:href => "http://www.beco203.com.br"} Beco
-      pra sempre :)
+      Oi! Preencha o formulario abaixo para colocar voce e seus amigos
+      na lista de descontos de todas as festas do&nbsp;
+      %a{:href => "http://www.cabaretpoa.com.br"}Cabaret
+      ,&nbsp; do
+      %a{:href => "http://www.beco203.com.br"}Beco
+      &nbsp;e do
+      %a{:href => "http://www.laikaclub.com.br"}Laika Club
+      &nbsp;pra sempre :)
     %p
       %input{:name => "name", :type => "text", :placeholder => " Seu nome", :required => "true"}
     %p
@@ -22,6 +24,16 @@
       %input{:name => "friends[3]", :type => "text", :placeholder => " O último"}
     %p
       %input{:name => "submit", :type => "submit", :value => "OK"}
+  %footer
+    %ul
+      %li
+        %a{:href => "/"}Nightclubbers
+        &nbsp;|&nbsp;
+      %li
+        %a{:href => "/"}Resultados
+        &nbsp;|&nbsp;
+      %li
+        %a{:href => "/"}Sobre
 
 %script{:src => "javascripts.js"}
 

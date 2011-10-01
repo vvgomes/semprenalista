@@ -18,7 +18,6 @@ end
 @@subscriber = Subscriber.new
 #@@subscriber.add_nightclub Nightclub.new YAML::load_file 'cabaret.yml'
 #@@subscriber.add_nightclub Nightclub.new YAML::load_file 'beco.yml'
-#@@subscriber.add_nightclub Nightclub.new YAML::load_file 'casadolado.yml'
 
 every_monday_midday = '0 12 * * 1'
 Rufus::Scheduler.start_new.cron every_monday_midday do

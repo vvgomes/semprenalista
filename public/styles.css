@@ -1,13 +1,50 @@
 body {
 	color: grey;
-	font-family: Purisa, sans-serif;
-	font-size: big;
-	font-weight: bold;
+	font-family: Delius, sans-serif;
+	font-size: 18px;
+}
+
+fieldset {
+	margin-top: 50px;
+	margin-left: 30%;
+	margin-right: 30%;
+	border: 3px solid grey;
+	border-radius: 15px;
 }
 
 legend {
-	font-size: 250%;
+	font-size: 220%;
+	font-weight: bold;
 }
+
+input {
+	border: 2px solid grey;
+	border-radius: 15px;
+	height: 30px;
+	font-family: Delius, sans-serif;
+}
+
+input[type="text"] {
+	width: 100%;
+	font-size: large;
+}
+
+input[type="submit"] {
+	border: 3px solid grey;
+	margin-left: 86%;
+	width: 15%;
+	background-color: grey;
+	font-weight: bold;
+	font-size: 100%;
+	color: white;
+}
+
+input:focus {
+	outline: none;
+	border: 2px solid black;
+	border-radius: 15px;
+}
+
 
 p {
 	width: 100%;
@@ -32,30 +69,15 @@ a:active {
 	text-decoration: none;
 }
 
-fieldset {
-	border: 3px solid grey;
-	border-radius: 15px;
-	margin-top: 50px;
-	margin-left: 30%;
-	margin-right: 30%;
+footer {
+	text-align: center;
 }
 
-input {
-	border: 3px solid grey;
-	border-radius: 15px;
-	height: 30px;
-	font-family: Purisa, sans-serif;
-	font-weight: bold;
+footer ul {
+	padding-left: 0px;
 }
 
-input[type="text"] {
-	width: 100%;
-	font-size: large;
-}
-
-input[type="submit"] {
-	margin-left: 86%;
-	width: 15%;
-	background-color: white;
+footer ul li {
+	display: inline;
 }
 

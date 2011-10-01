@@ -4,6 +4,7 @@ module Beco
 
   def agent
     @agent = Mechanize.new if !@agent
+    @agent
   end
 
 
