@@ -19,7 +19,7 @@ describe 'Cabaret::Navigator' do
     agenda = mock
     link = mock
 
-    home.stub!(:link_with).with(:href => 'agenda.htm').and_return link
+    home.stub!(:link_with).with(:text => /agenda/i).and_return link
     link.stub!(:click).and_return agenda
 
     @nav.navigate_to_agenda_from(home).should be agenda

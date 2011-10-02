@@ -12,7 +12,7 @@ describe 'Cabaret::Party' do
     page = mock
 
     @nav.stub!(:find_party_name_for).with(page).and_return 'Amnesia'
-    @nav.stub!(:navigate_to_list_from).with(page).and_return mock
+    @nav.stub!(:navigate_to_list_from).with(page).and_return nil
 
     amnesia = Cabaret::Party.new page
     amnesia.name.should be_eql 'Amnesia'
@@ -39,6 +39,7 @@ describe 'Cabaret::Party' do
 
       @nav.stub!(:find_party_name_for).with(page).and_return 'Amnesia'
       @nav.stub!(:navigate_to_list_from).with(page).and_return mock
+      Cabaret::DiscountList.stub!(:new).and_return mock
 
       amnesia = Cabaret::Party.new page
       amnesia.should be_nice
@@ -51,9 +52,9 @@ describe 'Cabaret::Party' do
       response = mock
 
       @nav.stub!(:find_party_name_for).with(page).and_return 'Amnesia'
-      @nav.stub!(:navigate_to_list_from).with(page).and_return list
-      list.stub!(:add).with(sabella).and_return response
+      @nav.stub!(:navigate_to_list_from).with(page).and_return mock
       Cabaret::DiscountList.stub!(:new).and_return list
+      list.stub!(:add).with(sabella).and_return response
 
       amnesia = Cabaret::Party.new page
       amnesia.add_to_list(sabella).should be_eql response

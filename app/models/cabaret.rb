@@ -41,7 +41,8 @@ module Cabaret
 
     def initialize page
       @name = nav.find_party_name_for page
-      @list = nav.navigate_to_list_from page
+      list_page = nav.navigate_to_list_from page
+      @list = list_page ? DiscountList.new(list_page) : nil
     end
 
     def nice?
@@ -74,7 +75,7 @@ module Cabaret
       @form['email'] = clubber.email
 
       friends = clubber.friends
-      friend_fields = nav.friend_fields_for @form
+      friend_fields = nav.find_friend_fields_for @form
 
       friends.each_with_index do |friend, i|
         friend_fields[i].value = friend
@@ -119,7 +120,7 @@ module Cabaret
     end
 
     def navigate_to_agenda_from home_page
-      home_page.link_with(:href => 'agenda.htm').click
+      home_page.link_with(:text => /agenda/i).click
     end
 
     def navigate_to_parties_from agenda_page

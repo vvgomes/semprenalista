@@ -12,12 +12,8 @@ describe 'Cabaret' do
       response = p.add_to_list sabella
 
       response.code.should be 200
-      response.body.should be_eql 'ok'
+      response.message.should be_eql 'ok'
     end
-  end
-
-  def sabella
-    Nightclubber.new 'Filipe Sabella', 'sabella@gmail.com', ['Marano', 'Pedro']
   end
 
   def prevent_form_submission
@@ -34,5 +30,8 @@ describe 'Cabaret' do
     Mechanize.stub!(:new).and_return agent
   end
 
+  def sabella
+    Nightclubber.new 'Filipe Sabella', 'sabella@gmail.com', ['Marano', 'Pedro']
+  end
 end
 

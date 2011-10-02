@@ -30,7 +30,7 @@ describe 'Cabaret::DiscountList' do
       response = mock
 
       @nav.stub!(:find_form_for).with(page).and_return form
-      @nav.stub!(:friend_fields_for).with(form).and_return [field]
+      @nav.stub!(:find_friend_fields_for).with(form).and_return [field]
       @nav.stub!(:submit).with(form).and_return mock
       Cabaret::Response.stub!(:new).and_return response
 
