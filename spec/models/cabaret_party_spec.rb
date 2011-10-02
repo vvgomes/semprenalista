@@ -1,9 +1,19 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../app/models/cabaret')
+require File.expand_path(File.dirname(__FILE__) + '/../../app/models/nightclubber')
 
 describe 'Cabaret::Party' do
 
+  before :each do
+    @nav = mock
+    Cabaret::Navigator.stub!(:new).and_return @nav
+  end
+
   it 'should give me its name' do
-    page = party_page 'Amnesia'
+    page = mock
+
+    @nav.stub!(:find_party_name_for).with(page).and_return 'Amnesia'
+    @nav.stub!(:navigate_to_list_from).with(page).and_return mock
+
     amnesia = Cabaret::Party.new page
     amnesia.name.should be_eql 'Amnesia'
   end
@@ -11,7 +21,11 @@ describe 'Cabaret::Party' do
   context 'that does not have a discount list' do
 
     it 'should not be a nice party when there is no discount list' do
-      page = not_nice(party_page('London Calling'))
+      page = mock
+
+      @nav.stub!(:find_party_name_for).with(page).and_return 'London Calling'
+      @nav.stub!(:navigate_to_list_from).with(page).and_return nil
+
       london_calling = Cabaret::Party.new page
       london_calling.should_not be_nice
     end
@@ -21,50 +35,30 @@ describe 'Cabaret::Party' do
   context 'that has a discount list' do
 
     it 'should be nice' do
-      page = party_page 'Amnesia'
+      page = mock
+
+      @nav.stub!(:find_party_name_for).with(page).and_return 'Amnesia'
+      @nav.stub!(:navigate_to_list_from).with(page).and_return mock
+
       amnesia = Cabaret::Party.new page
       amnesia.should be_nice
     end
 
     it 'should add a nightclubber to its discount list' do
-      clubber = sabella
+      sabella = Nightclubber.new 'Sabella', 'lipe@gmail.com', ['Marano']
+      page = mock
+      list = mock
       response = mock
-      london_calling_list = mock
-      london_calling_list.should_receive(:add).with(clubber).and_return response
 
-      Cabaret::DiscountList.stub!(:new).and_return london_calling_list
+      @nav.stub!(:find_party_name_for).with(page).and_return 'Amnesia'
+      @nav.stub!(:navigate_to_list_from).with(page).and_return list
+      list.stub!(:add).with(sabella).and_return response
+      Cabaret::DiscountList.stub!(:new).and_return list
 
-      page = party_page 'Amnesia'
       amnesia = Cabaret::Party.new page
-      amnesia.add_to_list(clubber).should be_eql response
+      amnesia.add_to_list(sabella).should be_eql response
     end
 
-  end
-
-  def party_page name
-    name_element = mock
-    name_element.stub(:text).and_return name
-
-    list_link = mock
-    list_link.stub!(:click).and_return mock
-
-    page = mock
-    page.stub!(:search).with('div#texto > h2').and_return [name_element]
-    page.stub!(:link_with).with(:text => /enviar nome para a lista/i).and_return list_link
-    page
-  end
-
-  def not_nice page
-    page.stub!(:link_with).with(:text => /enviar nome para a lista/i).and_return nil
-    page
-  end
-
-  def sabella
-    sabella = mock
-    sabella.stub!(:name).and_return 'Filipe Sabella'
-    sabella.stub!(:email).and_return 'sabella@gmail.com'
-    sabella.stub!(:friends).and_return ['Marano']
-    sabella
   end
 
 end

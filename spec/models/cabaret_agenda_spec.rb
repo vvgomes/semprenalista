@@ -3,20 +3,17 @@ require File.expand_path(File.dirname(__FILE__) + '/../../app/models/cabaret')
 describe 'Cabaret::Agenda' do
 
   it 'should give me all the available parties' do
-    amnesia = mock
-    Cabaret::Party.stub!(:new).and_return amnesia
-
-    agenda = Cabaret::Agenda.new agenda_page
-    agenda.parties.should be_eql [amnesia]
-  end
-
-  def agenda_page
-    link = mock
-    link.stub!(:click).and_return mock
-
+    nav = mock
     page = mock
-    page.stub!(:links_with).with(:text => /saiba mais/i).and_return [link]
-    page
+    party_page = mock
+    amnesia = mock
+
+    nav.stub!(:navigate_to_parties_from).with(page).and_return [party_page]
+    Cabaret::Navigator.stub!(:new).and_return nav
+    Cabaret::Party.stub!(:new).with(party_page).and_return amnesia
+
+    agenda = Cabaret::Agenda.new page
+    agenda.parties.should be_eql [amnesia]
   end
 
 end
