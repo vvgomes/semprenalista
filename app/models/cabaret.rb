@@ -45,8 +45,8 @@ module Cabaret
       @list = list_page ? DiscountList.new(list_page) : nil
     end
 
-    def nice?
-      !@list.nil?
+    def fine?
+      @list && @list.fine?
     end
 
     def add_to_list clubber
