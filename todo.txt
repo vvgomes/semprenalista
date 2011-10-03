@@ -6,3 +6,13 @@
 
 - spec_helper
 
+- database integration test
+- refactor subscriber
+- save report
+- acceptance tests
+
+- refactor cabaret party niceness: it should also consider a list page w/out form
+- make the response to trim the message
+- change nice to fine for cabaret
+- handle the case when the response message wasn't properly found
+

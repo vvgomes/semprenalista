@@ -31,21 +31,41 @@ module Beco
     end
 
     def parties
-      []
+      parties = nav.navigate_to_parties_from @page
+      parties.map{ |page| Party.new page }
     end
 
   end
 
   class Party
     include Beco
+    attr_accessor :name
 
     def initialize page
+      @name = nav.find_party_name_for page
+      list_page = nav.navigate_to_list_from page
+      @list = list_page ? DiscountList.new(list_page) : nil
+    end
 
+    def fine?
+      @list && @list.fine?
+    end
+
+    def add_to_list clubber
+      @list.add clubber
     end
 
   end
 
-  # discount list
+  class DiscountList
+    include Beco
+
+    def fine?
+      true
+    end
+
+  end
+
   # response
   # emptyResponse
 
@@ -61,6 +81,20 @@ module Beco
 
     def navigate_to_agenda_from home_page
       home_page.link_with(:href => 'capa-beco.php').click
+    end
+
+    def navigate_to_parties_from agenda_page
+      links = agenda_page.links_with(:href => /agenda-beco.php?c=/i)
+      links.map{ |l| l.click }
+    end
+
+    def find_party_name_for party_page
+      party_page.search('div.conteudo-interna h1 strong').first.text
+    end
+
+    def navigate_to_list_from party_page
+      result = party_page.search('div.conteudo-interna a.nomenalista')
+      link = result ? result.first.click : nil
     end
 
   end
