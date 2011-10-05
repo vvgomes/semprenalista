@@ -32,7 +32,7 @@ module Cabaret
     end
 
     def find_name
-      @page.search('div#texto > h2').first.text
+      @page.search('div#texto > h2').first.text.strip
     end
 
     def navigate_to_list
@@ -68,7 +68,7 @@ module Cabaret
     end
   end
 
-  class Response
+  class ResponseNavigator
     def initialize page
       @page = page
     end
