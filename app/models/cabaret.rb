@@ -3,8 +3,15 @@ require 'mechanize'
 module Cabaret
   URL = 'http://www.cabaretpoa.com.br'
 
+  def agent
+    @agent = Mechanize.new if !@agent
+    @agent
+  end
+
   class HomeNavigator
-    def initialize agent
+    include Cabaret
+
+    def initialize
       @page = agent.get URL
     end
 
@@ -42,9 +49,10 @@ module Cabaret
   end
 
   class DiscountListNavigator
-    def initialize page, agent
+    include Cabaret
+
+    def initialize page
       @form = page.form_with(:action => /cadastra.php/i)
-      @agent
     end
 
     def fill_name name
@@ -56,14 +64,14 @@ module Cabaret
     end
 
     def fill_friends friends
-      fields = @form.fields_with(:name => /amigo/)
+      fields = @form.fields_with(:name => /amigo/i)
       friends.each_with_index do |friend, i|
         fields[i].value = friend
       end
     end
 
     def submit
-      response_page = @agent.submit form
+      response_page = agent.submit form
       ResponseNavigator.new(response_page)
     end
   end
