@@ -1,159 +1,85 @@
 require 'mechanize'
 
 module Cabaret
+  URL = 'http://www.cabaretpoa.com.br'
 
-  def nav
-    @nav = Navigator.new if !@nav
-    @nav
-  end
-
-  class Home
-    include Cabaret
-
-    def initialize
-      home_page = nav.navigate_to_home
-      agenda_page = nav.navigate_to_agenda_from home_page
-      @agenda = Agenda.new agenda_page
+  class HomeNavigator
+    def initialize agent
+      @page = agent.get URL
     end
 
-    def parties
-      @agenda.parties.find_all{ |p| p.nice? }
+    def navigate_to_agenda
+      agenda_link = @page.link_with(:text => /agenda/i)
+      agenda_page = agenda_link.click
+      AgendaNavigator.new agenda_page
     end
   end
 
-  class Agenda
-    include Cabaret
-
+  class AgendaNavigator
     def initialize page
       @page = page
     end
 
-    def parties
-      parties = nav.navigate_to_parties_from @page
-      parties.map{ |page| Party.new page }
+    def navigate_to_parties
+      links = @page.links_with(:text => /saiba mais/i)
+      links.map{ |l| PartyNavigator.new(l.click) }
     end
-
   end
 
-  class Party
-    include Cabaret
-    attr_accessor :name
-
+  class PartyNavigator
     def initialize page
-      @name = nav.find_party_name_for page
-      list_page = nav.navigate_to_list_from page
-      @list = list_page ? DiscountList.new(list_page) : nil
+      @page = page
     end
 
-    def fine?
-      @list && @list.fine?
+    def find_name
+      @page.search('div#texto > h2').first.text
     end
 
-    def add_to_list clubber
-      @list.add clubber
+    def navigate_to_list
+      link = @page.link_with(:text => /enviar nome para a lista/i)
+      link ? DiscountListNavigator.new(link.click) : nil
     end
-
   end
 
-  class DiscountList
-    include Cabaret
-
-    def initialize page
-      @form = nav.find_form_for page
+  class DiscountListNavigator
+    def initialize page, agent
+      @form = page.form_with(:action => /cadastra.php/i)
+      @agent
     end
 
-    def add clubber
-      return EmptyResponse.new('Form not found!') if @form.nil?
-      fill_form clubber
-      submit_form
+    def fill_name name
+      @form['name'] = name
     end
 
-    private
+    def fill_email email
+      @form['email'] = email
+    end
 
-    def fill_form clubber
-      @form['name'] = clubber.name
-      @form['email'] = clubber.email
-
-      friends = clubber.friends
-      friend_fields = nav.find_friend_fields_for @form
-
+    def fill_friends friends
+      fields = @form.fields_with(:name => /amigo/)
       friends.each_with_index do |friend, i|
-        friend_fields[i].value = friend
+        fields[i].value = friend
       end
     end
 
-    def submit_form
-      Response.new(nav.submit @form)
+    def submit
+      response_page = @agent.submit form
+      ResponseNavigator.new(response_page)
     end
-
   end
 
   class Response
-    include Cabaret
-    attr_reader :code, :message
-
     def initialize page
-      @code = page.code
-      @message = nav.find_message_for page
+      @page = page
     end
 
+    def code
+      @page.code
+    end
+
+    def find_message
+      @page.search('body').first.text.trim
+    end
   end
-
-  class EmptyResponse
-    attr_reader :code, :message
-
-    def initialize message
-      @message = message
-      @code = 0
-    end
-
-  end
-
-  class Navigator
-
-    def initialize
-      @agent = Mechanize.new
-    end
-
-    def navigate_to_home
-      @agent.get 'http://www.cabaretpoa.com.br/'
-    end
-
-    def navigate_to_agenda_from home_page
-      home_page.link_with(:text => /agenda/i).click
-    end
-
-    def navigate_to_parties_from agenda_page
-      links = agenda_page.links_with(:text => /saiba mais/i)
-      links.map{ |l| l.click }
-    end
-
-    def find_party_name_for party_page
-      party_page.search('div#texto > h2').first.text
-    end
-
-    def navigate_to_list_from party_page
-      link = party_page.link_with(:text => /enviar nome para a lista/i)
-      link ? link.click : nil
-    end
-
-    def find_form_for list_page
-      list_page.form_with(:action => /cadastra.php/i)
-    end
-
-    def find_friend_fields_for form
-      form.fields_with(:name => /amigo/)
-    end
-
-    def submit form
-      @agent.submit form
-    end
-
-    def find_message_for response_page
-      response_page.search('body').first.text
-    end
-
-  end
-
 end
 

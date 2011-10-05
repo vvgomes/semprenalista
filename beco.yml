@@ -1,8 +1,0 @@
----
-:home_page: http://www.beco203.com.br/capa-beco.php
-:links: !ruby/regexp /agenda_nomenalista.php/
-:param_names:
-  :friends: !ruby/regexp /nome_amigo/
-  :name: nome
-  :email: email
-

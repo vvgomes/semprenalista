@@ -1,18 +1,16 @@
+- fix integration tests
+- take a look at rspec 2 syntax changes
+- directory for nightclub specs
+- spec_helper
+
 - think about a better results page
 - change the subscriber to get to:
 	- get all nightclubbers
   - for each discount list
     - add all cached nightclubbers
 
-- spec_helper
-
 - database integration test
 - refactor subscriber
 - save report
 - acceptance tests
-
-- refactor cabaret party niceness: it should also consider a list page w/out form
-- make the response to trim the message
-- change nice to fine for cabaret
-- handle the case when the response message wasn't properly found
 
