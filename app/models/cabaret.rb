@@ -71,7 +71,7 @@ module Cabaret
     end
 
     def submit
-      response_page = agent.submit form
+      response_page = agent.submit @form
       ResponseNavigator.new(response_page)
     end
   end
