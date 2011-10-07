@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/../../app/models/cabaret')
+require File.expand_path(File.dirname(__FILE__) + '/../../app/models/nightclub/cabaret')
 
 describe 'Cabaret::PartyNavigator' do
 

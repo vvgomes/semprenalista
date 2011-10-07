@@ -86,7 +86,7 @@ module Cabaret
     end
 
     def find_message
-      @page.search('body').first.text.trim
+      @page.search('body').first.text.strip
     end
   end
 end

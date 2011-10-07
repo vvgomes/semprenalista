@@ -2,7 +2,6 @@
 - take a look at rspec 2 syntax changes
 - directory for nightclub specs
 - spec_helper
-
 - think about a better results page
 - change the subscriber to get to:
 	- get all nightclubbers
