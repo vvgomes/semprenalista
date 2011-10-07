@@ -1,7 +1,7 @@
-require File.expand_path(File.dirname(__FILE__) + '/../../app/models/cabaret')
+require File.expand_path(File.dirname(__FILE__) + '/../../app/models/discount_list')
 require File.expand_path(File.dirname(__FILE__) + '/../../app/models/nightclubber')
 
-describe 'Nightclub::DiscountList' do
+describe 'DiscountList' do
 
   it 'should get a response back after submiting nightclubber info' do
     sabella = Nightclubber.new('Sabella', 'lipe@gmail.com', ['Marano'])
@@ -14,9 +14,9 @@ describe 'Nightclub::DiscountList' do
     nav.stub!(:fill_email).with('lipe@gmail.com')
     nav.stub!(:fill_friends).with(['Marano'])
     nav.stub!(:submit).and_return response_nav
-    Nightclub::Response.stub(:new).with(response_nav).and_return response
+    Response.stub(:new).with(response_nav).and_return response
 
-    list = Nightclub::DiscountList.new nav
+    list = DiscountList.new nav
     list.add(sabella).should be response
   end
 

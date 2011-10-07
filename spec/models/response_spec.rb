@@ -1,6 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/../../app/models/nightclub')
+require File.expand_path(File.dirname(__FILE__) + '/../../app/models/response')
 
-describe 'Nightclub::Response' do
+describe 'Response' do
 
   context 'after a successful submission' do
 
@@ -8,7 +8,7 @@ describe 'Nightclub::Response' do
       nav = mock
       nav.stub!(:code).and_return 200
       nav.stub!(:find_message).and_return 'Successfully added to the list!'
-      @response = Nightclub::Response.new nav
+      @response = Response.new nav
     end
 
     it 'should have success code' do
@@ -27,7 +27,7 @@ describe 'Nightclub::Response' do
       nav = mock
       nav.stub!(:code).and_return 500
       nav.stub!(:find_message).and_return nil
-      @response = Nightclub::Response.new nav
+      @response = Response.new nav
     end
 
     it 'should have success code' do

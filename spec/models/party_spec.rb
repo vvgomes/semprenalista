@@ -1,7 +1,7 @@
-require File.expand_path(File.dirname(__FILE__) + '/../../app/models/cabaret')
+require File.expand_path(File.dirname(__FILE__) + '/../../app/models/party')
 require File.expand_path(File.dirname(__FILE__) + '/../../app/models/nightclubber')
 
-describe 'Nightclub::Party' do
+describe 'Party' do
 
   context 'with discount list' do
 
@@ -10,9 +10,9 @@ describe 'Nightclub::Party' do
       nav = fake_navigator list_nav
 
       @list = mock
-      Nightclub::DiscountList.stub!(:new).and_return @list
+      DiscountList.stub!(:new).and_return @list
 
-      @party = Nightclub::Party.new nav
+      @party = Party.new nav
     end
 
     it 'should be nice' do
@@ -35,7 +35,7 @@ describe 'Nightclub::Party' do
 
     before :each do
       nav = fake_navigator
-      @party = Nightclub::Party.new nav
+      @party = Party.new nav
     end
 
     it 'should not be nice' do

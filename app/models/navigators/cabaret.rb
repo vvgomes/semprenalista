@@ -1,30 +1,18 @@
 require 'mechanize'
 
 module Cabaret
-  URL = 'http://www.cabaretpoa.com.br'
+  URL = 'http://www.cabaretpoa.com.br/agenda.htm'
 
   def agent
     @agent = Mechanize.new if !@agent
     @agent
   end
 
-  class HomeNavigator
+  class Navigator
     include Cabaret
 
     def initialize
       @page = agent.get URL
-    end
-
-    def navigate_to_agenda
-      agenda_link = @page.link_with(:text => /agenda/i)
-      agenda_page = agenda_link.click
-      AgendaNavigator.new agenda_page
-    end
-  end
-
-  class AgendaNavigator
-    def initialize page
-      @page = page
     end
 
     def navigate_to_parties

@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/../../app/models/nightclub/cabaret')
+require File.expand_path(File.dirname(__FILE__) + '/../../../../app/models/navigators/cabaret')
 
 describe 'Cabaret::DiscountListNavigator' do
 
