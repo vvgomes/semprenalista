@@ -1,5 +1,4 @@
 - http://www.casadolado.com.br/agenda.htm is working!
-- fix rake spec task to get in inner dirs
 - fix integration tests
 - take a look at rspec 2 syntax changes
 - directory for nightclub specs
