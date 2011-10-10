@@ -31,8 +31,8 @@ module Beco
     end
 
     def navigate_to_list
-      link = @page.link_with('div.conteudo-interna a.nomenalista').first
-      link ? DiscountListNavigator.new(link.click) : nil
+      results = @page.search('div.conteudo-interna a.nomenalista')
+      results ? DiscountListNavigator.new(results.first.click) : nil
     end
   end
 
