@@ -40,19 +40,19 @@ module Beco
     include Beco
 
     def initialize page
-      #@form = page.form_with(:action => /cadastra.php/i)
+      @form = page.form_with(:action => 'agenda_nomenalista.php')
     end
 
     def fill_name name
-      #@form['name'] = name
+      @form['nome'] = name
     end
 
     def fill_email email
-      #@form['email'] = email
+      @form['email'] = email
     end
 
     def fill_friends friends
-      #fields = @form.fields_with(:name => /amigo/i)
+      fields = @form.fields_with(:name => /nome_amigo/i)
       friends.each_with_index do |friend, i|
         fields[i].value = friend
       end
@@ -65,7 +65,17 @@ module Beco
   end
 
   class ResponseNavigator
+    def initialize page
+      @page = page
+    end
 
+    def code
+      @page.code
+    end
+
+    def find_message
+      @page.search('body').first.text.strip
+    end
   end
 end
 
