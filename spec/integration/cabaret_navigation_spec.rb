@@ -1,5 +1,9 @@
-require File.expand_path(File.dirname(__FILE__) + '/../../app/models/cabaret')
+require File.expand_path(File.dirname(__FILE__) + '/../../app/models/response')
+require File.expand_path(File.dirname(__FILE__) + '/../../app/models/discount_list')
+require File.expand_path(File.dirname(__FILE__) + '/../../app/models/party')
+require File.expand_path(File.dirname(__FILE__) + '/../../app/models/nightclub')
 require File.expand_path(File.dirname(__FILE__) + '/../../app/models/nightclubber')
+require File.expand_path(File.dirname(__FILE__) + '/../../app/models/navigators/cabaret')
 
 describe 'Cabaret' do
 
@@ -7,8 +11,9 @@ describe 'Cabaret' do
     prevent_form_submission
   end
 
-  it 'should reflect the actual web site structure' do
-    home = Cabaret::Home.new.parties.each do |p|
+  it 'should reflect the web site structure' do
+    cabaret = Nightclub.new(Cabaret::Navigator.new)
+    cabaret.parties.each do |p|
       response = p.add_to_list sabella
 
       response.code.should be 200
@@ -17,16 +22,14 @@ describe 'Cabaret' do
   end
 
   def prevent_form_submission
-    body = mock
-    body.stub!(:text).and_return 'ok'
-
     page = mock
-    page.stub!(:search).and_return [body]
-    page.stub!(:code).and_return 200
-
+    body = mock
     agent = Mechanize.new
-    agent.stub!(:submit).and_return page
 
+    agent.stub!(:submit).and_return page
+    page.stub!(:code).and_return 200
+    page.stub!(:search).and_return [body]
+    body.stub!(:text).and_return 'ok'
     Mechanize.stub!(:new).and_return agent
   end
 
