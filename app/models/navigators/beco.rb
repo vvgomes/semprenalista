@@ -16,7 +16,8 @@ module Beco
     end
 
     def navigate_to_parties
-      links = @page.links_with(:href => /agenda-beco.php?c=/i)
+      links = @page.links_with(:href => /agenda-beco.php\?c=/i)
+      links = links.inject({}){ |h, l| h[l.href] = l; h}.values
       links.map{ |l| PartyNavigator.new(l.click) }
     end
   end
@@ -31,8 +32,10 @@ module Beco
     end
 
     def navigate_to_list
-      results = @page.search('div.conteudo-interna a.nomenalista')
-      results ? DiscountListNavigator.new(results.first.click) : nil
+      code = @page.uri.to_s.match(/.*=(.+)\z/i).captures[0]
+      regex = eval("/agenda_nomenalista.php\\?c=#{code}/i")
+      link = @page.link_with(:href => regex)
+      link ? DiscountListNavigator.new(link.click) : nil
     end
   end
 

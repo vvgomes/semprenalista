@@ -17,16 +17,18 @@ describe 'Beco::PartyNavigator' do
 
   context 'when navigating to discount list' do
 
-    it 'should give me nothing back when trying to navigate to the list' do
-      @page.stub!(:search).with('div.conteudo-interna a.nomenalista').and_return nil
+    it 'should give me nothing back when there is no list' do
+      @page.stub!(:uri).and_return 'http://beco203.com.br/agenda-beco.php?c=391'
+      @page.stub!(:link_with).with(:href => /agenda_nomenalista.php\?c=391/i).and_return nil
       @nav.navigate_to_list.should be_nil
     end
 
-    it 'should navigate to the list' do
+    it 'should create a list navigator when there is a list' do
       page = mock
       link = mock
+      @page.stub!(:uri).and_return 'http://beco203.com.br/agenda-beco.php?c=391'
+      @page.stub!(:link_with).with(:href => /agenda_nomenalista.php\?c=391/i).and_return link
       link.stub!(:click).and_return page
-      @page.stub!(:search).with('div.conteudo-interna a.nomenalista').and_return [link]
       Beco::DiscountListNavigator.should_receive(:new).with(page)
 
       @nav.navigate_to_list

@@ -11,7 +11,8 @@ describe 'Beco::Navigator' do
     Mechanize.stub!(:new).and_return agent
     agent.stub!(:get).with('http://www.beco203.com.br/capa-beco.php').and_return page
 
-    page.stub!(:links_with).with(:href => /agenda-beco.php?c=/i).and_return [party_link]
+    page.stub!(:links_with).with(:href => /agenda-beco.php\?c=/i).and_return [party_link]
+    party_link.stub!(:href).and_return 'http://url.com'
     party_link.stub!(:click).and_return [party_page]
 
     nav = Beco::Navigator.new

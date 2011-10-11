@@ -1,4 +1,4 @@
-- improve agent depency injection
+- improve agent depency injection (maybe static in the module)
 - http://www.casadolado.com.br/agenda.htm is working!
 - fix integration tests
 - spec_helper
