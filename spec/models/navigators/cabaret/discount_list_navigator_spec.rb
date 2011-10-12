@@ -27,10 +27,7 @@ describe 'Cabaret::DiscountListNavigator' do
   end
 
   it 'should submit the form and navigate to response' do
-    agent = mock
-    agent.stub(:submit).with(@form).and_return mock
-    Mechanize.stub!(:new).and_return agent
-
+    Cabaret.stub(:submit).with(@form).and_return mock
     @nav.submit.should be_an_instance_of Cabaret::ResponseNavigator
   end
 

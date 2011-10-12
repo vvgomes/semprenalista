@@ -1,18 +1,11 @@
 require 'mechanize'
 
 module Beco
-  URL = 'http://www.beco203.com.br/capa-beco.php'
-
-  def agent
-    @agent = Mechanize.new if !@agent
-    @agent
-  end
+  extend Agent
 
   class Navigator
-    include Beco
-
     def initialize
-      @page = agent.get URL
+      @page = Beco.get 'http://www.beco203.com.br/capa-beco.php'
     end
 
     def navigate_to_parties
@@ -40,7 +33,6 @@ module Beco
   end
 
   class DiscountListNavigator
-    include Beco
 
     def initialize page
       @form = page.form_with(:action => 'agenda_nomenalista.php')
@@ -62,7 +54,7 @@ module Beco
     end
 
     def submit
-      response_page = agent.submit @form
+      response_page = Beco.submit @form
       ResponseNavigator.new(response_page)
     end
   end

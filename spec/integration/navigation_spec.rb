@@ -1,16 +1,25 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe 'Cabaret' do
+describe 'Navigation' do
 
   before :each do
     prevent_form_submission
   end
 
-  it 'should reflect the web site structure' do
-    cabaret = Nightclub.new(Cabaret::Navigator.new)
-    cabaret.parties.each do |p|
-      response = p.add_to_list sabella
+  it 'should reflect the web site structure for Cabaret' do
+    browse Nightclub.new(Cabaret::Navigator.new)
+  end
 
+  it 'should reflect the web site structure for Beco' do
+    browse Nightclub.new(Beco::Navigator.new)
+  end
+
+  def browse nightclub
+    parties = nightclub.parties
+    parties.should_not be_empty
+
+    parties.each do |p|
+      response = p.add_to_list sabella
       response.code.should be 200
       response.message.should be_eql 'ok'
     end

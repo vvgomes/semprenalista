@@ -1,18 +1,9 @@
-require 'mechanize'
-
 module Cabaret
-  URL = 'http://www.cabaretpoa.com.br/agenda.htm'
-
-  def agent
-    @agent = Mechanize.new if !@agent
-    @agent
-  end
+  extend Agent
 
   class Navigator
-    include Cabaret
-
     def initialize
-      @page = agent.get URL
+      @page = Cabaret.get 'http://www.cabaretpoa.com.br/agenda.htm'
     end
 
     def navigate_to_parties
@@ -37,8 +28,6 @@ module Cabaret
   end
 
   class DiscountListNavigator
-    include Cabaret
-
     def initialize page
       @form = page.form_with(:action => /cadastra.php/i)
     end
@@ -59,7 +48,7 @@ module Cabaret
     end
 
     def submit
-      response_page = agent.submit @form
+      response_page = Cabaret.submit @form
       ResponseNavigator.new(response_page)
     end
   end

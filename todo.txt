@@ -1,15 +1,13 @@
-- integration tests for beco
-- improve agent depency injection (maybe static in the module)
 - new feature: available parties
 - refactor subscriber
 	- get all nightclubbers
   - for each discount list
     - add all cached nightclubbers
-- try: move load-all-models, mongo-setup, sinatra-config to config.ru or config
 - save report
+- results url should be hidden
+- try: move load-all-models, mongo-setup, sinatra-config to config.ru or config
 - http://www.casadolado.com.br/agenda.htm is working!
 - take a look at rspec 2 syntax changes
-- results url should be hidden
 - database integration test
 - acceptance tests
 
