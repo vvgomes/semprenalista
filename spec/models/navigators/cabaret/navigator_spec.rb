@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/../../../../app/models/navigators/cabaret')
+require File.expand_path(File.dirname(__FILE__) + '/../../../spec_helper')
 
 describe 'Cabaret::Navigator' do
 

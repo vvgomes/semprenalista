@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/../../app/models/response')
+require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe 'Response' do
 

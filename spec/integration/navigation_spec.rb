@@ -1,9 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/../../app/models/response')
-require File.expand_path(File.dirname(__FILE__) + '/../../app/models/discount_list')
-require File.expand_path(File.dirname(__FILE__) + '/../../app/models/party')
-require File.expand_path(File.dirname(__FILE__) + '/../../app/models/nightclub')
-require File.expand_path(File.dirname(__FILE__) + '/../../app/models/nightclubber')
-require File.expand_path(File.dirname(__FILE__) + '/../../app/models/navigators/cabaret')
+require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe 'Cabaret' do
 

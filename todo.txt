@@ -1,12 +1,13 @@
-- fix integration tests
-- new feature: available parties
+- improve agent depency injection (maybe static in the module)
 - spec_helper
+- integration tests for beco
+- new feature: available parties
 - refactor subscriber
 	- get all nightclubbers
   - for each discount list
     - add all cached nightclubbers
+- try: move load-all-models, mongo-setup, sinatra-config to config.ru or config
 - save report
-- improve agent depency injection (maybe static in the module)
 - http://www.casadolado.com.br/agenda.htm is working!
 - take a look at rspec 2 syntax changes
 - results url should be hidden

@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/../../../../app/models/navigators/beco')
+require File.expand_path(File.dirname(__FILE__) + '/../../../spec_helper')
 
 describe 'Beco::Navigator' do
 
