@@ -1,6 +1,5 @@
-- improve agent depency injection (maybe static in the module)
-- spec_helper
 - integration tests for beco
+- improve agent depency injection (maybe static in the module)
 - new feature: available parties
 - refactor subscriber
 	- get all nightclubbers
