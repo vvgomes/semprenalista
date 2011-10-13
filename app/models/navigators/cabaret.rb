@@ -6,6 +6,10 @@ module Cabaret
       @page = Cabaret.get 'http://www.cabaretpoa.com.br/agenda.htm'
     end
 
+    def name
+      'Cabaret'
+    end
+
     def navigate_to_parties
       links = @page.links_with(:text => /saiba mais/i)
       links.map{ |l| PartyNavigator.new(l.click) }

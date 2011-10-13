@@ -8,6 +8,10 @@ module Beco
       @page = Beco.get 'http://www.beco203.com.br/capa-beco.php'
     end
 
+    def name
+      'Beco'
+    end
+
     def navigate_to_parties
       links = @page.links_with(:href => /agenda-beco.php\?c=/i)
       links = links.inject({}){ |h, l| h[l.href] = l; h}.values

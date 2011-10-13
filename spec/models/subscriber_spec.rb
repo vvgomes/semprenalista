@@ -40,5 +40,6 @@ describe 'Subscriber' do
     @subscriber.subscribe_everybody
   end
 
+
 end
 

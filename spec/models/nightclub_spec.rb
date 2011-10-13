@@ -7,10 +7,15 @@ describe 'Nightclub' do
     party_nav = mock
     @party = mock
 
+    nav.stub!(:name).and_return 'Badalos'
     nav.stub!(:navigate_to_parties).and_return [party_nav]
     Party.stub!(:new).with(party_nav).and_return @party
 
     @place = Nightclub.new nav
+  end
+
+  it 'should have a name' do
+    @place.name.should be_eql 'Badalos'
   end
 
   it 'should give me all the nice parties' do

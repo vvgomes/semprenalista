@@ -4,6 +4,10 @@ class Nightclub
     @nav = nav
   end
 
+  def name
+    @nav.name
+  end
+
   def parties
     navs = @nav.navigate_to_parties
     all = navs.map{ |n| Party.new(n) }

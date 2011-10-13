@@ -17,7 +17,7 @@ class Subscriber
     @nightclubs.each do |club|
       club.parties.each do |party|
         people.each do |dude|
-          party.add_to_list dude
+          response = party.add_to_list dude
         end
       end
     end
