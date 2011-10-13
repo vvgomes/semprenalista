@@ -1,6 +1,7 @@
 class Subscriber
 
-  def initialize
+  def initialize reporter
+    @reporter = reporter
     @nightclubs = []
   end
 
@@ -18,12 +19,14 @@ class Subscriber
       club.parties.each do |party|
         people.each do |dude|
           response = party.add_to_list dude
+          @reporter.save(club, party, dude, response)
         end
       end
     end
   end
 
   def subscribe_everybody
+    @reporter.clean
     everybody = Nightclubber.all
     subscribe everybody
   end

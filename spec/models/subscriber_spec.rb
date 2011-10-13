@@ -3,7 +3,11 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe 'Subscriber' do
 
   before :each do
-    @subscriber = Subscriber.new
+    reporter = mock
+    reporter.stub!(:save)
+    reporter.stub!(:clean)
+
+    @subscriber = Subscriber.new reporter
   end
 
   it 'should save a nightclubber for eternal subscription' do

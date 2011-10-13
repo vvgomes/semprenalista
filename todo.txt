@@ -1,6 +1,6 @@
-- save report
-	- new users
-	- subscriptions
+- subscriber integration test to see if it is able to save reports properly
+- hidden view for
+- party to get its image (see how it is in laika/casadolado)
 - new feature: available parties
 - results url should be hidden
 - try: move load-all-models, mongo-setup, sinatra-config to config.ru or config
