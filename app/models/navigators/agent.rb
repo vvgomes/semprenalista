@@ -6,7 +6,7 @@ module Agent
   end
 
   def submit form
-    m.submit
+    m.submit form
   end
 
   def m

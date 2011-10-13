@@ -12,16 +12,20 @@ class Subscriber
     @nightclubs << club
   end
 
-  def subscribe clubber
+  def subscribe people
+    people = [people] if people.class != Array
     @nightclubs.each do |club|
-      club.add_to_available_lists clubber
+      club.parties.each do |party|
+        people.each do |dude|
+          party.add_to_list dude
+        end
+      end
     end
   end
 
   def subscribe_everybody
-    Nightclubber.all.each do |clubber|
-      subscribe clubber
-    end
+    everybody = Nightclubber.all
+    subscribe everybody
   end
 
 end

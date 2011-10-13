@@ -1,9 +1,7 @@
-- new feature: available parties
-- refactor subscriber
-	- get all nightclubbers
-  - for each discount list
-    - add all cached nightclubbers
 - save report
+	- new users
+	- subscriptions
+- new feature: available parties
 - results url should be hidden
 - try: move load-all-models, mongo-setup, sinatra-config to config.ru or config
 - http://www.casadolado.com.br/agenda.htm is working!

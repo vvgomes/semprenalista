@@ -2,36 +2,42 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe 'Subscriber' do
 
-  it 'should subscribe a nightclubber to the available lists' do
-    fulvio = mock
+  before :each do
+    @subscriber = Subscriber.new
+  end
+
+  it 'should save a nightclubber for eternal subscription' do
+    sabella = mock
+    sabella.should_receive :save
+
+    @subscriber.add sabella
+  end
+
+  it 'should subscribe a nightclubber to the available discount lists' do
+    sabella = mock
     cabaret = mock
-    cabaret.should_receive(:add_to_available_lists).once.with fulvio
+    amnesia = mock
 
-    subscriber = Subscriber.new
-    subscriber.add_nightclub cabaret
-    subscriber.subscribe fulvio
+    cabaret.stub!(:parties).and_return [amnesia]
+    amnesia.should_receive(:add_to_list).with sabella
+
+    @subscriber.add_nightclub cabaret
+    @subscriber.subscribe sabella
   end
 
-  it 'should add a nightclubber to the subscription list' do
-    fulvio = mock
-    fulvio.should_receive :save
-
-    subscriber = Subscriber.new
-    subscriber.add fulvio
-  end
-
-  it 'should subscribe all nightclubbers to the available lists' do
+  it 'should subscribe all nightclubbers to the available discount lists' do
     marano = mock
     sabella = mock
-    Nightclubber.stub!(:all).and_return [marano, sabella]
-
     cabaret = mock
-    cabaret.should_receive(:add_to_available_lists).once.with marano
-    cabaret.should_receive(:add_to_available_lists).once.with sabella
+    amnesia = mock
 
-    subscriber = Subscriber.new
-    subscriber.add_nightclub cabaret
-    subscriber.subscribe_everybody
+    Nightclubber.stub!(:all).and_return [marano, sabella]
+    cabaret.stub!(:parties).and_return [amnesia]
+    amnesia.should_receive(:add_to_list).once.with marano
+    amnesia.should_receive(:add_to_list).once.with sabella
+
+    @subscriber.add_nightclub cabaret
+    @subscriber.subscribe_everybody
   end
 
 end

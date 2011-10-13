@@ -33,7 +33,6 @@ module Beco
   end
 
   class DiscountListNavigator
-
     def initialize page
       @form = page.form_with(:action => 'agenda_nomenalista.php')
     end

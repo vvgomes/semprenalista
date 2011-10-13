@@ -3,7 +3,7 @@ require 'bundler'
 require 'yaml'
 
 Bundler.require :default
-Dir.glob(File.expand_path(File.dirname(__FILE__)+'/models/*.rb')).each{|f| require f}
+Dir.glob(File.expand_path(File.dirname(__FILE__)+'/models/**/*.rb')).each{|f| require f}
 
 Mongoid.configure do |config|
   if ENV['MONGOHQ_URL']
@@ -16,12 +16,12 @@ Mongoid.configure do |config|
 end
 
 @@subscriber = Subscriber.new
-#@@subscriber.add_nightclub Nightclub.new YAML::load_file 'cabaret.yml'
-#@@subscriber.add_nightclub Nightclub.new YAML::load_file 'beco.yml'
+@@subscriber.add_nightclub Nightclub.new(Cabaret::Navigator.new)
+@@subscriber.add_nightclub Nightclub.new(Beco::Navigator.new)
 
 every_monday_midday = '0 12 * * 1'
 Rufus::Scheduler.start_new.cron every_monday_midday do
-  @@subscriber.subscribe_everybody
+  #@@subscriber.subscribe_everybody
 end
 
 configure do
@@ -58,15 +58,15 @@ get '/done' do
   haml :done
 end
 
-get '/results' do
-  haml :results
-end
-
 get '/nightclubbers' do
   haml :nightclubbers
 end
 
 get '/about' do
   haml :about
+end
+
+get '/results' do
+  haml :results
 end
 
