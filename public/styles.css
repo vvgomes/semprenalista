@@ -24,7 +24,7 @@ input {
 	font-family: Delius, sans-serif;
 }
 
-input[type="text"] {
+input {
 	width: 98%;
 	font-size: large;
 	padding-left: 5px;

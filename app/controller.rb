@@ -15,7 +15,7 @@ Mongoid.configure do |config|
   end
 end
 
-@@subscriber = Subscriber.new
+@@subscriber = Subscriber.new(Reporter.new)
 @@subscriber.add_nightclub Nightclub.new(Cabaret::Navigator.new)
 @@subscriber.add_nightclub Nightclub.new(Beco::Navigator.new)
 
@@ -60,6 +60,10 @@ end
 
 get '/nightclubbers' do
   haml :nightclubbers
+end
+
+get '/parties' do
+  haml :index
 end
 
 get '/about' do

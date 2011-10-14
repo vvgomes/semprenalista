@@ -1,5 +1,6 @@
 - subscriber integration test to see if it is able to save reports properly
-- hidden view for
+- unsubscribe feature
+- hidden view for reports
 - party to get its image (see how it is in laika/casadolado)
 - new feature: available parties
 - results url should be hidden
