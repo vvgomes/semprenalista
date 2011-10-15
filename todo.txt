@@ -1,12 +1,10 @@
-- subscriber integration test to see if it is able to save reports properly
-- unsubscribe feature
-- hidden view for reports
 - party to get its image (see how it is in laika/casadolado)
 - new feature: available parties
-- results url should be hidden
+- edit / delete subscription
+- params handler
+- really consider factory for tests
 - try: move load-all-models, mongo-setup, sinatra-config to config.ru or config
 - http://www.casadolado.com.br/agenda.htm is working!
 - take a look at rspec 2 syntax changes
-- database integration test
 - acceptance tests
 

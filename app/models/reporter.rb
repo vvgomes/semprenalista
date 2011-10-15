@@ -1,10 +1,7 @@
-require 'observer'
-
 class Reporter
 
   def save club, party, clubber, response
     Report.new(
-      Time.now,
       club.name,
       party.name,
       clubber.name,
@@ -14,6 +11,10 @@ class Reporter
 
   def clean
     Report.delete_all
+  end
+
+  def reports
+    Report.all.map{ |r| r.to_s }
   end
 
 end

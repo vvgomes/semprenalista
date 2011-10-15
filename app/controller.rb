@@ -35,10 +35,10 @@ helpers do
   def subscribe_new_nightclubber params
     name = params[:name]
     email = params[:email]
-    friends = params[:friends].values.map{ |f| f if !f.empty? }
+    friends = params[:friends].values.find_all{ |f| f if !f.empty? }
     raver = Nightclubber.new name, email, friends
-#    @@subscriber.subscribe raver
-#    @@subscriber.add raver
+    #@@subscriber.subscribe raver
+    @@subscriber.add raver
   end
 end
 
@@ -59,7 +59,9 @@ get '/done' do
 end
 
 get '/nightclubbers' do
-  haml :nightclubbers
+  haml :nightclubbers, :locals => {
+    :clubbers => Nightclubber.all
+  }
 end
 
 get '/parties' do
@@ -70,7 +72,9 @@ get '/about' do
   haml :about
 end
 
-get '/results' do
-  haml :results
+get '/reports' do
+  erb :reports, :locals => {
+    :reports => @@subscriber.reports
+  }
 end
 

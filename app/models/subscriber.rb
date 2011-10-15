@@ -31,5 +31,9 @@ class Subscriber
     subscribe everybody
   end
 
+  def reports
+    @reporter.reports
+  end
+
 end
 
