@@ -25,6 +25,10 @@ module Cabaret
       @page.search('div#texto > h2').first.text.strip
     end
 
+    def url
+      @page.uri.to_s
+    end
+
     def navigate_to_list
       link = @page.link_with(:text => /enviar nome para a lista/i)
       link ? DiscountListNavigator.new(link.click) : nil

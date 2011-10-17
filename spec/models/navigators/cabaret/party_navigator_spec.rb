@@ -15,6 +15,11 @@ describe 'Cabaret::PartyNavigator' do
     @nav.find_name.should be_eql 'London Calling'
   end
 
+  it 'should know the url to the party' do
+    @page.stub!(:uri).and_return 'www.cabaretpoa.com/london_calling.htm'
+    @nav.url.should be_eql 'www.cabaretpoa.com/london_calling.htm'
+  end
+
   context 'when navigating to discount list' do
 
     it 'should give me nothing back when trying to navigate to the list' do

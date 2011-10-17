@@ -15,6 +15,11 @@ describe 'Beco::PartyNavigator' do
     @nav.find_name.should be_eql 'Indie Rocker'
   end
 
+  it 'should know the url to the party' do
+    @page.stub!(:uri).and_return 'www.beco203.com.br/indierockers'
+    @nav.url.should be_eql 'www.beco203.com.br/indierockers'
+  end
+
   context 'when navigating to discount list' do
 
     it 'should give me nothing back when there is no list' do

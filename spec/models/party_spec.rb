@@ -22,6 +22,10 @@ describe 'Party' do
       @party.name.should be_eql 'London Calling'
     end
 
+    it 'shold have an url' do
+      @party.url.should be_eql 'www.cabaretpoa.com/london_calling.htm'
+    end
+
     it 'should be able to add a nightclubber to the list' do
       sabella = Nightclubber.new('Sabella', 'lipe@gmail.com', ['Marano'])
       @list.should_receive(:add).with(sabella)
@@ -50,6 +54,7 @@ describe 'Party' do
   def fake_navigator list_nav=nil
     nav = mock
     nav.stub!(:find_name).and_return 'London Calling'
+    nav.stub!(:url).and_return 'www.cabaretpoa.com/london_calling.htm'
     nav.stub!(:navigate_to_list).and_return list_nav
     nav
   end

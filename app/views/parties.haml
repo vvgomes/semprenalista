@@ -2,7 +2,9 @@
   %details
     %summary
       = n.name
-    - n.parties.each do |p|
-      %p
-        = p.name
+    %ul
+      - n.parties.each do |p|
+        %li
+          %a{:href => "#{p.url}"}
+            = p.name
 

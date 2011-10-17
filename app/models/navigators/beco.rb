@@ -28,8 +28,12 @@ module Beco
       @page.search('div.conteudo-interna h1 strong').first.text.strip
     end
 
+    def url
+      @page.uri.to_s
+    end
+
     def navigate_to_list
-      code = @page.uri.to_s.match(/.*=(.+)\z/i).captures[0]
+      code = url.match(/.*=(.+)\z/i).captures[0]
       regex = eval("/agenda_nomenalista.php\\?c=#{code}/i")
       link = @page.link_with(:href => regex)
       link ? DiscountListNavigator.new(link.click) : nil
