@@ -65,7 +65,9 @@ get '/nightclubbers' do
 end
 
 get '/parties' do
-  haml :index
+  haml :parties, :locals => {
+    :nightclubs => @@subscriber.nightclubs
+  }
 end
 
 get '/about' do

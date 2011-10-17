@@ -1,7 +1,9 @@
+- params handler
+- helper to create and retrieve subscriber
+- report to give me back the right timezone instead of local
 - party to get its image (see how it is in laika/casadolado)
 - new feature: available parties
 - edit / delete subscription
-- params handler
 - really consider factory for tests
 - try: move load-all-models, mongo-setup, sinatra-config to config.ru or config
 - http://www.casadolado.com.br/agenda.htm is working!

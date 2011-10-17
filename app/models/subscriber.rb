@@ -1,5 +1,7 @@
 class Subscriber
 
+  attr_reader :nightclubs
+
   def initialize reporter
     @reporter = reporter
     @nightclubs = []

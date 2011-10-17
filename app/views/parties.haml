@@ -1,0 +1,8 @@
+- nightclubs.each do |n|
+  %details
+    %summary
+      = n.name
+    - n.parties.each do |p|
+      %p
+        = p.name
+
