@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../../spec_helper')
 
-describe 'Cabaret::Navigator' do
+describe Cabaret::Navigator do
 
   before :each do
     @page = mock

@@ -1,10 +1,5 @@
-- check scheduller
-- scheduller object
-- edit / delete subscription dont add again
-- cron
-- http://www.casadolado.com.br/agenda.htm is working!
+- details to work in firefox
 - try: move load-all-models, mongo-setup, sinatra-config to config.ru or config
-- really consider factory for tests
-- take a look at rspec 2 syntax changes
-- acceptance tests
+- really consider factory for unit specs
+- acceptance specs
 

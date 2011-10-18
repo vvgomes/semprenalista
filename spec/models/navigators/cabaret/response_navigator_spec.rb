@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../../spec_helper')
 
-describe 'Cabaret::ResponseNavigator' do
+describe Cabaret::ResponseNavigator do
 
   it 'should find the response code' do
     page = mock

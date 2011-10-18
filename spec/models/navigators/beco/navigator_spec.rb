@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../../spec_helper')
 
-describe 'Beco::Navigator' do
+describe Beco::Navigator do
 
   before :each do
     @page = mock

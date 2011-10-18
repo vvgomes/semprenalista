@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe 'Nightclubber' do
+describe Nightclubber do
 
   before :each do
     @fulvio = Nightclubber.new 'Fulvio Silas', 'fulvio@gmail.com', ['Jairo', 'Gilda']

@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe 'Response' do
+describe Response do
 
   context 'after a successful submission' do
 

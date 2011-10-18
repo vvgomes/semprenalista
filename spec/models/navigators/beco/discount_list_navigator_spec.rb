@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../../spec_helper')
 
-describe 'Beco::DiscountListNavigator' do
+describe Beco::DiscountListNavigator do
 
   before :each do
     @form = mock

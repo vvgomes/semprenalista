@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe 'Robot' do
+describe Robot do
 
   it 'should subscribe everybody every monday midday' do
     Rufus::Scheduler.stub!(:start_new).and_return FakeJob.new

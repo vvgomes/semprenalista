@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe 'Party' do
+describe Party do
 
   context 'with discount list' do
 

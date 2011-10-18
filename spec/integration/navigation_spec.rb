@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe 'Navigation' do
+describe 'Nightclubs navigators' do
 
   before :each do
     prevent_form_submission
