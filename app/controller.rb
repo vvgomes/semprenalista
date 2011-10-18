@@ -24,13 +24,13 @@ end
 
 helpers do
   def subscriber
-    if !@@subscribber then
-      @@subscriber = Subscriber.new
-      @@subscriber.add Nightclub.new(Cabaret::Navigator.new)
-      @@subscriber.add Nightclub.new(Beco::Navigator.new)
-      Robot.new(@@subscriber).work
+    if !@subscriber
+      @subscriber = Subscriber.new
+      @subscriber.add Nightclub.new(Cabaret::Navigator.new)
+      @subscriber.add Nightclub.new(Beco::Navigator.new)
+      Robot.new(@subscriber).work
     end
-    @@subscriber
+    @subscriber
   end
 end
 
