@@ -2,16 +2,11 @@ class Subscriber
 
   attr_reader :nightclubs
 
-  def initialize reporter
-    @reporter = reporter
+  def initialize
     @nightclubs = []
   end
 
-  def add clubber
-    clubber.save
-  end
-
-  def add_nightclub club
+  def add club
     @nightclubs << club
   end
 
@@ -21,20 +16,30 @@ class Subscriber
       club.parties.each do |party|
         people.each do |dude|
           response = party.add_to_list dude
-          @reporter.save(club, party, dude, response)
+          save_report(club, party, dude, response)
         end
       end
     end
   end
 
   def subscribe_everybody
-    @reporter.clean
-    everybody = Nightclubber.all
-    subscribe everybody
+    Report.delete_all
+    subscribe Nightclubber.all
   end
 
   def reports
-    @reporter.reports
+    Report.all.map{ |r| r.to_s }
+  end
+
+  private
+
+  def save_report club, party, clubber, response
+    Report.new(
+      club.name,
+      party.name,
+      clubber.name,
+      response.code,
+      response.message).save
   end
 
 end

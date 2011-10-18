@@ -11,17 +11,8 @@ Mongoid.configure do |config|
     uri = URI.parse(ENV['MONGOHQ_URL'])
     config.master = conn.db(uri.path.gsub(/^\//, ''))
   else
-    config.master = Mongo::Connection.from_uri("mongodb://localhost:27017").db('semprenalista')
+    config.master = Mongo::Connection.from_uri('mongodb://localhost:27017').db('semprenalista')
   end
-end
-
-@@subscriber = Subscriber.new(Reporter.new)
-@@subscriber.add_nightclub Nightclub.new(Cabaret::Navigator.new)
-@@subscriber.add_nightclub Nightclub.new(Beco::Navigator.new)
-
-every_monday_midday = '0 12 * * 1'
-Rufus::Scheduler.start_new.cron every_monday_midday do
-  #@@subscriber.subscribe_everybody
 end
 
 configure do
@@ -32,13 +23,14 @@ configure do
 end
 
 helpers do
-  def subscribe_new_nightclubber params
-    name = params[:name]
-    email = params[:email]
-    friends = params[:friends].values.find_all{ |f| f if !f.empty? }
-    raver = Nightclubber.new name, email, friends
-    #@@subscriber.subscribe raver
-    @@subscriber.add raver
+  def subscriber
+    if !@@subscribber then
+      @@subscriber = Subscriber.new
+      @@subscriber.add Nightclub.new(Cabaret::Navigator.new)
+      @@subscriber.add Nightclub.new(Beco::Navigator.new)
+      Robot.new(@@subscriber).work
+    end
+    @@subscriber
   end
 end
 
@@ -48,7 +40,9 @@ end
 
 post '/subscribe' do
   session[:subscribed] = true
-  subscribe_new_nightclubber params
+  raver = Nightclubber.parse params
+  #subscriber.subscribe raver
+  raver.save
   redirect to '/done'
 end
 
@@ -66,7 +60,7 @@ end
 
 get '/parties' do
   haml :parties, :locals => {
-    :nightclubs => @@subscriber.nightclubs
+    :nightclubs => subscriber.nightclubs
   }
 end
 
@@ -76,7 +70,7 @@ end
 
 get '/reports' do
   erb :reports, :locals => {
-    :reports => @@subscriber.reports
+    :reports => subscriber.reports
   }
 end
 

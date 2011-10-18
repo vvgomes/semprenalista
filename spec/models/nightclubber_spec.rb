@@ -18,5 +18,35 @@ describe 'Nightclubber' do
     @fulvio.friends.should be_eql ['Jairo', 'Gilda']
   end
 
+  context 'when parsing request parameters' do
+
+    before :each do
+      params = {
+        :name => 'Filipe Sabella',
+        :email => 'lipe@gmail.com',
+        :friends => {
+          :f0 => 'Marano',
+          :f1 => 'Pedro',
+          :f2 => '',
+          :f3 => ''
+        }
+      }
+      @sabella = Nightclubber.parse params
+    end
+
+    it 'should be able to extract the name' do
+      @sabella.name.should be_eql 'Filipe Sabella'
+    end
+
+    it 'should be able to extract the email' do
+      @sabella.email.should be_eql 'lipe@gmail.com'
+    end
+
+    it 'should be able to extract the friends' do
+      @sabella.friends.should be_eql ['Marano', 'Pedro']
+    end
+
+  end
+
 end
 

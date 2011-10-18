@@ -3,61 +3,88 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe 'Subscriber' do
 
   before :each do
-    @subscriber = Subscriber.new fake_reporter
-  end
-
-  it 'should save a nightclubber for eternal subscription' do
-    sabella = mock
-    sabella.should_receive :save
-
-    @subscriber.add sabella
-  end
-
-  it 'should subscribe a nightclubber to the available discount lists' do
-    sabella = mock
-    cabaret = mock
-    amnesia = mock
-
-    cabaret.stub!(:parties).and_return [amnesia]
-    amnesia.should_receive(:add_to_list).with sabella
-
-    @subscriber.add_nightclub cabaret
-    @subscriber.subscribe sabella
-  end
-
-  it 'should subscribe all nightclubbers to the available discount lists' do
-    marano = mock
-    sabella = mock
-    cabaret = mock
-    amnesia = mock
-
-    Nightclubber.stub!(:all).and_return [marano, sabella]
-    cabaret.stub!(:parties).and_return [amnesia]
-    amnesia.should_receive(:add_to_list).once.with marano
-    amnesia.should_receive(:add_to_list).once.with sabella
-
-    @subscriber.add_nightclub cabaret
-    @subscriber.subscribe_everybody
-  end
-
-  it 'should show me the reports for the last subscriptions' do
-    @subscriber.reports.should be_eql ['something happened on Monday.']
+    @subscriber = Subscriber.new
   end
 
   it 'should give me the nightclubs' do
     beco = mock
     cabaret = mock
-    @subscriber.add_nightclub beco
-    @subscriber.add_nightclub cabaret
+
+    @subscriber.add beco
+    @subscriber.add cabaret
+
     @subscriber.nightclubs.should be_eql [beco, cabaret]
   end
 
-  def fake_reporter
-    reporter = mock
-    reporter.stub!(:save)
-    reporter.stub!(:clean)
-    reporter.stub!(:reports).and_return ['something happened on Monday.']
-    reporter
+  context 'when subscribing' do
+
+    before :each do
+      @subscriber.stub!(:save_report)
+    end
+
+    it 'should subscribe a nightclubber to the available discount lists' do
+      sabella = mock
+      cabaret = mock
+      amnesia = mock
+
+      cabaret.stub!(:parties).and_return [amnesia]
+      amnesia.should_receive(:add_to_list).with sabella
+
+      @subscriber.add cabaret
+      @subscriber.subscribe sabella
+    end
+
+    it 'should subscribe all nightclubbers to the available discount lists' do
+      marano = mock
+      sabella = mock
+      cabaret = mock
+      amnesia = mock
+
+      Report.stub!(:delete_all)
+      Nightclubber.stub!(:all).and_return [marano, sabella]
+      cabaret.stub!(:parties).and_return [amnesia]
+
+      amnesia.should_receive(:add_to_list).once.with marano
+      amnesia.should_receive(:add_to_list).once.with sabella
+
+      @subscriber.add cabaret
+      @subscriber.subscribe_everybody
+    end
+  end
+
+  context 'when reporting its actions' do
+
+    it 'should show me the reports for the last subscriptions' do
+      report = mock
+      report.stub!(:to_s).and_return 'something happened on Monday.'
+      Report.stub!(:all).and_return [report]
+
+      @subscriber.reports.should be_eql ['something happened on Monday.']
+    end
+
+    it 'should save a report after subscribing a clubber' do
+      cabaret = mock
+      amnesia = mock
+      response = mock
+      report = mock
+
+      cabaret.stub!(:name).and_return 'Cabaret'
+      cabaret.stub!(:parties).and_return [amnesia]
+      amnesia.stub!(:add_to_list).and_return response
+      amnesia.stub!(:name).and_return 'Amnesia'
+      response.stub!(:message).and_return 'ok'
+      response.stub!(:code).and_return 200
+
+      Report.should_receive(:new).
+        with('Cabaret', 'Amnesia', 'Sabella', 200, 'ok').and_return report
+
+      report.should_receive(:save)
+
+      sabella = Nightclubber.new 'Sabella', 'lipe@gmail.com', ['Marano']
+      @subscriber.add cabaret
+      @subscriber.subscribe sabella
+    end
+
   end
 
 end
