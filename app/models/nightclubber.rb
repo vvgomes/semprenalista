@@ -6,6 +6,8 @@ class Nightclubber
   field :email, :type => String
   field :friends, :type => Array, :default => []
 
+  validates_uniqueness_of :email
+
   def initialize name, email, friends
     super :name => name, :email => email, :friends => friends
   end
