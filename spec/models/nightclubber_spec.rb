@@ -66,5 +66,12 @@ describe Nightclubber do
 
   end
 
+  it 'should give me all people names sorted' do
+    zilda = Nightclubber.new 'Zilda', 'mail', ['Abraao']
+    magda = Nightclubber.new 'Magda', 'mail', ['Crenildo']
+    Nightclubber.stub!(:all).and_return [zilda, magda]
+    Nightclubber.sorted_names.should be_eql ['Abraao', 'Crenildo', 'Magda', 'Zilda']
+  end
+
 end
 

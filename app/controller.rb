@@ -33,8 +33,8 @@ helpers do
     @subscriber
   end
 
-  def nightclubbers
-    Nightclubber.all
+  def nightclubbers_names
+    Nightclubber.sorted_names
   end
 
   def nightclubs
@@ -66,7 +66,7 @@ end
 
 get '/nightclubbers' do
   haml :nightclubbers, :locals => {
-    :clubbers => nightclubbers
+    :names => nightclubbers_names
   }
 end
 

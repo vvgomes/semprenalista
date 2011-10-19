@@ -19,5 +19,9 @@ class Nightclubber
     Nightclubber.new name, email, friends
   end
 
+  def self.sorted_names
+    Nightclubber.all.inject([]){|names, dude|names+[dude.name]+dude.friends}.sort
+  end
+
 end
 

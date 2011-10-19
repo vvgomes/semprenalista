@@ -1,12 +1,8 @@
 %h2
   Quem j&aacute; est&aacute; na lista...
 %ul{:id => "nightclubbers"}
-  - clubbers.each do |c|
+  - names.each do |name|
     %li
       %p
-        = c.name
-        - c.friends.each do |f|
-          %li
-            %p
-              = f
+        = name
 
