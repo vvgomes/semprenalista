@@ -2,6 +2,14 @@ class Subscriber
 
   attr_reader :nightclubs
 
+
+  def self.create
+    subscriber = Subscriber.new
+    subscriber.add Nightclub.new(Cabaret::Navigator.new)
+    subscriber.add Nightclub.new(Beco::Navigator.new)
+    subscriber
+  end
+
   def initialize
     @nightclubs = []
   end

@@ -87,5 +87,10 @@ describe Subscriber do
 
   end
 
+  it 'should be able to create a subscriber with nightclubs' do
+    subscriber = Subscriber.create
+    subscriber.nightclubs.map{|n|n.name}.should be_eql ['Cabaret', 'Beco']
+  end
+
 end
 

@@ -25,9 +25,7 @@ end
 helpers do
   def subscriber
     if !@subscriber
-      @subscriber = Subscriber.new
-      @subscriber.add Nightclub.new(Cabaret::Navigator.new)
-      @subscriber.add Nightclub.new(Beco::Navigator.new)
+      @subscriber = Subscriber.create
       Robot.new(@subscriber).work
     end
     @subscriber
