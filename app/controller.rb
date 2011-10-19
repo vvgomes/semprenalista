@@ -11,7 +11,9 @@ Mongoid.configure do |config|
     uri = URI.parse(ENV['MONGOHQ_URL'])
     config.master = conn.db(uri.path.gsub(/^\//, ''))
   else
-    config.master = Mongo::Connection.from_uri('mongodb://localhost:27017').db('semprenalista')
+    config.master = Mongo::Connection.
+      from_uri('mongodb://localhost:27017').
+      db('semprenalista')
   end
 end
 
@@ -30,6 +32,18 @@ helpers do
     end
     @subscriber
   end
+
+  def nightclubbers
+    Nightclubber.all
+  end
+
+  def nightclubs
+    subscriber.nightclubs
+  end
+
+  def reports
+    subscriber.reports
+  end
 end
 
 get '/' do
@@ -39,7 +53,7 @@ end
 post '/subscribe' do
   session[:subscribed] = true
   raver = Nightclubber.parse params
-  #subscriber.subscribe raver
+  subscriber.subscribe raver
   raver.save
   redirect to '/done'
 end
@@ -52,13 +66,13 @@ end
 
 get '/nightclubbers' do
   haml :nightclubbers, :locals => {
-    :clubbers => Nightclubber.all
+    :clubbers => nightclubbers
   }
 end
 
 get '/parties' do
   haml :parties, :locals => {
-    :nightclubs => subscriber.nightclubs
+    :nightclubs => nightclubs
   }
 end
 
@@ -68,7 +82,7 @@ end
 
 get '/reports' do
   erb :reports, :locals => {
-    :reports => subscriber.reports
+    :reports => reports
   }
 end
 
