@@ -49,6 +49,10 @@ input:focus {
 	border-radius: 15px;
 }
 
+input[type="text"] {
+	padding-left: 10px;
+}
+
 h2 {
 	margin-left: 10px;
 	font-size: 120%;
@@ -113,5 +117,9 @@ footer ul li {
 details {
 	margin: 10px;
 	margin-left: 20px;
+}
+
+#error_message {
+	color: red;
 }
 

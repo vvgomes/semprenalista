@@ -5,19 +5,22 @@
   &nbsp;e do
   %a{:href => "http://www.beco203.com.br"}Beco
   &nbsp;pra sempre :)
-%form{:action => "/subscribe", :method => "post"}
+%form{:action => "/", :method => "post"}
+  - if error_message
+    %p{:id => 'error_message'}
+      = error_message
   %p
-    %input{:name => "name", :type => "text", :placeholder => " Seu nome", :required => "true"}
+    %input{:name => "name",:type => "text",:placeholder => "Seu nome",:required => "true",:value => params[:name]}
   %p
-    %input{:name => "email", :type => "email", :placeholder => " Seu email", :required => "true"}
+    %input{:name => "email",:type => "email",:placeholder =>"Seu email",:required => "true",:value => params[:email]}
   %p
-    %input{:name => "friends[0]", :type => "text", :placeholder => " Um amigo"}
+    %input{:name => "friends[0]", :type => "text", :placeholder => "Um amigo"}
   %p
-    %input{:name => "friends[1]", :type => "text", :placeholder => " Outro amigo"}
+    %input{:name => "friends[1]", :type => "text", :placeholder => "Outro amigo"}
   %p
-    %input{:name => "friends[2]", :type => "text", :placeholder => " Mais um"}
+    %input{:name => "friends[2]", :type => "text", :placeholder => "Mais um"}
   %p
-    %input{:name => "friends[3]", :type => "text", :placeholder => " O último"}
+    %input{:name => "friends[3]", :type => "text", :placeholder => "O último"}
   %p{:id => "submit"}
     %input{:name => "submit", :type => "submit", :value => "OK"}
 

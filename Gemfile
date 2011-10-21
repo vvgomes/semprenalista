@@ -2,6 +2,8 @@ source :rubygems
 
 gem 'rake'
 gem 'sinatra'
+gem 'rack-flash'
+gem 'sinatra-redirect-with-flash'
 gem 'haml'
 gem 'nokogiri'
 gem 'mechanize'

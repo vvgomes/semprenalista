@@ -19,6 +19,7 @@ end
 
 configure do
   enable :sessions
+  use Rack::Flash, :sweep => true
   set :app_file, __FILE__
   set :public, File.dirname(__FILE__)+'/../public'
   set :views, File.dirname(__FILE__)+'/views'
@@ -50,12 +51,17 @@ get '/' do
   haml :index
 end
 
-post '/subscribe' do
-  session[:subscribed] = true
-  raver = Nightclubber.parse params
-  subscriber.subscribe raver
-  raver.save
-  redirect to '/done'
+post '/' do
+  if Nightclubber.parse(params).save
+    #subscriber.subscribe raver
+    session[:subscribed] = true
+    redirect to '/done'
+  else
+    haml :index, :locals => {
+      :error_message => 'Email j&aacute cadastrado :(',
+      :params => params
+    }
+  end
 end
 
 get '/done' do
