@@ -18,7 +18,7 @@ class Subscriber
   end
 
   def subscribe people
-    people = [people] if people.class != Array
+    people = [people] if people.class == Nightclubber
     @nightclubs.each do |club|
       club.parties.each do |party|
         people.each do |dude|

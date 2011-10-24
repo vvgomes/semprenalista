@@ -27,6 +27,7 @@ describe Subscriber do
       cabaret = mock
       amnesia = mock
 
+      sabella.stub!(:class).and_return Nightclubber
       cabaret.stub!(:parties).and_return [amnesia]
       amnesia.should_receive(:add_to_list).with sabella
 
