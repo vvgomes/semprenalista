@@ -22,12 +22,9 @@ input {
 	border-radius: 15px;
 	height: 30px;
 	font-family: Delius, sans-serif;
-}
-
-input {
 	width: 98%;
 	font-size: large;
-	padding-left: 5px;
+	padding-left: 10px;
 }
 
 p#submit {
@@ -47,10 +44,6 @@ input:focus {
 	outline: none;
 	border: 2px solid black;
 	border-radius: 15px;
-}
-
-input[type="text"] {
-	padding-left: 10px;
 }
 
 h2 {

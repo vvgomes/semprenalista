@@ -48,19 +48,18 @@ helpers do
 end
 
 get '/' do
+  @clubber = Nightclubber.empty
   haml :index
 end
 
 post '/' do
-  if Nightclubber.parse(params).save
-    #subscriber.subscribe raver
+  @clubber = Nightclubber.parse(params)
+  if @clubber.save
+    #subscriber.subscribe @clubber
     session[:subscribed] = true
     redirect to '/done'
   else
-    haml :index, :locals => {
-      :error_message => 'Email j&aacute cadastrado :(',
-      :params => params
-    }
+    haml :index
   end
 end
 

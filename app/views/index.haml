@@ -6,21 +6,21 @@
   %a{:href => "http://www.beco203.com.br"}Beco
   &nbsp;pra sempre :)
 %form{:action => "/", :method => "post"}
-  - if error_message
+  - if !@clubber.valid?
     %p{:id => 'error_message'}
-      = error_message
+      Email j&aacute cadastrado :(
   %p
-    %input{:name => "name",:type => "text",:placeholder => "Seu nome",:required => "true",:value => params[:name]}
+    %input{:name => "name",:type => "text",:placeholder => "Seu nome",:required => "true",:value => @clubber.name}
   %p
-    %input{:name => "email",:type => "email",:placeholder =>"Seu email",:required => "true",:value => params[:email]}
+    %input{:name => "email",:type => "email",:placeholder =>"Seu email",:required => "true",:value => @clubber.email}
   %p
-    %input{:name => "friends[0]", :type => "text", :placeholder => "Um amigo"}
+    %input{:name => "friends[0]", :type => "text", :placeholder => "Um amigo", :value => @clubber.friends[0]}
   %p
-    %input{:name => "friends[1]", :type => "text", :placeholder => "Outro amigo"}
+    %input{:name => "friends[1]", :type => "text", :placeholder => "Outro amigo", :value => @clubber.friends[1]}
   %p
-    %input{:name => "friends[2]", :type => "text", :placeholder => "Mais um"}
+    %input{:name => "friends[2]", :type => "text", :placeholder => "Mais um", :value => @clubber.friends[2]}
   %p
-    %input{:name => "friends[3]", :type => "text", :placeholder => "O último"}
+    %input{:name => "friends[3]", :type => "text", :placeholder => "O último", :value => @clubber.friends[3]}
   %p{:id => "submit"}
     %input{:name => "submit", :type => "submit", :value => "OK"}
 

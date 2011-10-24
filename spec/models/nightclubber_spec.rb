@@ -73,5 +73,12 @@ describe Nightclubber do
     Nightclubber.sorted_names.should be_eql ['Abraao', 'Crenildo', 'Magda', 'Zilda']
   end
 
+  it 'should create an empty new guy' do
+    empty = Nightclubber.empty
+    empty.name.should be_eql ''
+    empty.email.should be_eql ''
+    empty.friends.each{|f| f.should be_eql ''}
+  end
+
 end
 
