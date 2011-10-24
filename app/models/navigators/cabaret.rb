@@ -1,3 +1,5 @@
+require File.expand_path(File.dirname(__FILE__) + '/agent')
+
 module Cabaret
   extend Agent
 

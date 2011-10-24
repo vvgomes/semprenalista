@@ -5,7 +5,7 @@
   &nbsp;e do
   %a{:href => "http://www.beco203.com.br"}Beco
   &nbsp;pra sempre :)
-%form{:action => "/", :method => "post"}
+%form{:id => "form", :action => "/", :method => "post"}
   - if !@clubber.valid?
     %p{:id => 'error_message'}
       Email j&aacute cadastrado :(
@@ -23,4 +23,9 @@
     %input{:name => "friends[3]", :type => "text", :placeholder => "O último", :value => @clubber.friends[3]}
   %p{:id => "submit"}
     %input{:name => "submit", :type => "submit", :value => "OK"}
+%footer
+  %small
+    Se voce j&aacute; se cadastrou, clique&nbsp;
+    %a{:id => "edit", :onclick => "showDialog();", :href => "#"}aqu&iacute;
+    &nbsp;para editar.
 
