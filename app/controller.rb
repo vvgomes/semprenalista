@@ -25,14 +25,14 @@ configure do
   set :views, File.dirname(__FILE__)+'/views'
 end
 
+#bootstrap
+@@subscriber = Subscriber.create
+@@robot = Robot.new(@@subscriber)
+@@robot.work
+
 helpers do
   def subscriber
-    if !@subscriber
-      @subscriber = Subscriber.create
-      @robot = Robot.new(@subscriber)
-      @robot.work
-    end
-    @subscriber
+    @@subscriber
   end
 
   def nightclubbers_names
@@ -45,6 +45,10 @@ helpers do
 
   def reports
     subscriber.reports
+  end
+
+  def robot
+    @@robot
   end
 end
 
@@ -93,7 +97,7 @@ get '/reports' do
 end
 
 get '/subscribe' do
-  @robot.do_it_now
+  robot.do_it_now
   'ok'
 end
 
