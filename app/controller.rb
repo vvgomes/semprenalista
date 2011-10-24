@@ -91,3 +91,8 @@ get '/reports' do
   }
 end
 
+get '/subscribe' do
+  subscriber.subscribe_everybody
+  'ok'
+end
+
