@@ -1,3 +1,4 @@
+- fix specs
 - fix unit tests to not be mongo dependent
 - details to work in firefox
 - try: move load-all-models, mongo-setup, sinatra-config to config.ru or config

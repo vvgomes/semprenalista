@@ -29,7 +29,8 @@ helpers do
   def subscriber
     if !@subscriber
       @subscriber = Subscriber.create
-      Robot.new(@subscriber).work
+      @robot = Robot.new(@subscriber)
+      @robot.work
     end
     @subscriber
   end
@@ -92,7 +93,7 @@ get '/reports' do
 end
 
 get '/subscribe' do
-  subscriber.subscribe_everybody
+  @robot.do_it_now
   'ok'
 end
 
