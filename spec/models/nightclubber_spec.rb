@@ -61,7 +61,7 @@ describe Nightclubber do
     end
 
     it 'should be able to extract the friends' do
-      @sabella.friends.should be_eql ['Marano', 'Pedro']
+      @sabella.friends.to_set.should be_eql ['Marano', 'Pedro'].to_set
     end
 
   end

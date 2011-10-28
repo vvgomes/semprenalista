@@ -24,7 +24,7 @@ configure do
   set :public, File.dirname(__FILE__)+'/../public'
   set :views, File.dirname(__FILE__)+'/views'
 end
-Nightclubber.delete_all
+
 #bootstrap
 @@subscriber = Subscriber.create
 @@robot = Robot.new(@@subscriber)
