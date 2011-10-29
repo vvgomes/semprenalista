@@ -1,6 +1,5 @@
 .gems/*
 *.DS_Store
-*.lock
 .redcar/*
 app/.redcar/*
 .komodotools/*

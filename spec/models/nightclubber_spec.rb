@@ -18,24 +18,6 @@ describe Nightclubber do
     @fulvio.friends.should be_eql ['Jairo', 'Gilda']
   end
 
-  context 'when saving' do
-
-    before :each do
-      @duplicated = Nightclubber.new 'Other Name', 'fulvio@gmail.com', []
-    end
-
-    after :each do
-      Nightclubber.delete_all
-    end
-
-    it 'should not allow duplicated emails' do
-      @fulvio.save
-      @duplicated.save
-      @duplicated.should_not be_valid
-    end
-
-  end
-
   context 'when parsing request parameters' do
 
     before :each do
