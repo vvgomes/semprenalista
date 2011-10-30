@@ -1,5 +1,3 @@
-require File.expand_path(File.dirname(__FILE__) + '/../../../spec_helper')
-
 describe Beco::ResponseNavigator do
 
   it 'should find the response code' do

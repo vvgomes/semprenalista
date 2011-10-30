@@ -1,5 +1,5 @@
 - Factory for subscriber and robot
-- fix specs
+- why can't I remove spec_helper explicit require in discount_list_spec and navigation_spec?
 - details to work in firefox
 - extract trash from controller
 - acceptance specs
