@@ -1,12 +1,15 @@
 describe Robot do
 
+  before :each do
+    @subscriber = mock
+    @robot = Robot.new @subscriber
+  end
+
   context 'when being called by cron' do
     
     before :each do
-      @subscriber = mock
       @day = mock
       Time.stub!(:now).and_return @day
-      @robot = Robot.new @subscriber
     end
     
     it 'should subscribe everybody every monday' do
@@ -26,7 +29,8 @@ describe Robot do
   end
 
   it 'should subscribe everybody eventually' do
-    
+    @subscriber.should_receive :subscribe_everybody
+    @robot.do_it_now
   end
   
 end
