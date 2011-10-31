@@ -1,3 +1,4 @@
+- the task subscribe doesn't make sense right now because I would like to trigger it from my localbox in eventual situations, like when there is a party for the current week which was added after monday. so, I get to point to the production database.
 - why can't I remove spec_helper explicit require in discount_list_spec and navigation_spec?
 - details to work in firefox
 - acceptance specs
