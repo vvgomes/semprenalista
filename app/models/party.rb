@@ -12,9 +12,10 @@ class Party
   def nice?
     !@list.nil?
   end
-
+  
   def add_to_list clubber
     @list.add clubber
   end
+  
 end
 

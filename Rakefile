@@ -1,5 +1,7 @@
-require 'rubygems'
+require File.expand_path(File.dirname(__FILE__) + '/config/environment')
 require 'rake'
+
+Bundler.require :test
 require 'rspec/core/rake_task'
 
 task :default => :spec
@@ -22,5 +24,11 @@ end
 
 desc 'This task is called by the Heroku cron add-on'
 task :cron do
-  Robot.create.work
+  Job.new(Subscriber.create).run
+end
+
+task :subscribe do
+  puts "[#{Time.now}] Job started."
+  Job.new(Subscriber.create).run_now
+  puts "[#{Time.now}] Job done."
 end
