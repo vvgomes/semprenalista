@@ -69,4 +69,3 @@ get '/reports' do
     :reports => reports
   }
 end
-
