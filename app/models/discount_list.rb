@@ -12,7 +12,7 @@ class DiscountList
     #FakeResponse.new
   end
   
-  #I know...
+  # I know...
   class FakeResponse
     def code
       200
@@ -21,6 +21,6 @@ class DiscountList
       'ok'
     end
   end
-
+  
 end
 
