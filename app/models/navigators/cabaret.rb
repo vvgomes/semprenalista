@@ -35,6 +35,7 @@ module Cabaret
       link = @page.link_with(:text => /enviar nome para a lista/i)
       link ? DiscountListNavigator.new(link.click) : nil
     end
+    
   end
 
   class DiscountListNavigator

@@ -28,6 +28,12 @@ task :cron do
 end
 
 task :subscribe do
+  Mongoid.configure do |config|
+    production_db = 'mongodb://heroku:iy6k13o77hxc6q5026zttd@flame.mongohq.com:27103/app525158'
+    conn = Mongo::Connection.from_uri(production_db)
+    uri = URI.parse(production_db)
+    config.master = conn.db(uri.path.gsub(/^\//, ''))
+  end
   puts "[#{Time.now}] Job started."
   Job.new(Subscriber.create).run_now
   puts "[#{Time.now}] Job done."

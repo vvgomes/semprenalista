@@ -21,9 +21,11 @@ class Subscriber
     people = [people] if people.class == Nightclubber
     @nightclubs.each do |club|
       club.parties.each do |party|
-        people.each do |dude|
-          response = party.add_to_list dude
-          save_report(club, party, dude, response)
+        people.each do |dude|      
+          if !subscribed?(club.name, party.name, dude.name) 
+            response = party.add_to_list dude
+            save_report(club, party, dude, response)
+          end
         end
       end
     end
@@ -31,7 +33,7 @@ class Subscriber
 
   def subscribe_everybody
     Report.delete_all
-    subscribe Nightclubber.all
+    subscribe Nightclubber.all.reverse
   end
 
   def reports
@@ -48,6 +50,10 @@ class Subscriber
       response.code,
       response.message).save
   end
-
+  
+  def subscribed? club_name, party_name, clubber_name
+    Report.where(:club => club_name).and(:party => party_name).and(:clubber => clubber_name).size > 0
+  end
+  
 end
 

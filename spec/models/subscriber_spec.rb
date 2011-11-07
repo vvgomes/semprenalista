@@ -2,11 +2,16 @@ describe Subscriber do
 
   before :each do
     @subscriber = Subscriber.new
+    @subscriber.stub!(:subscribed?).and_return false
+    
   end
 
   it 'should give me the nightclubs' do
     beco = mock
     cabaret = mock
+    
+    beco.stub!(:name).and_return 'Beco'
+    cabaret.stub!(:name).and_return 'Cabaret'
 
     @subscriber.add beco
     @subscriber.add cabaret
@@ -25,6 +30,10 @@ describe Subscriber do
       cabaret = mock
       amnesia = mock
 
+      cabaret.stub!(:name).and_return 'Cabaret'
+      amnesia.stub!(:name).and_return 'Amnesia'
+      sabella.stub!(:name).and_return 'Sabella'
+
       sabella.stub!(:class).and_return Nightclubber
       cabaret.stub!(:parties).and_return [amnesia]
       amnesia.should_receive(:add_to_list).with sabella
@@ -38,6 +47,11 @@ describe Subscriber do
       sabella = mock
       cabaret = mock
       amnesia = mock
+      
+      cabaret.stub!(:name).and_return 'Cabaret'
+      amnesia.stub!(:name).and_return 'Amnesia'
+      sabella.stub!(:name).and_return 'Sabella'
+      marano.stub!(:name).and_return 'Marano'
 
       Report.stub!(:delete_all)
       Nightclubber.stub!(:all).and_return [marano, sabella]

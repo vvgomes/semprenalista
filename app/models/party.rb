@@ -7,6 +7,7 @@ class Party
     @list = n ? DiscountList.new(n) : nil
     @name = nav.find_name
     @url = nav.url
+    @nav = nav
   end
 
   def nice?
@@ -15,6 +16,10 @@ class Party
   
   def add_to_list clubber
     @list.add clubber
+  end
+
+  def reset_agent
+    @nav.reset_agent
   end
   
 end

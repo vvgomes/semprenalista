@@ -6,11 +6,9 @@ Dir.glob(File.expand_path(File.dirname(__FILE__)+'/../app/models/**/*.rb')).each
 
 Mongoid.configure do |config|
   if ENV['MONGOHQ_URL']
-    puts "### MONGOHQ_URL: #{ENV['MONGOHQ_URL']}"
     conn = Mongo::Connection.from_uri(ENV['MONGOHQ_URL'])
     uri = URI.parse(ENV['MONGOHQ_URL'])
     config.master = conn.db(uri.path.gsub(/^\//, ''))
-    puts "### uri.path.gsub:#{uri.path.gsub(/^\//, '')}"
   else
     begin
       config.master = Mongo::Connection.
@@ -18,8 +16,8 @@ Mongoid.configure do |config|
         db('semprenalista')
     rescue
       puts 'No DB.'
-    end      
+    end
   end
 end
 
-#mongo flame.mongohq.com:27103/app525158 -u heroku -p <pass>
+#mongodb://heroku:iy6k13o77hxc6q5026zttd@flame.mongohq.com:27103/app525158

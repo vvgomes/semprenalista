@@ -13,5 +13,6 @@ module Agent
     @m = Mechanize.new if !@m
     @m
   end
+  
 end
 
