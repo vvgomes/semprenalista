@@ -3,9 +3,12 @@ require File.expand_path(File.dirname(__FILE__) + '/agent')
 module Cabaret
   extend Agent
 
+  HOME = 'http://www.cabaretpoa.com.br'
+
   class Navigator
     def initialize
-      @page = Cabaret.get 'http://www.cabaretpoa.com.br/agenda.htm'
+      #TODO: can I avoid passing HOME?
+      @page = Cabaret.get "#{HOME}/js/agenda.js"
     end
 
     def name
@@ -13,9 +16,23 @@ module Cabaret
     end
 
     def navigate_to_parties
-      links = @page.links_with(:text => /saiba mais/i)
-      links.map{ |l| PartyNavigator.new(l.click) }
+      js = @page.body
+      js = remove_comments js
+      hrefs(js).map{ |l| PartyNavigator.new(Cabaret.get("#{HOME}/#{l}")) }
     end
+    
+    private
+    
+    # move to a new class
+    
+    def remove_comments js
+      js.gsub(/\/\/.+$/, "")
+    end
+    
+    def hrefs js
+      js.scan(/href="([^"]+)"/).map{ |r| r.first }
+    end
+    
   end
 
   class PartyNavigator
@@ -24,7 +41,7 @@ module Cabaret
     end
 
     def find_name
-      @page.search('div#texto > h2').first.text.strip
+      @page.search('div#perfil > h2').first.text.strip
     end
 
     def url
@@ -32,8 +49,9 @@ module Cabaret
     end
 
     def navigate_to_list
-      link = @page.link_with(:text => /enviar nome para a lista/i)
-      link ? DiscountListNavigator.new(link.click) : nil
+      iframe = @page.iframe_with(:id => 'fr_lista')
+      return nil if !iframe
+      DiscountListNavigator.new(Cabaret.get("#{HOME}/#{iframe.uri}"))
     end
     
   end
