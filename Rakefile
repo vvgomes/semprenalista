@@ -38,3 +38,9 @@ task :subscribe do
   Job.new(Subscriber.create).run_now
   puts "[#{Time.now}] Job done."
 end
+
+task :cleandb do
+  Nightclubber.delete_all
+  Report.delete_all
+  puts 'done.'
+end

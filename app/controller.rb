@@ -12,18 +12,6 @@ helpers do
     @subscriber = Subscriber.create if !@subscriber
     @subscriber
   end
-
-  def nightclubbers_names
-    Nightclubber.sorted_names
-  end
-
-  def nightclubs
-    subscriber.nightclubs
-  end
-
-  def reports
-    subscriber.reports
-  end
 end
 
 get '/' do
@@ -34,7 +22,7 @@ end
 post '/' do
   @clubber = Nightclubber.parse(params)
   if @clubber.save
-    subscriber.subscribe @clubber
+    subscriber.subscribe @clubber #bad
     session[:subscribed] = true
     redirect to '/done'
   else
@@ -50,13 +38,13 @@ end
 
 get '/nightclubbers' do
   haml :nightclubbers, :locals => {
-    :names => nightclubbers_names
+    :names => Nightclubber.sorted_names
   }
 end
 
 get '/parties' do
   haml :parties, :locals => {
-    :nightclubs => nightclubs
+    :nightclubs => Nightclub.all
   }
 end
 
@@ -66,6 +54,6 @@ end
 
 get '/reports' do
   erb :reports, :locals => {
-    :reports => reports
+    :reports => Report.all.map{ |r| r.to_s }
   }
 end
