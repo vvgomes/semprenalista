@@ -1,5 +1,3 @@
-- job spec is a mess
-
 - turn-off cron job
 - heroku scheduler
 
