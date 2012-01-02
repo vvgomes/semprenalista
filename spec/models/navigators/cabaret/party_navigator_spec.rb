@@ -30,7 +30,7 @@ describe Cabaret::PartyNavigator do
       iframe = mock
       @page.stub!(:iframe_with).with(:id => 'fr_lista').and_return iframe
       iframe.stub!(:uri).and_return 'listas/lista-indiada.htm?var=0000000001'
-      Cabaret.stub!(:get).with('http://www.cabaretpoa.com.br/listas/lista-indiada.htm?var=0000000001').and_return list_page
+      Cabaret.stub!(:get).with('listas/lista-indiada.htm?var=0000000001').and_return list_page
       Cabaret::DiscountListNavigator.should_receive(:new).with(list_page)
 
       @nav.navigate_to_list

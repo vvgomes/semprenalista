@@ -2,10 +2,14 @@ require File.expand_path(File.dirname(__FILE__) + '/agent')
 
 module Beco
   extend Agent
-
+  
+  def self.home 
+    'http://www.beco203.com.br'
+  end
+  
   class Navigator
     def initialize
-      @page = Beco.get 'http://www.beco203.com.br/capa-beco.php'
+      @page = Beco.get 'capa-beco.php'
     end
 
     def name

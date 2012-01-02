@@ -1,8 +1,9 @@
 require 'mechanize'
 
 module Agent
-  def get url
-    m.get url
+  
+  def get resource
+    m.get "#{home}/#{resource}"
   end
 
   def submit form
@@ -12,6 +13,10 @@ module Agent
   def m
     @m = Mechanize.new if !@m
     @m
+  end
+  
+  def home
+    ''
   end
   
 end

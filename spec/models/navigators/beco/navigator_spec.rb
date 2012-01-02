@@ -2,7 +2,7 @@ describe Beco::Navigator do
 
   before :each do
     @page = mock
-    Beco.stub!(:get).with('http://www.beco203.com.br/capa-beco.php').and_return @page
+    Beco.stub!(:get).with('capa-beco.php').and_return @page
 
     @nav = Beco::Navigator.new
   end

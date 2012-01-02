@@ -3,12 +3,13 @@ require File.expand_path(File.dirname(__FILE__) + '/agent')
 module Cabaret
   extend Agent
 
-  HOME = 'http://www.cabaretpoa.com.br'
-
+  def self.home
+    'http://www.cabaretpoa.com.br'
+  end
+  
   class Navigator
     def initialize
-      #TODO: can I avoid passing HOME?
-      @page = Cabaret.get "#{HOME}/js/agenda.js"
+      @page = Cabaret.get 'js/agenda.js'
     end
 
     def name
@@ -17,7 +18,7 @@ module Cabaret
 
     def navigate_to_parties
       js = JsNavigator.new @page.body
-      js.hrefs.map{ |l| PartyNavigator.new(Cabaret.get("#{HOME}/#{l}")) }
+      js.hrefs.map{ |l| PartyNavigator.new(Cabaret.get(l)) }
     end    
   end
 
@@ -37,7 +38,7 @@ module Cabaret
     def navigate_to_list
       iframe = @page.iframe_with(:id => 'fr_lista')
       return nil if !iframe
-      DiscountListNavigator.new(Cabaret.get("#{HOME}/#{iframe.uri}"))
+      DiscountListNavigator.new(Cabaret.get(iframe.uri))
     end
     
   end
