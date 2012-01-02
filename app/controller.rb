@@ -7,13 +7,6 @@ configure do
   set :views, File.dirname(__FILE__)+'/views'
 end
 
-helpers do
-  def subscriber
-    @subscriber = Subscriber.create if !@subscriber
-    @subscriber
-  end
-end
-
 get '/' do
   @clubber = Nightclubber.empty
   haml :index

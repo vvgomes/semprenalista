@@ -24,7 +24,7 @@ end
 
 desc 'This task is called by the Heroku cron add-on'
 task :cron do
-  Job.new(Subscriber.create).run
+  Job.new.cron
 end
 
 task :subscribe do
@@ -34,15 +34,13 @@ task :subscribe do
     uri = URI.parse(production_db)
     config.master = conn.db(uri.path.gsub(/^\//, ''))
   end
-  puts "[#{Time.now}] Job started."
-  Job.new(Subscriber.create).run_now
-  puts "[#{Time.now}] Job done."
+  Job.new.run
 end
 
 task :cleandb do
   Nightclubber.delete_all
   Report.delete_all
-  puts 'done.'
+  puts 'Done.'
 end
 
 task :news do
