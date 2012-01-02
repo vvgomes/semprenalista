@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../config/environment')
 configure do
   enable :sessions
   set :app_file, __FILE__
-  set :public, File.dirname(__FILE__)+'/../public'
+  set :public_folder, File.dirname(__FILE__)+'/../public'
   set :views, File.dirname(__FILE__)+'/views'
 end
 
