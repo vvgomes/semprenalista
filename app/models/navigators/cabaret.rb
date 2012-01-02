@@ -16,23 +16,9 @@ module Cabaret
     end
 
     def navigate_to_parties
-      js = @page.body
-      js = remove_comments js
-      hrefs(js).map{ |l| PartyNavigator.new(Cabaret.get("#{HOME}/#{l}")) }
-    end
-    
-    private
-    
-    # move to a new class
-    
-    def remove_comments js
-      js.gsub(/\/\/.+$/, "")
-    end
-    
-    def hrefs js
-      js.scan(/href="([^"]+)"/).map{ |r| r.first }
-    end
-    
+      js = JsNavigator.new @page.body
+      js.hrefs.map{ |l| PartyNavigator.new(Cabaret.get("#{HOME}/#{l}")) }
+    end    
   end
 
   class PartyNavigator
@@ -93,6 +79,23 @@ module Cabaret
 
     def find_message
       @page.search('body').first.text.strip
+    end
+  end
+  
+  class JsNavigator
+    def initialize code
+      @js = remove_comments_from code
+    end
+    
+    def hrefs
+      @js.scan(/href="([^"]+)"/).map{ |r| r.first }
+    end
+    
+    private
+    def remove_comments_from code
+      single_line = /\/\/.+$/
+      multi_line = /\/\*([^*]|[\r\n]|(\*+([^*\/]|[\r\n])))*\*+\//
+      code.gsub(single_line, '').gsub(multi_line, '')
     end
   end
 end
