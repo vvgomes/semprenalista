@@ -6,23 +6,23 @@ class Report
   field :time, :type => Time
   field :club, :type => String
   field :party, :type => String
-  field :clubber, :type => String
+  field :email, :type => String
   field :code => Integer
   field :message => String
 
-  def initialize club, party, clubber, code, message
+  def initialize club, party, email, code, message
     super(
       :time => Time.now,
       :club => club,
       :party => party,
-      :clubber => clubber,
+      :email => email,
       :code => code,
       :message => message
     )
   end
 
   def to_s
-    "#{formated_time} - #{club} - #{party} - #{clubber} and friends - #{code} - [#{message}]"
+    "#{formated_time} - #{club} - #{party} - #{email} - #{code} - [#{message}]"
   end
 
   private

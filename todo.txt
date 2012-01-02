@@ -1,6 +1,14 @@
-- consider: get to the party and subscribe everybody X take each one to all parties
+- job spec is a mess
 
-- task to be run by heroku every monday
-- task to be run by me
+- turn-off cron job
+- heroku scheduler
+
+- job.run
+- job.run!
+
+- log when everybody is subscribed
+- need a better reports view (grouped by people and showing missing ones)
+
+- when everybody is in there and today is monday then erase the reports
 
 - acceptance specs

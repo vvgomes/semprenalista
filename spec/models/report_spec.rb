@@ -3,7 +3,7 @@ describe Report do
   before :each do
     @moment = Time.now
     Time.stub!(:now).and_return @moment
-    @report = Report.new 'Cabaret', 'Amnesia', 'Sabella', 200, 'ok'
+    @report = Report.new 'Cabaret', 'Amnesia', 'lipe@gmail.com', 200, 'ok'
   end
 
   it 'should have the nightclub name' do
@@ -14,8 +14,8 @@ describe Report do
     @report.party.should be_eql 'Amnesia'
   end
 
-  it 'should have the nightclubber name' do
-    @report.clubber.should be_eql 'Sabella'
+  it 'should have the nightclubber email' do
+    @report.email.should be_eql 'lipe@gmail.com'
   end
 
   it 'should have the response code' do
@@ -33,7 +33,7 @@ describe Report do
 
   it 'should be able to give me a human-readable respresentation' do
     @report.to_s.should match(
-      /\d\d\/\d\d\/\d\d\d\d \d\d:\d\d[AP]M - Cabaret - Amnesia - Sabella and friends - 200 - \[ok\]/)
+      /\d\d\/\d\d\/\d\d\d\d \d\d:\d\d[AP]M - Cabaret - Amnesia - lipe@gmail.com - 200 - \[ok\]/)
   end
 
 end
