@@ -1,5 +1,3 @@
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
-
 describe DiscountList do
 
   it 'should get a response back after submiting nightclubber info' do
