@@ -22,7 +22,6 @@ end
 post '/' do
   @clubber = Nightclubber.parse(params)
   if @clubber.save
-    subscriber.subscribe @clubber #bad
     session[:subscribed] = true
     redirect to '/done'
   else

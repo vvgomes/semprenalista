@@ -1,2 +1,6 @@
-- the task subscribe doesn't make sense right now because I would like to trigger it from my localbox in eventual situations, like when there is a party for the current week which was added after monday. so that I could just point to the production database.
+- consider: get to the party and subscribe everybody X take each one to all parties
+
+- task to be run by heroku every monday
+- task to be run by me
+
 - acceptance specs

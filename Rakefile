@@ -44,3 +44,8 @@ task :cleandb do
   Report.delete_all
   puts 'done.'
 end
+
+task :news do
+  puts "Number of clubbers: #{Nightclubber.count}"
+  puts "Last added: #{Nightclubber.last.to_s}"
+end
