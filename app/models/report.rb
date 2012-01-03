@@ -30,6 +30,10 @@ class Report
   def formated_time
     time.getlocal.strftime("%d/%m/%Y %I:%M%p")
   end
+  
+  def self.all_sorted
+    Report.all.sort { |one, another| one.time.to_i <=> another.time.to_i }
+  end
 
 end
 

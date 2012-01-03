@@ -1,5 +1,7 @@
 - need a better reports view (grouped by people and showing missing ones)
 
+- move subscription test to integration folder
+
 - test real subscription manually before turning scheduler on
 
 - functional specs

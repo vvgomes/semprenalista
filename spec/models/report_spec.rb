@@ -35,6 +35,20 @@ describe Report do
     @report.to_s.should match(
       /\d\d\/\d\d\/\d\d\d\d \d\d:\d\d[AP]M - lipe@gmail.com - Cabaret - Amnesia - 200 - \[ok\]/)
   end
+  
+  it 'should give me a report list sorted by time' do
+    first = @report
+    second = Report.new '', '', '', 0, ''
+    third = Report.new '', '', '', 0, ''
+    
+    # Time.now is stubed
+    second.time+=1
+    third.time+=2
+    
+    Report.stub!(:all).and_return [third, second, first]
+    
+    Report.all_sorted.should be == [first, second, third]
+  end
 
 end
 
