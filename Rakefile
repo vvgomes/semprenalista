@@ -1,7 +1,5 @@
 require File.expand_path(File.dirname(__FILE__) + '/config/environment')
 require 'rake'
-
-Bundler.require :test
 require 'rspec/core/rake_task'
 
 task :default => :spec

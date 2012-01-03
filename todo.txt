@@ -1,5 +1,7 @@
-- test subscription manually before turning scheduler on
 - heroku scheduler
+- job spec
+
+- test real subscription manually before turning scheduler on
 
 - job.run
 - job.run!
