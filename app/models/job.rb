@@ -27,8 +27,8 @@ class Job
   end
   
   def not_subscribed_yet
-    Nightclubber.all.find do |clubber|
-      Report.where(:email => clubber.email).nil?
+    Nightclubber.all.to_a.find do |clubber|
+      Report.where(:email => clubber.email).count == 0
     end
   end
   

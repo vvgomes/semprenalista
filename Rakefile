@@ -12,9 +12,13 @@ n = namespace :spec do
   RSpec::Core::RakeTask.new(:integration) do |spec|
     spec.pattern = 'spec/integration/**/*_spec.rb'
   end
+  
+  RSpec::Core::RakeTask.new(:functional) do |spec|
+    spec.pattern = 'spec/functional/**/*_spec.rb'
+  end
 end
 
-task :spec => [n[:models], n[:integration]]
+task :spec => [n[:models], n[:integration], n[:functional]]
 
 task :server do
   ruby 'app/controller.rb'

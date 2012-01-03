@@ -24,7 +24,7 @@ describe Job do
       end
 
       it 'should find someone not subscribed yet' do      
-        Report.stub!(:where).with(:email => 'lipe@gmail.com').and_return nil
+        Report.stub!(:where).with(:email => 'lipe@gmail.com').and_return []
         @job.stub!(:save_report)
       
         @rockpocket.should_receive(:add_to_list).with(@sabella).and_return @response
@@ -49,7 +49,7 @@ describe Job do
       
       it 'should remove all reports on monday' do
         @job.stub!(:monday?).and_return true
-        Report.stub!(:where).with(:email => 'lipe@gmail.com').and_return @sabella
+        Report.stub!(:where).with(:email => 'lipe@gmail.com').and_return [@sabella]
         @job.stub!(:log)
         
         Report.should_receive(:delete_all)
@@ -59,7 +59,7 @@ describe Job do
       
       it 'should log it every run except on monday' do
         @job.stub!(:monday?).and_return false
-        Report.stub!(:where).with(:email => 'lipe@gmail.com').and_return @sabella
+        Report.stub!(:where).with(:email => 'lipe@gmail.com').and_return [@sabella]
         
         @job.should_receive(:log)
         

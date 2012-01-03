@@ -33,7 +33,7 @@ describe Report do
 
   it 'should be able to give me a human-readable respresentation' do
     @report.to_s.should match(
-      /\d\d\/\d\d\/\d\d\d\d \d\d:\d\d[AP]M - Cabaret - Amnesia - lipe@gmail.com - 200 - \[ok\]/)
+      /\d\d\/\d\d\/\d\d\d\d \d\d:\d\d[AP]M - lipe@gmail.com - Cabaret - Amnesia - 200 - \[ok\]/)
   end
 
 end

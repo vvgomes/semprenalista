@@ -1,4 +1,4 @@
-describe 'Nightclubs navigators' do
+describe 'Navigators' do
 
   before :each do
     prevent_form_submission

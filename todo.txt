@@ -1,4 +1,3 @@
-- job spec
 - need a better reports view (grouped by people and showing missing ones)
 
 - test real subscription manually before turning scheduler on

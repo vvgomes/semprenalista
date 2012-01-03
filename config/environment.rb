@@ -19,5 +19,3 @@ Mongoid.configure do |config|
     end
   end
 end
-
-#mongodb://heroku:iy6k13o77hxc6q5026zttd@flame.mongohq.com:27103/app525158

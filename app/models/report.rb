@@ -22,7 +22,7 @@ class Report
   end
 
   def to_s
-    "#{formated_time} - #{club} - #{party} - #{email} - #{code} - [#{message}]"
+    "#{formated_time} - #{email} - #{club} - #{party} - #{code} - [#{message}]"
   end
 
   private
