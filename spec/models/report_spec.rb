@@ -49,6 +49,6 @@ describe Report do
     
     Report.all_sorted.should be == [first, second, third]
   end
-
+  
 end
 

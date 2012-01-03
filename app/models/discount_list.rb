@@ -8,8 +8,8 @@ class DiscountList
     @nav.fill_name clubber.name
     @nav.fill_email clubber.email
     @nav.fill_friends clubber.friends
-    #Response.new(@nav.submit)
-    FakeResponse.new
+    Response.new(@nav.submit)
+    #FakeResponse.new
   end
 
   # I know...

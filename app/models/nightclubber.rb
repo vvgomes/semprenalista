@@ -27,16 +27,6 @@ class Nightclubber
   def self.empty
     Nightclubber.new('', '', ['', '', '', ''])
   end
-  
-  def to_s
-    "#{formated_time} - #{name} (#{email}) with #{friends.join(', ')}"
-  end
-  
-  private
-
-  def formated_time
-    time.getlocal.strftime("%d/%m/%Y %I:%M%p")
-  end
 
 end
 

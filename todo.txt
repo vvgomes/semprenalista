@@ -1,10 +1,7 @@
-- move subscription test to integration folder
-
-- [job] test job locally
-
 - [report] I would like to know people who haven't been subscribed yet, 
   - so that I can keep control and call the emergency job if needed
 
+- [job] test job locally
 - [job] test real subscription for one guy before turning scheduler on
 
 - functional specs

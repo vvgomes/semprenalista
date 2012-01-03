@@ -60,11 +60,7 @@ describe Nightclubber do
     empty.friends.each{|f| f.should be_eql ''}
   end
   
-  it 'should be able to render itself as string' do
-    sabella = Nightclubber.new 'Filipe Sabella', 'lipe@gmail.com', ['Marano', 'Pedro']
-    sabella.to_s.should match(
-      /\d\d\/\d\d\/\d\d\d\d \d\d:\d\d[AP]M - Filipe Sabella \(lipe@gmail.com\) with Marano, Pedro/)
-  end
+  
 
 end
 
