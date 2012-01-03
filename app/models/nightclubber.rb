@@ -19,13 +19,22 @@ class Nightclubber
     friends = params[:friends].values.find_all{ |f| f if !f.empty? }
     Nightclubber.new name, email, friends
   end
+  
+  def self.empty
+    Nightclubber.new('', '', ['', '', '', ''])
+  end
 
   def self.sorted_names
     Nightclubber.all.inject([]){|names, dude|names+[dude.name]+dude.friends}.sort
   end
-
-  def self.empty
-    Nightclubber.new('', '', ['', '', '', ''])
+  
+  def self.all_subscribed
+    emails = Report.all.map{ |r| r.email }
+    Nightclubber.all.find_all{ |c| emails.include? c.email }
+  end
+  
+  def self.all_not_subscribed
+    Nightclubber.all.to_a - Nightclubber.all_subscribed
   end
 
 end

@@ -1,6 +1,6 @@
 describe Nightclubber do
   
-  context 'in normal conditions' do
+  context 'when creating a new instance' do
     before :each do
       @sabella = Nightclubber.new 'Filipe Sabella', 'lipe@gmail.com', ['Marano', 'Pedro']
     end
@@ -49,16 +49,17 @@ describe Nightclubber do
   context 'when searching the weekly subscriptions' do
     before :each do
       @sabella = Nightclubber.new 'Filipe Sabella', 'lipe@gmail.com', ['Marano', 'Pedro']
+      @ygor = Nightclubber.new 'Ygor Bruxel', 'ygor@gmail.com', ['Marano', 'Pedro']
+      Report.stub!(:all).and_return [@sabella]
+      Nightclubber.stub!(:all).and_return [@sabella, @ygor]
     end
     
     it 'should find all subscribed people' do
-      Report.stub!(:where).with(:email => 'lipe@gmail.com').and_return [@sabella]
-      Nightclubber.stub!(:all).and_return [@sabella]
       Nightclubber.all_subscribed.should be == [@sabella]
     end
 
     it 'should find all people not subscribed yet' do
-      #Nightclubber.all_not_subscribed
+      Nightclubber.all_not_subscribed.should be == [@ygor]
     end
   end
 
