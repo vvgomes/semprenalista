@@ -11,6 +11,7 @@ describe 'Subscription' do
     create_nightclubber
     prevent_form_submission
     @job = Job.new
+    @job.stub!(:log)
   end
   
   after :each do
@@ -36,17 +37,16 @@ describe 'Subscription' do
     before :each do
       @job.run # adding the lonely nightclubber
     end
-    
-    it 'should log it' do
-      @job.should_receive :log
-      @job.run
-      Report.all.to_a.should_not be_empty
-    end
 
     it 'should remove all reports on monday' do
       make_it_monday
       @job.run
       Report.all.to_a.should be_empty
+    end
+    
+    it 'should not remove the reports before/after monday' do
+      @job.run
+      Report.all.to_a.should_not be_empty
     end
     
   end

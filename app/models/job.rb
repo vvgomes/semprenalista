@@ -23,17 +23,19 @@ class Job
   end
   
   def subscribe clubber
+    log ">>> Subscribing #{clubber.email}..."
     Nightclub.all.each do |club|
       club.parties.each do |party|
         response = party.add_to_list clubber
         save_report(club, party, clubber, response)
       end
     end
+    log ">>> Done."
   end
   
   def everybody_subscribed
     Report.delete_all if monday?
-    log 
+    log 'Everybody is subscribed to all lists already.'
   end
   
   def save_report club, party, clubber, response
@@ -49,8 +51,8 @@ class Job
     Time.now.wday == 1
   end
   
-  def log
-    puts 'Everybody is subscribed to all lists already.'
+  def log message
+    puts message
   end
 
 end

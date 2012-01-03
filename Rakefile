@@ -39,8 +39,3 @@ task :subscribe, :email do |t, args|
     # $ rake subscribe_now[vvgomess@gmail.com]
   end  
 end
-
-task :info do
-  puts "Number of clubbers: #{Nightclubber.count}"
-  puts "Last added: #{Nightclubber.last.to_s}"
-end

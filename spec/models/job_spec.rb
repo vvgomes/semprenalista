@@ -21,6 +21,7 @@ describe Job do
         @rockpocket.stub!(:name).and_return 'rockpocket'
         @response.stub!(:code).and_return 200
         @response.stub!(:message).and_return 'ok'
+        @job.stub!(:log)
       end
 
       it 'should find someone not subscribed yet' do      
@@ -73,7 +74,7 @@ describe Job do
         @job.stub!(:monday?).and_return false
         Report.stub!(:where).with(:email => 'lipe@gmail.com').and_return [@sabella]
         
-        @job.should_receive(:log)
+        @job.should_receive(:log).with('Everybody is subscribed to all lists already.')
         
         @job.run
       end
