@@ -25,28 +25,22 @@ task :server do
 end
 
 desc 'This task is called by the Heroku Scheduler add-on'
-task :subscribe do
-  #Job.new.run
-  puts '>>> RUNING SUBSCRIBE! <o> \o/ <o> \o/ <o> \o/'
-end
-
-task :subscribe_now do
-  Mongoid.configure do |config|
-    production_db = 'mongodb://heroku:iy6k13o77hxc6q5026zttd@flame.mongohq.com:27103/app525158'
-    conn = Mongo::Connection.from_uri(production_db)
-    uri = URI.parse(production_db)
-    config.master = conn.db(uri.path.gsub(/^\//, ''))
-  end
-  Job.new.run!
+task :subscribe, :email do |t, args|
+  if !args[:email]
+    Job.new.run
+  else
+    Mongoid.configure do |config|
+      production_db = 'mongodb://heroku:iy6k13o77hxc6q5026zttd@flame.mongohq.com:27103/app525158'
+      conn = Mongo::Connection.from_uri(production_db)
+      uri = URI.parse(production_db)
+      config.master = conn.db(uri.path.gsub(/^\//, ''))
+    end
+    Job.new.run args[:email]
+    # $ rake subscribe_now[vvgomess@gmail.com]
+  end  
 end
 
 task :info do
   puts "Number of clubbers: #{Nightclubber.count}"
   puts "Last added: #{Nightclubber.last.to_s}"
-end
-
-task :clear_db do
-  Nightclubber.delete_all
-  Report.delete_all
-  puts 'Done.'
 end

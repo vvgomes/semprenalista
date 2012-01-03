@@ -24,6 +24,13 @@ describe 'Subscription' do
     reports.should include_all_available_parties
   end
   
+  it 'should subscribe a nightclubber given an email' do
+    @job.run 'lipe@gmail.com'
+    reports = Report.where(:email => 'lipe@gmail.com').to_a
+    reports.should_not be_empty
+    reports.should include_all_available_parties
+  end
+  
   context 'when everybody have already been subscribed' do
     
     before :each do

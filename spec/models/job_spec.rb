@@ -31,6 +31,18 @@ describe Job do
       
         @job.run
       end
+      
+      it 'should find someone by email' do
+        mongoid_thing = mock
+        mongoid_thing.stub! :delete_all
+        Report.stub!(:where).with(:email => 'lipe@gmail.com').and_return mongoid_thing
+        Nightclubber.stub!(:where).with(:email => 'lipe@gmail.com').and_return [@sabella]
+        @job.stub!(:save_report)
+        
+        @rockpocket.should_receive(:add_to_list).with(@sabella).and_return @response
+      
+        @job.run 'lipe@gmail.com'
+      end
     
       it 'should save a new report' do
         @job.stub!(:not_subscribed_yet).and_return @sabella

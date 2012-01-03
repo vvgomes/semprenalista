@@ -9,6 +9,17 @@ class DiscountList
     @nav.fill_email clubber.email
     @nav.fill_friends clubber.friends
     Response.new(@nav.submit)
+    #FakeResponse.new
+  end
+
+  # I know...
+  class FakeResponse
+    def code
+      200
+    end
+    def message
+      'ok'
+    end
   end
   
 end

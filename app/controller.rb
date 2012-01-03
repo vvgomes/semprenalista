@@ -46,6 +46,6 @@ end
 
 get '/reports' do
   erb :reports, :locals => {
-    :reports => Report.all.map{ |r| r.to_s }
+    :reports => Report.all_sorted.map{ |r| r.to_s }
   }
 end

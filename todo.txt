@@ -1,4 +1,13 @@
-- need a better reports view (grouped by people and showing missing ones)
+- [job] better job logs
+
+- [job] test job locally
+
+- [report] I would like to know people who haven't been subscribed yet, 
+  - so that I can keep control and call the emergency job if needed
+
+- [job] think about a way to subscribe someone passing the email
+  - erase existing reports for him
+  - running the job for him
 
 - move subscription test to integration folder
 
