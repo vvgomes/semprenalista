@@ -24,7 +24,8 @@ end
 
 desc 'This task is called by the Heroku Scheduler add-on'
 task :subscribe do
-  Job.new.run
+  #Job.new.run
+  puts '>>> RUNING SUBSCRIBE! <o> \o/ <o> \o/ <o> \o/'
 end
 
 task :subscribe_now do
