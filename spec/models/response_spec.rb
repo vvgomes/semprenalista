@@ -28,11 +28,11 @@ describe Response do
       @response = Response.new nav
     end
 
-    it 'should have success code' do
+    it 'should have reason code' do
       @response.code.should be 500
     end
 
-    it 'should find the success message' do
+    it 'should have an error message' do
       @response.message.should be_eql 'Something went wrong!'
     end
 
