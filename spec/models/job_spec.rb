@@ -50,6 +50,7 @@ describe Job do
       it 'should remove all reports on monday' do
         @job.stub!(:monday?).and_return true
         Report.stub!(:where).with(:email => 'lipe@gmail.com').and_return @sabella
+        @job.stub!(:log)
         
         Report.should_receive(:delete_all)
         

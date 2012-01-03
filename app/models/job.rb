@@ -1,11 +1,10 @@
 class Job
   
   def run
-    clubber = not_subscribed_yet
-    if clubber
-      subscribe clubber
-    else
-      Report.delete_all if monday?
+    if clubber = not_subscribed_yet 
+      subscribe clubber 
+    else  
+      everybody_subscribed  
     end  
   end
 
@@ -33,6 +32,11 @@ class Job
     end
   end
   
+  def everybody_subscribed
+    Report.delete_all if monday?
+    log 
+  end
+  
   def save_report club, party, clubber, response
     Report.new(
       club.name,
@@ -44,6 +48,10 @@ class Job
   
   def monday?
     Time.now.wday == 1
+  end
+  
+  def log
+    puts 'Everybody is subscribed to all lists already.'
   end
 
 end
