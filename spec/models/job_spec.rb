@@ -56,11 +56,11 @@ describe Job do
         @job.run
       end
       
-      it 'should do nothing the other days' do
+      it 'should log it every run except on monday' do
         @job.stub!(:monday?).and_return false
         Report.stub!(:where).with(:email => 'lipe@gmail.com').and_return @sabella
         
-        Report.should_not_receive(:delete_all)
+        @job.should_receive(:log)
         
         @job.run
       end

@@ -1,14 +1,7 @@
-- heroku scheduler
-- job spec
-
-- test real subscription manually before turning scheduler on
-
-- job.run
-- job.run!
-
 - log when everybody is subscribed
+- job spec
 - need a better reports view (grouped by people and showing missing ones)
 
-- when everybody is in there and today is monday then erase the reports
+- test real subscription manually before turning scheduler on
 
 - acceptance specs
