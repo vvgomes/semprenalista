@@ -15,7 +15,7 @@ describe Nightclub do
   it 'should have a name' do
     @place.name.should be_eql 'Cabaret'
   end
-  
+
   it 'should use its name as identity' do
     same = mock
     same.stub!(:name).and_return 'Cabaret'
@@ -31,11 +31,12 @@ describe Nightclub do
     @party.stub!(:nice?).and_return false
     @place.parties.should be_empty
   end
-  
+
   it 'should know about all available nightclubs' do
     beco = Nightclub.new(Beco::Navigator.new)
     cabaret = Nightclub.new(Cabaret::Navigator.new)
-    Nightclub.all.should =~ [cabaret, beco]
+    laika = Nightclub.new(Laika::Navigator.new)
+    Nightclub.all.should =~ [cabaret, beco, laika]
   end
 
 end
