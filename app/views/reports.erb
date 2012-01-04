@@ -1,11 +1,27 @@
 <html>
 <head>
   <title>Sempre na Lista Logs</title>
+  <style type="text/css">
+    body {
+      line-height: 90%;
+      font-size: 12px; 
+      font-family: sans-serif;
+      color: green;
+      background-color: black;
+    }
+    h2 {
+      color: white;
+    }
+  </style>
 </head>
-<body style="font-size:small;">
-  <h1>Reports</h1>
+<body>
+  <h2>Last Subscriptions</h2>
   <% reports.each do |r| %>
     <p><%= r %></p>
+  <% end %>
+  <h2>Not Subscribed</h2>
+  <% clubbers.each do |c| %>
+    <p><%= c.name %>&nbsp;(<%= c.email %>)</p>
   <% end %>
 </body>
 </html>
