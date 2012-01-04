@@ -29,7 +29,11 @@ module Laika
     end
 
     def find_name
-      @page.search('//div/div/table/tbody/tr/td/p/span/strong').first.text.strip
+      begin
+      @page.search('//div/div/table/tbody/tr/td/p/span').first.text.strip
+      rescue NoMethodError
+        url.match(/id=\d*:([a-z_-]*)/)[1]
+      end
     end
 
     def url
@@ -41,7 +45,7 @@ module Laika
     end
   end
 
-  class DiscountListNavigator
+  class DiscountNavigator
     def initialize page
       @form = page.form_with(:action => 'index.php')
     end
