@@ -7,6 +7,7 @@
   &nbsp;e
   %a{:href => "http://laikaclub.com.br/"}Laika
   &nbsp;pra sempre :)
+  
 %form{:id => "form", :action => "/", :method => "post"}
   - if !@clubber.valid?
     %p{:id => 'error_message'}
@@ -23,12 +24,15 @@
     %input{:name => "friends[2]", :type => "text", :placeholder => "Mais um", :value => @clubber.friends[2]}
   %p
     %input{:name => "friends[3]", :type => "text", :placeholder => "O último", :value => @clubber.friends[3]}
-  %p{:id => "submit"}
-    %input{:name => "submit", :type => "submit", :value => "OK"}
+  #buttons
+    #ok
+      %input{:name => "submit", :type => "submit", :value => "OK"}
+    #tweet  
+      %a{:id => "twitter", :href => "https://twitter.com/share", :class => "twitter-share-button", 'data-text' => 'Party more, pay less! \o/', 'data-size' => 'large', 'data-hashtags' => 'semprenalista', 'data-url' => 'http://semprenalista.heroku.com'}Tweet  
+        
 %footer
   %small
     Se voce j&aacute; se cadastrou, clique&nbsp;
     %a{:id => "edit", :href => "#"}aqu&iacute;
     &nbsp;para editar.
-#dialog{:class => "invisible"}
-  %input{:type => "email", :placeholder => "Seu email", :required => "true"}
+    

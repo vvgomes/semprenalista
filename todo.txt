@@ -1,3 +1,4 @@
 - "monday" strategy doesnt work! subscription model?
+- subscription queue -> perform by person-party
 - twitter button (/ and /done)
 - functional specs

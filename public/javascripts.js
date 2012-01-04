@@ -1,16 +1,10 @@
 $dom.onready(function(){
-	console.log('executing onready');
-	var showDialog = function() {
-		console.log('hey');
-		$dom.removeClass(dialogDiv(), 'invisible');
-	};
-	
-	editLink().onclick = showDialog;
-	
-	function dialogDiv() {
-		return $dom.get('#dialog');
-	}
-	function editLink() {
-		return $dom.get('#edit');
-	}
+	!function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if(!d.getElementById(id)){
+	    js=d.createElement(s);
+	    js.id=id;js.src="//platform.twitter.com/widgets.js";
+	    fjs.parentNode.insertBefore(js,fjs);
+	  }
+	}(document, "script", "twitter-wjs");
 });

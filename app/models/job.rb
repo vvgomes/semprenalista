@@ -23,7 +23,7 @@ class Job
   end
   
   def subscribe clubber
-    log ">>> Subscribing #{clubber.email}..."
+    log "Subscribing #{clubber.email}..."
     Nightclub.all.each do |club|
       club.parties.each do |party|
         begin
@@ -31,19 +31,18 @@ class Job
           save_report(club, party, clubber, response)
         rescue
           begin
-            log ">>> Error adding #{clubber.email} to #{club.name} - #{party.name}."
-            log ">>> Trying again..."
+            log "Error adding #{clubber.email} to #{club.name} - #{party.name}."
+            log "Trying again..."
             response = party.add_to_list clubber
             save_report(club, party, clubber, response)
           rescue => e  
-            #require 'ruby-debug';debugger
-            log ">>> Unable to add #{clubber.email} to #{club.name} - #{party.name}."
-            log ">>> Reason: #{e}"
+            log "Unable to add #{clubber.email} to #{club.name} - #{party.name}."
+            log "Reason: #{e}"
           end
         end  
       end
     end
-    log ">>> Done."
+    log "Done."
   end
   
   def everybody_subscribed
@@ -65,7 +64,7 @@ class Job
   end
   
   def log message
-    puts message
+    puts ">>> #{message}"
   end
 
 end
