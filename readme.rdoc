@@ -1,0 +1,4 @@
+= Sempre na lista!
+It aims to help people to party more and spending less money.
+* Running at: http://semprenalista.heroku.com
+* Building at: http://travis-ci.org/#!/vvgomes/semprenalista/builds
