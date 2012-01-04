@@ -1,20 +1,22 @@
 require File.expand_path(File.dirname(__FILE__) + '/config/environment')
 require 'rake'
-require 'rspec/core/rake_task'
 
-task :default => :spec
+unless ENV['RACK_ENV'] == 'production'
+  require 'rspec/core/rake_task'
+  task :default => :spec
 
-n = namespace :spec do
-  RSpec::Core::RakeTask.new(:models) do |spec|
-    spec.pattern = 'spec/models/**/*_spec.rb'
+  n = namespace :spec do
+    RSpec::Core::RakeTask.new(:models) do |spec|
+      spec.pattern = 'spec/models/**/*_spec.rb'
+    end
+
+    RSpec::Core::RakeTask.new(:integration) do |spec|
+      spec.pattern = 'spec/integration/**/*_spec.rb'
+    end
   end
-
-  RSpec::Core::RakeTask.new(:integration) do |spec|
-    spec.pattern = 'spec/integration/**/*_spec.rb'
-  end
+  task :spec => [n[:models], n[:integration]]
 end
 
-task :spec => [n[:models], n[:integration]]
 
 task :server do
   ruby 'app/controller.rb'
