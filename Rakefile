@@ -32,6 +32,6 @@ task :subscribe, :email do |t, args|
       config.master = conn.db(uri.path.gsub(/^\//, ''))
     end
     Job.new.run args[:email]
-    # $ rake subscribe_now[vvgomess@gmail.com]
+    # $ rake subscribe[vvgomess@gmail.com]
   end  
 end
