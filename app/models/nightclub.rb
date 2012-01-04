@@ -1,5 +1,5 @@
 class Nightclub
-  
+
   def initialize nav
     @nav = nav
   end
@@ -13,18 +13,19 @@ class Nightclub
     all = navs.map{ |n| Party.new(n) }
     all.find_all{ |p| p.nice? }
   end
-  
+
   def ==(other)
     name == other.name
   end
-  
+
   def self.all
     begin
       return @@nightclubs
     rescue
       @@nightclubs = [
-        Nightclub.new(Beco::Navigator.new), 
-        Nightclub.new(Cabaret::Navigator.new)
+        Nightclub.new(Beco::Navigator.new),
+        Nightclub.new(Cabaret::Navigator.new),
+        Nightclub.new(Laika::Navigator.new)
       ]
       all
     end
