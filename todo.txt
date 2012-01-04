@@ -1,6 +1,2 @@
-- should I keep subscription integration spec?
-
-- ci
+- "monday" strategy doesnt work! subscription model?
 - functional specs
-
-- subscription model, because the "monday" strategy doesn't work
