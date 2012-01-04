@@ -1,4 +1,5 @@
 .gems/*
+.Gemfile
 *.DS_Store
 .redcar/*
 app/.redcar/*
