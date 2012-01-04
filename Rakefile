@@ -25,7 +25,7 @@ end
 desc 'This task is called by the Heroku Scheduler add-on'
 task :subscribe, :email do |t, args|
   if !args[:email]
-    puts '>>> RUNING SUBSCRIBE! <o> \o/ <o> \o/ <o> \o/'#Job.new.run
+    Job.new.run
   else
     Mongoid.configure do |config|
       production_db = 'mongodb://heroku:iy6k13o77hxc6q5026zttd@flame.mongohq.com:27103/app525158'
