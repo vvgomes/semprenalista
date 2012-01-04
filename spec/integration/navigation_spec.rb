@@ -11,6 +11,10 @@ describe 'Navigators' do
   it 'should reflect the web site structure for Beco' do
     browse Nightclub.new(Beco::Navigator.new)
   end
+  
+  xit 'should reflect the web site structure for Laika' do
+    browse Nightclub.new(Laika::Navigator.new)
+  end
 
   def browse nightclub
     parties = nightclub.parties

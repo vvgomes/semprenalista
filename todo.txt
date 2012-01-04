@@ -1,2 +1,3 @@
 - "monday" strategy doesnt work! subscription model?
+- twitter button (/ and /done)
 - functional specs
