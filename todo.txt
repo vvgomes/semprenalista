@@ -1,3 +1,6 @@
-- [job] test real subscription for one guy before turning scheduler on
 - should I keep subscription integration spec?
+
+- ci
 - functional specs
+
+- subscription model, because the "monday" strategy doesn't work
