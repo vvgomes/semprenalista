@@ -17,9 +17,9 @@ class Party
   def add_to_list clubber
     @list.add clubber
   end
-
-  def reset_agent
-    @nav.reset_agent
+  
+  def ==(other)
+    other.url == @url
   end
   
 end

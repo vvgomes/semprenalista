@@ -3,8 +3,7 @@ describe Party do
   context 'with discount list' do
 
     before :each do
-      list_nav = mock
-      nav = fake_navigator list_nav
+      nav = fake_navigator mock
 
       @list = mock
       DiscountList.stub!(:new).and_return @list
@@ -17,17 +16,23 @@ describe Party do
     end
 
     it 'should have a name' do
-      @party.name.should be_eql 'London Calling'
+      @party.name.should be == 'London Calling'
     end
 
     it 'shold have an url' do
-      @party.url.should be_eql 'www.cabaretpoa.com/london_calling.htm'
+      @party.url.should be == 'www.cabaretpoa.com/london_calling.htm'
     end
 
     it 'should be able to add a nightclubber to the list' do
       sabella = Nightclubber.new('Sabella', 'lipe@gmail.com', ['Marano'])
       @list.should_receive(:add).with(sabella)
       @party.add_to_list(sabella)
+    end
+    
+    it 'should use its url as identity' do
+      other = mock
+      other.stub!(:url).and_return 'www.cabaretpoa.com/london_calling.htm'
+      @party.should be == other
     end
 
   end
@@ -44,9 +49,14 @@ describe Party do
     end
 
     it 'should still have a name though' do
-      @party.name.should be_eql 'London Calling'
+      @party.name.should be == 'London Calling'
     end
 
+  end
+  
+  xit 'should find all available parties for all clubs' do
+    
+    Party.all.should =~ [fuckrehab, discorock, amnesia, londoncalling]
   end
 
   def fake_navigator list_nav=nil
