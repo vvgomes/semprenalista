@@ -54,9 +54,20 @@ describe Party do
 
   end
   
-  xit 'should find all available parties for all clubs' do
+  it 'should find all available parties for all clubs' do
+    beco = mock
+    fuckrehab = mock
+    discorock = mock
+    beco.stub!(:parties).and_return [fuckrehab, discorock]
     
-    Party.all.should =~ [fuckrehab, discorock, amnesia, londoncalling]
+    cabaret = mock
+    amnesia = mock
+    londoncalling = mock
+    cabaret.stub!(:parties).and_return [amnesia, londoncalling]
+    
+    Nightclub.stub!(:all).and_return [beco, cabaret]
+    
+    Party.all.should == [fuckrehab, discorock, amnesia, londoncalling]
   end
 
   def fake_navigator list_nav=nil

@@ -22,5 +22,9 @@ class Party
     other.url == @url
   end
   
+  def self.all
+    Nightclub.all.inject([]){ |parties, club| parties + club.parties }
+  end
+  
 end
 
