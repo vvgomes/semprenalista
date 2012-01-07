@@ -14,11 +14,7 @@ describe Nightclubber do
     end
 
     it 'should tell me who are his friends' do
-      @sabella.friends.should be == ['Marano', 'Pedro']
-    end
-    
-    it 'should not have any subscription' do
-      @sabella.subscriptions.should be_empty
+      @sabella.friends.should =~ ['Marano', 'Pedro']
     end
     
     it 'should use its email as identity' do
@@ -26,6 +22,34 @@ describe Nightclubber do
       same.stub(:email).and_return 'lipe@gmail.com'
       @sabella.should be == same
     end
+    
+    it 'should not have any subscription by default' do
+      @sabella.subscriptions.should be_empty
+    end
+    
+    context 'with subscriptions' do
+
+      before :each do
+        @amnesia = fake_party 'http://www.cabaretpoa.com.br/amnesia.htm'
+        @rocket = fake_party 'http://www.cabaretpoa.com.br/rocket.htm'
+        @sabella.add Subscription.new(@rocket, fake_response)
+      end
+
+      it 'should be able to identify when he is subscribed to a party' do
+        @sabella.should be_subscribed_to @rocket
+      end  
+
+      it 'should be able to identify the parties he is not subscribed' do
+        @sabella.find_missing_from([@amnesia, @rocket]).should be == [@amnesia]
+      end
+
+      it 'should remove expired subscriptions' do
+        @sabella.remove_expired_subscriptions [@amnesia]
+        @sabella.should_not be_subscribed_to @rocket
+      end
+
+    end
+    
   end
 
   context 'when parsing request parameters' do
@@ -52,24 +76,7 @@ describe Nightclubber do
     end
 
     it 'should be able to extract the friends' do
-      @sabella.friends.to_set.should be == ['Thiago', 'Nascimento'].to_set
-    end
-  end
-  
-  context 'when searching the weekly subscriptions' do # this will die
-    before :each do
-      @sabella = Nightclubber.new 'Filipe Sabella', 'lipe@gmail.com', ['Marano', 'Pedro']
-      @ygor = Nightclubber.new 'Ygor Bruxel', 'ygor@gmail.com', ['Marano', 'Pedro']
-      Report.stub!(:all).and_return [@sabella]
-      Nightclubber.stub!(:all).and_return [@sabella, @ygor]
-    end
-    
-    it 'should find all subscribed people' do
-      Nightclubber.all_subscribed.should be == [@sabella]
-    end
-
-    it 'should find all people not subscribed yet' do
-      Nightclubber.all_not_subscribed.should be == [@ygor]
+      @sabella.friends.should =~ ['Thiago', 'Nascimento']
     end
   end
 
@@ -97,6 +104,19 @@ describe Nightclubber do
   it 'should give me an empty result back when not able to find by email' do
     Nightclubber.stub!(:where).and_return []
     Nightclubber.find('lipe@gmail.com').should be_nil
+  end
+  
+  def fake_party url
+    party = mock
+    party.stub!(:url).and_return url
+    party
+  end
+  
+  def fake_response
+    response = mock
+    response.stub!(:code).and_return 200
+    response.stub!(:message).and_return 'ok'
+    response
   end
 
 end

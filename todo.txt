@@ -1,8 +1,8 @@
+- do I need to save a clubber after deleting subscriptions?
+- subscription collection?
+
 - "monday" strategy doesnt work! subscription model?
-  - subscription model
-  - party.club_name?
   - new job
-  - expired subscription
   
 - subscription queue -> perform by person-party
 

@@ -68,13 +68,17 @@ class Job
   end
   
   def _run email
+    parties = Party.all
     clubber = Nightclubber.find email    
-    clubber.find_missing(Party.all).each do |party|
+    clubber.remove_expired_subscriptions parties
+    
+    clubber.find_missing(parties).each do |party|
       begin
         log "Subscribing #{clubber.email} to #{party.name}."
         
         response = party.add_to_list clubber
-        clubber.add Subscription.new party, response
+        clubber.add Subscription.new(party, response)
+        clubbser.save
         
         log 'OK.'
       rescue => e  

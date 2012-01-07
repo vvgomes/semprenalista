@@ -23,9 +23,24 @@ class Nightclubber
     subscriptions << subscription
   end
   
-  def find_missing parties
-    # eliminate what isn't there anymore
-    # return what's missing
+  def subscribed_to? party
+    subscribed_urls.include? party.url
+    # would like it to be subscriptions.has_one_for? party
+  end
+  
+  def find_missing_from parties
+    urls = subscribed_urls
+    parties.find_all{|p| !urls.include? p.url}
+    # would like it to be subscriptions.missing parties
+  end
+  
+  def remove_expired_subscriptions parties
+    party_urls = parties.map{|p| p.url}
+    expireds = subscriptions.find_all{|s| !party_urls.include? s.party_url}
+    expireds.each do |expired|
+      expired.delete
+    end
+    # would like it to be subscriptions.remove_expired
   end
 
   def self.parse params
@@ -54,6 +69,12 @@ class Nightclubber
   
   def self.all_not_subscribed
     Nightclubber.all.to_a - Nightclubber.all_subscribed
+  end
+  
+  private
+  
+  def subscribed_urls
+    subscriptions.map{|s| s.party_url}
   end
 
 end
