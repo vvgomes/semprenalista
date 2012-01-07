@@ -20,6 +20,12 @@ describe Nightclubber do
     it 'should not have any subscription' do
       @sabella.subscriptions.should be_empty
     end
+    
+    it 'should use its email as identity' do
+      same = mock
+      same.stub(:email).and_return 'lipe@gmail.com'
+      @sabella.should be == same
+    end
   end
 
   context 'when parsing request parameters' do
@@ -50,7 +56,7 @@ describe Nightclubber do
     end
   end
   
-  context 'when searching the weekly subscriptions' do
+  context 'when searching the weekly subscriptions' do # this will die
     before :each do
       @sabella = Nightclubber.new 'Filipe Sabella', 'lipe@gmail.com', ['Marano', 'Pedro']
       @ygor = Nightclubber.new 'Ygor Bruxel', 'ygor@gmail.com', ['Marano', 'Pedro']
@@ -80,6 +86,17 @@ describe Nightclubber do
       Nightclubber.new('Carla', 'mail', ['Borges'])
     ]
     Nightclubber.sorted_names.should be == ['Alberto', 'Borges', 'Carla', 'Daniela']
+  end
+  
+  it 'should find by email' do
+    sabella = Nightclubber.new 'Filipe Sabella', 'lipe@gmail.com', ['Marano', 'Pedro']
+    Nightclubber.stub!(:where).with(:email => 'lipe@gmail.com').and_return sabella
+    Nightclubber.find('lipe@gmail.com').should be == sabella
+  end
+  
+  it 'should give me an empty result back when not able to find by email' do
+    Nightclubber.stub!(:where).and_return []
+    Nightclubber.find('lipe@gmail.com').should be_nil
   end
 
 end

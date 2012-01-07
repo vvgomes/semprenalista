@@ -15,6 +15,10 @@ class Nightclubber
     super :name => name, :email => email, :friends => friends
   end
   
+  def ==(other)
+    other.email == email
+  end
+  
   def add subscription
     subscriptions << subscription
   end
@@ -37,6 +41,10 @@ class Nightclubber
 
   def self.sorted_names
     Nightclubber.all.inject([]){|names, dude|names+[dude.name]+dude.friends}.sort
+  end
+  
+  def self.find email
+    Nightclubber.where(:email => email).to_a.first
   end
   
   def self.all_subscribed

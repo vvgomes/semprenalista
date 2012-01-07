@@ -4,9 +4,6 @@ describe Subscription do
     @moment = Time.now
     Time.stub!(:now).and_return @moment
     
-    clubber = mock
-    clubber.stub!(:email).and_return 'lipe@gmail.com'
-    
     party = mock
     party.stub!(:url).and_return 'http://www.cabaretpoa.com.br/rocket.htm'
     
