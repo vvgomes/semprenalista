@@ -16,6 +16,10 @@ describe Nightclubber do
     it 'should tell me who are his friends' do
       @sabella.friends.should be == ['Marano', 'Pedro']
     end
+    
+    it 'should not have any subscription' do
+      @sabella.subscriptions.should be_empty
+    end
   end
 
   context 'when parsing request parameters' do
@@ -71,10 +75,11 @@ describe Nightclubber do
   end
   
   it 'should give me all people names sorted' do
-    zilda = Nightclubber.new 'Zilda', 'mail', ['Abraao']
-    magda = Nightclubber.new 'Magda', 'mail', ['Crenildo']
-    Nightclubber.stub!(:all).and_return [zilda, magda]
-    Nightclubber.sorted_names.should be == ['Abraao', 'Crenildo', 'Magda', 'Zilda']
+    Nightclubber.stub!(:all).and_return [
+      Nightclubber.new('Daniela', 'mail', ['Alberto']),
+      Nightclubber.new('Carla', 'mail', ['Borges'])
+    ]
+    Nightclubber.sorted_names.should be == ['Alberto', 'Borges', 'Carla', 'Daniela']
   end
 
 end

@@ -2,15 +2,26 @@ require 'mongoid'
 
 class Nightclubber
   include Mongoid::Document
+
   field :name, :type => String
   field :email, :type => String
   field :friends, :type => Array, :default => []
-  field :time, :type => Time
+  
+  embeds_many :subscriptions
 
   validates_uniqueness_of :email
 
   def initialize name, email, friends
-    super :name => name, :email => email, :friends => friends, :time => Time.now
+    super :name => name, :email => email, :friends => friends
+  end
+  
+  def add subscription
+    subscriptions << subscription
+  end
+  
+  def find_missing parties
+    # eliminate what isn't there anymore
+    # return what's missing
   end
 
   def self.parse params

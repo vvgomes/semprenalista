@@ -64,7 +64,25 @@ class Job
   end
   
   def log message
-    puts ">>> #{message}"
+    puts "[JOB] #{message}"
+  end
+  
+  def _run email
+    clubber = Nightclubber.find email    
+    clubber.find_missing(Party.all).each do |party|
+      begin
+        log "Subscribing #{clubber.email} to #{party.name}."
+        
+        response = party.add_to_list clubber
+        clubber.add Subscription.new party, response
+        
+        log 'OK.'
+      rescue => e  
+        log "Unable to add #{clubber.email} to #{party.name}."
+        log "Reason: #{e}"
+      end  
+    end
+    log 'Done.'
   end
 
 end
