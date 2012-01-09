@@ -2,6 +2,7 @@ require 'mongoid'
 
 class Nightclubber
   include Mongoid::Document
+  include Mongoid::Timestamps
 
   field :name, :type => String
   field :email, :type => String
@@ -25,13 +26,13 @@ class Nightclubber
   
   def subscribed_to? party
     subscribed_urls.include? party.url
-    # would like it to be subscriptions.has_one_for? party
+    # I would like it to be subscriptions.has_one_for? party
   end
   
   def find_missing_from parties
     urls = subscribed_urls
     parties.find_all{|p| !urls.include? p.url}
-    # would like it to be subscriptions.missing parties
+    # I would like it to be subscriptions.missing parties
   end
   
   def remove_expired_subscriptions parties
@@ -40,7 +41,7 @@ class Nightclubber
     expireds.each do |expired|
       expired.delete
     end
-    # would like it to be subscriptions.remove_expired
+    # I would like it to be subscriptions.remove_expired
   end
 
   def self.parse params
@@ -69,6 +70,29 @@ class Nightclubber
   
   def self.all_not_subscribed
     Nightclubber.all.to_a - Nightclubber.all_subscribed
+  end
+  
+  def self.next_to_subscribe parties
+    candidates = Nightclubber.need_subscription parties
+    return [] if candidates.empty?
+    
+    candidates.inject(candidates.first) do |winner, current|  
+      if winner.updated_at.nil?
+        winner = winner
+      else
+        if current.updated_at.nil?
+          winner = current  
+        else 
+          winner = (current.updated_at < winner.updated_at) ? current : winner
+        end
+      end  
+    end
+  end
+  
+  def self.need_subscription parties
+    Nightclubber.all.to_a.find_all do |clubber|
+      !clubber.find_missing_from(parties).empty?
+    end
   end
   
   private

@@ -1,11 +1,5 @@
-- do I need to save a clubber after deleting subscriptions?
-- subscription collection?
-
-- "monday" strategy doesnt work! subscription model?
-  - new job
-  
-- subscription queue -> perform by person-party
-
+- mongoid timestamps
+- new job
+- nightclubber needs a subscription custom collection
 - laika integration tests
-
 - functional specs

@@ -67,24 +67,25 @@ class Job
     puts "[JOB] #{message}"
   end
   
-  def _run email
+  def _run email=nil
     parties = Party.all
-    clubber = Nightclubber.find email    
-    clubber.remove_expired_subscriptions parties
     
+    clubber = email ? Nightclubber.find(email) : Nightclubber.next_to_subscribe(parties)
+    
+    clubber.remove_expired_subscriptions parties
     clubber.find_missing(parties).each do |party|
       begin
         log "Subscribing #{clubber.email} to #{party.name}."
-        
         response = party.add_to_list clubber
         clubber.add Subscription.new(party, response)
         clubbser.save
-        
         log 'OK.'
+        
       rescue => e  
         log "Unable to add #{clubber.email} to #{party.name}."
         log "Reason: #{e}"
       end  
+      
     end
     log 'Done.'
   end

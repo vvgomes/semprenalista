@@ -33,19 +33,44 @@ describe Nightclubber do
         @amnesia = fake_party 'http://www.cabaretpoa.com.br/amnesia.htm'
         @rocket = fake_party 'http://www.cabaretpoa.com.br/rocket.htm'
         @sabella.add Subscription.new(@rocket, fake_response)
+        
+        @ygor = Nightclubber.new 'Ygor Bruxel', 'ygor@gmail.com', []
+        @ygor.add Subscription.new(@rocket, fake_response)
+        @ygor.stub!(:updated_at).and_return Time.now
+        
+        Nightclubber.stub!(:all).and_return [@ygor, @sabella]
       end
 
       it 'should be able to identify when he is subscribed to a party' do
         @sabella.should be_subscribed_to @rocket
       end  
 
-      it 'should be able to identify the parties he is not subscribed' do
+      it 'should be able to identify the parties it is not subscribed' do
         @sabella.find_missing_from([@amnesia, @rocket]).should be == [@amnesia]
       end
 
-      it 'should remove expired subscriptions' do
+      it 'should remove the expired ones' do
         @sabella.remove_expired_subscriptions [@amnesia]
         @sabella.should_not be_subscribed_to @rocket
+      end
+      
+      it 'should need new subscriptions for the missing parties' do
+        Nightclubber.need_subscription([@amnesia, @rocket]).should include @sabella
+      end
+      
+      it 'should not need more subscriptions when subscribed to all parties' do
+        @sabella.add Subscription.new(@amnesia, fake_response)
+        Nightclubber.need_subscription([@amnesia, @rocket]).should_not include @sabella
+      end
+        
+      it 'should be the next one to be subscribed when it wasnt updated yet' do
+        @sabella.stub!(:updated_at).and_return nil
+        Nightclubber.next_to_subscribe([@amnesia, @rocket]).should be == @sabella
+      end
+      
+      it 'should be the next one to be subscribed when it has the oldest update' do
+        @sabella.stub!(:updated_at).and_return @ygor.updated_at - 1
+        Nightclubber.next_to_subscribe([@amnesia, @rocket]).should be == @sabella
       end
 
     end
@@ -120,4 +145,3 @@ describe Nightclubber do
   end
 
 end
-
