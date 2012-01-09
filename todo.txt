@@ -1,5 +1,5 @@
-- mongoid timestamps
 - new job
+- try the new job locally with fake response
 - nightclubber needs a subscription custom collection
 - laika integration tests
 - functional specs
