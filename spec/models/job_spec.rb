@@ -1,85 +1,68 @@
 describe Job do
+    
+  before :each do
+    @job = Job.new
+    @clubber = mock
+    @party = mock
+    Party.stub!(:all).and_return [@party]
+  end
+  
+  context 'when taking a clubber to be subcribed' do
 
     before :each do
-      @job = Job.new
-      @sabella = Nightclubber.new 'Sabella', 'lipe@gmail.com', []
-      Nightclubber.stub!(:all).and_return [@sabella]
-    end
-    
-    context 'when subscribing people' do
-      
-      before :each do
-        cabaret = mock
-        cabaret = mock
-        @response = mock
-        @rockpocket = mock
-        
-        Nightclub.stub!(:all).and_return [cabaret]
-        cabaret.stub!(:parties).and_return [@rockpocket]
-        cabaret.stub!(:name).and_return 'cabaret'
-        
-        @rockpocket.stub!(:name).and_return 'rockpocket'
-        @response.stub!(:code).and_return 200
-        @response.stub!(:message).and_return 'ok'
-        @job.stub!(:log)
-      end
-
-      it 'should find someone not subscribed yet' do      
-        Report.stub!(:where).with(:email => 'lipe@gmail.com').and_return []
-        @job.stub!(:save_report)
-      
-        @rockpocket.should_receive(:add_to_list).with(@sabella).and_return @response
-      
-        @job.run
-      end
-      
-      it 'should find someone by email' do
-        mongoid_thing = mock
-        mongoid_thing.stub! :delete_all
-        Report.stub!(:where).with(:email => 'lipe@gmail.com').and_return mongoid_thing
-        Nightclubber.stub!(:where).with(:email => 'lipe@gmail.com').and_return [@sabella]
-        @job.stub!(:save_report)
-        
-        @rockpocket.should_receive(:add_to_list).with(@sabella).and_return @response
-      
-        @job.run 'lipe@gmail.com'
-      end
-    
-      it 'should save a new report' do
-        @job.stub!(:not_subscribed_yet).and_return @sabella
-        @rockpocket.stub!(:add_to_list).and_return @response
-        
-        report = mock
-        Report.should_receive(:new).with('cabaret', 'rockpocket', 'lipe@gmail.com', 200, 'ok').and_return(report)
-        report.should_receive(:save)
-      
-        @job.run
-      end
-    
-    end
-    
-    context 'when everybody has already been subscribed' do
-      
-      it 'should remove all reports on monday' do
-        @job.stub!(:monday?).and_return true
-        Report.stub!(:where).with(:email => 'lipe@gmail.com').and_return [@sabella]
-        @job.stub!(:log)
-        
-        Report.should_receive(:delete_all)
-        
-        @job.run
-      end
-      
-      it 'should log it every run except on monday' do
-        @job.stub!(:monday?).and_return false
-        Report.stub!(:where).with(:email => 'lipe@gmail.com').and_return [@sabella]
-        
-        @job.should_receive(:log).with('Everybody is subscribed to all lists already.')
-        
-        @job.run
-      end
-      
+      @clubber.stub!(:remove_expired_subscriptions)
+      @job.stub!(:subscribe)
     end
 
+    it 'should find by email' do
+      Nightclubber.should_receive(:find).with('lipe@gmail.com').and_return @clubber
+      @job.run 'lipe@gmail.com'
+    end
+  
+    it 'should find the next elegible one' do
+      Nightclubber.should_receive(:next_to_subscribe).and_return @clubber
+      @job.run
+    end
+
+  end
+    
+  context 'when subscribing' do
+      
+    before :each do
+      @job.stub!(:log)
+      @job.stub!(:find).and_return @clubber
+      @clubber.stub!(:remove_expired_subscriptions)
+      @clubber.stub!(:find_missing).and_return [@party]
+      @clubber.stub!(:email)
+      @party.stub!(:name)
+      @subscription = mock
+      Subscription.stub!(:new).and_return @subscription
+    end
+    
+    it 'should add the clubber to the party list' do
+      @clubber.stub!(:add)
+      @clubber.stub!(:save)
+      
+      @party.should_receive(:add_to_list).with(@clubber).and_return mock
+      @job.run
+    end
+    
+    it 'should create a new subscription and save' do
+      @party.should_receive(:add_to_list).with(@clubber).and_return mock
+      
+      @clubber.should_receive(:add).with(@subscription)
+      @clubber.should_receive(:save)
+      @job.run
+    end
+      
+  end
+  
+  it 'should ask clubber to throw away all the old subscriptions' do
+    @job.stub!(:find).and_return @clubber
+    @job.stub!(:subscribe)
+    
+    @clubber.should_receive(:remove_expired_subscriptions).with [@party]
+    @job.run
+  end
+    
 end
-

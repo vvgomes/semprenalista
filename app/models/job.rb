@@ -1,93 +1,37 @@
 class Job
   
   def run email=nil
-    if clubber = find_clubber(email)
-      subscribe clubber 
-    else  
-      everybody_subscribed  
-    end  
+    parties = Party.all
+    clubber = find email, parties
+    clubber.remove_expired_subscriptions parties
+    subscribe clubber, parties
   end
-
+  
   private
   
-  def find_clubber email
-    return not_subscribed_yet if !email
-    Report.where(:email => email).delete_all
-    Nightclubber.where(:email => email).first
+  def find email, parties
+    email ? Nightclubber.find(email) : Nightclubber.next_to_subscribe(parties)
   end
   
-  def not_subscribed_yet
-    Nightclubber.all.to_a.find do |clubber|
-      Report.where(:email => clubber.email).count == 0
-    end
-  end
-  
-  def subscribe clubber
-    log "Subscribing #{clubber.email}..."
-    Nightclub.all.each do |club|
-      club.parties.each do |party|
-        begin
-          response = party.add_to_list clubber
-          save_report(club, party, clubber, response)
-        rescue
-          begin
-            log "Error adding #{clubber.email} to #{club.name} - #{party.name}."
-            log "Trying again..."
-            response = party.add_to_list clubber
-            save_report(club, party, clubber, response)
-          rescue => e  
-            log "Unable to add #{clubber.email} to #{club.name} - #{party.name}."
-            log "Reason: #{e}"
-          end
-        end  
+  def subscribe clubber, parties
+    clubber.find_missing(parties).each do |party|
+      begin
+        log "Subscribing #{clubber.email} to #{party.name}..."
+        response = party.add_to_list clubber
+        clubber.add Subscription.new(party, response)
+        clubber.save
+        log 'OK.'
+      
+      rescue => e  
+        log "Unable to add #{clubber.email} to #{party.name}."
+        log "Reason: #{e}"
       end
     end
-    log "Done."
-  end
-  
-  def everybody_subscribed
-    Report.delete_all if monday?
-    log 'Everybody is subscribed to all lists already.'
-  end
-  
-  def save_report club, party, clubber, response
-    Report.new(
-      club.name,
-      party.name,
-      clubber.email,
-      response.code,
-      response.message).save
-  end
-  
-  def monday?
-    Time.now.wday == 1
+    log 'Done.' 
   end
   
   def log message
     puts "[JOB] #{message}"
-  end
-  
-  def _run email=nil
-    parties = Party.all
-    
-    clubber = email ? Nightclubber.find(email) : Nightclubber.next_to_subscribe(parties)
-    
-    clubber.remove_expired_subscriptions parties
-    clubber.find_missing(parties).each do |party|
-      begin
-        log "Subscribing #{clubber.email} to #{party.name}."
-        response = party.add_to_list clubber
-        clubber.add Subscription.new(party, response)
-        clubbser.save
-        log 'OK.'
-        
-      rescue => e  
-        log "Unable to add #{clubber.email} to #{party.name}."
-        log "Reason: #{e}"
-      end  
-      
-    end
-    log 'Done.'
   end
 
 end
