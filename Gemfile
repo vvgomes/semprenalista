@@ -13,6 +13,6 @@ group :test do
 end
 
 # Add your own local bundler stuff
-#local_gemfile = File.dirname(__FILE__) + "/.Gemfile"
-#instance_eval File.read local_gemfile if File.exists? local_gemfile
+local_gemfile = File.dirname(__FILE__) + "/.Gemfile"
+instance_eval File.read local_gemfile if File.exists? local_gemfile
 

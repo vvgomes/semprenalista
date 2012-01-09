@@ -76,17 +76,14 @@ class Nightclubber
     candidates = Nightclubber.need_subscription parties
     return [] if candidates.empty?
     
-    candidates.inject(candidates.first) do |winner, current|  
-      if winner.updated_at.nil?
-        winner = winner
-      else
-        if current.updated_at.nil?
-          winner = current  
-        else 
-          winner = (current.updated_at < winner.updated_at) ? current : winner
-        end
-      end  
+    winner = candidates.first
+    return winner if winner.updated_at.nil?
+    
+    candidates.each do |c|
+      winner = (c.updated_at.nil?) ? 
+        c : (c.updated_at < winner.updated_at) ? c : winner
     end
+    winner
   end
   
   def self.need_subscription parties
