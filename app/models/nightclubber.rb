@@ -56,7 +56,7 @@ class Nightclubber
   end
 
   def self.sorted_names
-    Nightclubber.all.inject([]){|names, dude|names+[dude.name]+dude.friends}.sort
+    Nightclubber.all.to_a.inject([]){|names, dude|names+[dude.name]+dude.friends}.sort
   end
   
   def self.find email

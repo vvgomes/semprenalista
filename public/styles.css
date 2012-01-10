@@ -2,19 +2,24 @@ body {
 	color: grey;
 	font-family: Delius, sans-serif;
 	font-size: 18px;
+	background-color: rgb(240, 240, 240);
 }
 
 fieldset {
+	background-color: white;
 	margin-top: 50px;
 	margin-left: 30%;
 	margin-right: 30%;
-	border: 4px double grey;
+	border: 4px double rgb(240, 240, 240);
 	border-radius: 15px;
 }
 
 legend {
 	font-size: 220%;
 	font-weight: bold;
+	text-shadow: black 2px 2px, white -1px -1px;
+	padding: 0px;
+	margin: 0px;
 }
 
 input {
@@ -113,8 +118,10 @@ details {
 }
 
 p#about {
-	text-align: left;
-	margin-left: 15px;
+	text-align: center;
+	margin-left: 0px;
+	padding-left: 0px;
+	margin-bottom: 25px;
 }
 
 p#about a:hover {
