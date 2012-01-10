@@ -47,6 +47,6 @@ end
 get '/subscriptions' do
   erb :subscriptions, :locals => {
     :subscriptions => Nightclubber.all_subscriptions,
-    :missing => Nightclubber.all_missing_from Party.all
+    :missing => Nightclubber.missing_emails_with_party_urls(Party.all)
   }
 end
