@@ -2,7 +2,7 @@ body {
 	color: grey;
 	font-family: Delius, sans-serif;
 	font-size: 18px;
-	background-color: rgb(240, 240, 240);
+	background-color: rgb(220, 220, 220);
 }
 
 fieldset {
@@ -10,7 +10,7 @@ fieldset {
 	margin-top: 50px;
 	margin-left: 30%;
 	margin-right: 30%;
-	border: 4px double rgb(240, 240, 240);
+	border: 4px double rgb(220, 220, 220);
 	border-radius: 15px;
 }
 
