@@ -1,11 +1,5 @@
 - remove duplicated parties by url
-
-- new job
-  - new subscription view
-  - rename reports erb
-    - missing ones
-  - fake response
-  - enable task  
+- laika navigator unit test taking so long
 
 - laika integration tests
 - facebook like button
