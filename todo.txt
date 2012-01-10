@@ -1,5 +1,13 @@
+- remove duplicated parties by url
+
 - new job
-- try the new job locally with fake response
-- nightclubber needs a subscription custom collection
+  - new subscription view
+  - rename reports erb
+    - missing ones
+  - fake response
+  - enable task  
+
 - laika integration tests
+- facebook like button
+- nightclubber needs a subscription custom collection
 - functional specs

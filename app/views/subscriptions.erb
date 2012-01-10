@@ -16,13 +16,15 @@
 </head>
 <body>
   <h2>Last Subscriptions</h2>
-  <% reports.each do |r| %>
-    <p><%= r %></p>
+  <% subscriptions.each do |s| %>
+    <p><%= s.to_s %></p>
   <% end %>
   <h2>Not Subscribed</h2>
-  <% clubbers.each do |c| %>
-    <p><%= c.name %>&nbsp;(<%= c.email %>)</p>
+  <!-- 
+  <% missing.each do |m| %>
+    <p><%= m[:email] %>&nbsp;to&nbsp;<%= m.[:party_url] %></p>
   <% end %>
+  -->
 </body>
 </html>
 

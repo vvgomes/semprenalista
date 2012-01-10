@@ -17,13 +17,13 @@ describe Nightclubber do
       @sabella.friends.should =~ ['Marano', 'Pedro']
     end
     
-    it 'should use its email as identity' do
+    it 'should use his email as identity' do
       same = mock
       same.stub(:email).and_return 'lipe@gmail.com'
       @sabella.should be == same
     end
     
-    it 'should not have any subscription by default' do
+    it 'should not have any subscriptions by default' do
       @sabella.subscriptions.should be_empty
     end
     
@@ -41,11 +41,11 @@ describe Nightclubber do
         Nightclubber.stub!(:all).and_return [@ygor, @sabella]
       end
 
-      it 'should be able to identify when he is subscribed to a party' do
+      it 'should be able to identify when he was subscribed to a party' do
         @sabella.should be_subscribed_to @rocket
       end  
 
-      it 'should be able to identify the parties it is not subscribed' do
+      it 'should be able to identify the parties he wasnt subscribed yet' do
         @sabella.find_missing_from([@amnesia, @rocket]).should be == [@amnesia]
       end
 
@@ -71,6 +71,21 @@ describe Nightclubber do
       it 'should be the next one to be subscribed when it has the oldest update' do
         @sabella.stub!(:updated_at).and_return @ygor.updated_at - 1
         Nightclubber.next_to_subscribe([@amnesia, @rocket]).should be == @sabella
+      end
+      
+      it 'should be included in all subscriptions' do
+        Nightclubber.all_subscriptions.should =~ (@sabella.subscriptions + @ygor.subscriptions)
+      end
+      
+      it 'should be included in the missing reports' do
+        missing = Nightclubber.missing_emails_with_party_urls [@amnesia, @rocket]
+        missing.should =~ [{
+          :email => 'lipe@gmail.com', 
+          :party_url => 'http://www.cabaretpoa.com.br/amnesia.htm'
+        }, {
+          :email => 'ygor@gmail.com', 
+          :party_url => 'http://www.cabaretpoa.com.br/amnesia.htm'
+        }]
       end
 
     end

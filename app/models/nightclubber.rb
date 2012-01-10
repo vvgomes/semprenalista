@@ -63,13 +63,10 @@ class Nightclubber
     Nightclubber.where(:email => email).to_a.first
   end
   
-  def self.all_subscribed
-    emails = Report.all.map{ |r| r.email }
-    Nightclubber.all.find_all{ |c| emails.include? c.email }
-  end
-  
-  def self.all_not_subscribed
-    Nightclubber.all.to_a - Nightclubber.all_subscribed
+  def self.all_subscriptions
+    Nightclubber.all.to_a.inject([]) do |all, clubber|
+      all + clubber.subscriptions
+    end
   end
   
   def self.next_to_subscribe parties
@@ -90,6 +87,16 @@ class Nightclubber
     Nightclubber.all.to_a.find_all do |clubber|
       !clubber.find_missing_from(parties).empty?
     end
+  end
+  
+  def self.missing_emails_with_party_urls parties
+    result = []
+    Nightclubber.need_subscription(parties).each do |clubber|
+      clubber.find_missing_from(parties).each do |party|
+        result << {:email => clubber.email, :party_url => party.url}
+      end
+    end
+    result
   end
   
   private

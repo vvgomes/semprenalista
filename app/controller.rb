@@ -44,9 +44,9 @@ get '/about' do
   haml :about
 end
 
-get '/reports' do
-  erb :reports, :locals => {
-    :reports => Report.all_sorted.map{ |r| r.to_s },
-    :clubbers => Nightclubber.all_not_subscribed
+get '/subscriptions' do
+  erb :subscriptions, :locals => {
+    :subscriptions => Nightclubber.all_subscriptions,
+    :missing => Nightclubber.all_missing_from Party.all
   }
 end
