@@ -10,7 +10,7 @@ fieldset {
 	margin-top: 50px;
 	margin-left: 30%;
 	margin-right: 30%;
-	border: 4px double rgb(220, 220, 220);
+	border: 4px double grey;
 	border-radius: 15px;
 }
 
@@ -34,7 +34,7 @@ input {
 }
 
 input[type="submit"] {
-	border: 3px solid rgb(220, 220, 220);
+	border: 3px double rgb(240, 240, 240);
 	width: 100%;
 	background-color: grey;
 	font-weight: bold;
