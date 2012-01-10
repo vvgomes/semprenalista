@@ -25,6 +25,7 @@ input {
 	width: 98%;
 	font-size: large;
 	padding-left: 10px;
+	background-color: rgb(240, 240, 240);
 }
 
 input[type="submit"] {
