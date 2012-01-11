@@ -138,12 +138,12 @@ describe Nightclubber do
   it 'should find by email' do
     sabella = Nightclubber.new 'Filipe Sabella', 'lipe@gmail.com', ['Marano', 'Pedro']
     Nightclubber.stub!(:where).with(:email => 'lipe@gmail.com').and_return sabella
-    Nightclubber.find('lipe@gmail.com').should be == sabella
+    Nightclubber.find_by('lipe@gmail.com').should be == sabella
   end
   
   it 'should give me an empty result back when not able to find by email' do
     Nightclubber.stub!(:where).and_return []
-    Nightclubber.find('lipe@gmail.com').should be_nil
+    Nightclubber.find_by('lipe@gmail.com').should be_nil
   end
   
   def fake_party url

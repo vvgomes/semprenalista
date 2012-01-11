@@ -59,7 +59,7 @@ class Nightclubber
     Nightclubber.all.to_a.inject([]){|names, dude|names+[dude.name]+dude.friends}.sort
   end
   
-  def self.find email
+  def self.find_by email
     Nightclubber.where(:email => email).to_a.first
   end
   
@@ -98,12 +98,12 @@ class Nightclubber
     end
     result
   end
-  
+
   private
   
   def subscribed_urls
     subscriptions.map{|s| s.party_url}
   end
-
+  
 end
 

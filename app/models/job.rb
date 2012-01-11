@@ -10,7 +10,7 @@ class Job
   private
   
   def find email, parties
-    email ? Nightclubber.find(email) : Nightclubber.next_to_subscribe(parties)
+    email ? Nightclubber.find_by(email) : Nightclubber.next_to_subscribe(parties)
   end
   
   def subscribe clubber, parties
