@@ -7,7 +7,7 @@ describe Cabaret::JsNavigator do
       document.write('<a href="indiada.htm">Saiba mais</a></li>');
     }
     nav = Cabaret::JsNavigator.new js
-    nav.hrefs.should be_eql ['rockpocket.htm', 'amnesia.htm', 'indiada.htm']
+    nav.hrefs.should be == ['rockpocket.htm', 'amnesia.htm', 'indiada.htm']
   end
   
   it 'should ignore code under single-line comments' do
@@ -17,7 +17,7 @@ describe Cabaret::JsNavigator do
       document.write('<a href="indiada.htm">Saiba mais</a></li>');
     }
     nav = Cabaret::JsNavigator.new js
-    nav.hrefs.should be_eql ['rockpocket.htm', 'indiada.htm']
+    nav.hrefs.should be == ['rockpocket.htm', 'indiada.htm']
   end
   
   it 'should ignore code under multi-line comments' do
@@ -27,7 +27,16 @@ describe Cabaret::JsNavigator do
       document.write('<a href="indiada.htm">Saiba mais</a></li>');
     }
     nav = Cabaret::JsNavigator.new js
-    nav.hrefs.should be_eql ['indiada.htm']
+    nav.hrefs.should be == ['indiada.htm']
+  end
+  
+  it 'should avoid duplicated urls' do
+    js = %q{
+      document.write('<a href="amnesia.htm">Saiba mais</a></li>');
+      document.write('<a href="amnesia.htm">Saiba mais</a></li>');
+    }
+    nav = Cabaret::JsNavigator.new js
+    nav.hrefs.size.should be 1
   end
   
 end
