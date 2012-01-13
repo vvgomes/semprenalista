@@ -7,7 +7,7 @@ describe Cabaret::JsNavigator do
       document.write('<a href="indiada.htm">Saiba mais</a></li>');
     }
     nav = Cabaret::JsNavigator.new js
-    nav.hrefs.should be == ['rockpocket.htm', 'amnesia.htm', 'indiada.htm']
+    nav.hrefs.should =~ ['rockpocket.htm', 'amnesia.htm', 'indiada.htm']
   end
   
   it 'should ignore code under single-line comments' do
@@ -17,7 +17,7 @@ describe Cabaret::JsNavigator do
       document.write('<a href="indiada.htm">Saiba mais</a></li>');
     }
     nav = Cabaret::JsNavigator.new js
-    nav.hrefs.should be == ['rockpocket.htm', 'indiada.htm']
+    nav.hrefs.should =~ ['rockpocket.htm', 'indiada.htm']
   end
   
   it 'should ignore code under multi-line comments' do
