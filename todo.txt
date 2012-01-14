@@ -1,7 +1,5 @@
 - laika navigator spec is slow = probably not mocking network access
-- remove duplicated parties by url
 - laika navigator unit test taking so long
-
 - laika integration tests
 - facebook like button
 - nightclubber needs a subscription custom collection

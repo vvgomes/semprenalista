@@ -43,4 +43,3 @@ describe 'Navigators' do
     Nightclubber.new 'Filipe Sabella', 'sabella@gmail.com', ['Marano', 'Pedro']
   end
 end
-

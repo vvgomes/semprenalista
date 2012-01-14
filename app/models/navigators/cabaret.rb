@@ -89,7 +89,7 @@ module Cabaret
     end
     
     def hrefs
-      @js.scan(/href="([^"]+)"/).map{ |r| r.first }.inject({}){ |h,l| h[l.to_sym]=l; h }.values;
+      @js.scan(/href="([^"]+)"/).map{ |r| r.first }.inject({}){ |h,l| h[l.to_sym]=l; h }.values
     end
     
     private
