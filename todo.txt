@@ -1,3 +1,4 @@
+- remove my tw mail from there
 - laika navigator spec is slow = probably not mocking network access
 - remove duplicated parties by url
 - laika navigator unit test taking so long

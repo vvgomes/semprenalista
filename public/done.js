@@ -1,0 +1,3 @@
+$dom.onready(function(){
+	createTweetButton();
+});

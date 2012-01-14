@@ -9,7 +9,7 @@
   &nbsp;pra sempre :)
   
 %form{:id => "form", :action => "/", :method => "post"}
-  - if !@clubber.valid?
+  - unless @clubber.valid?
     %p{:id => 'error_message'}
       Email j&aacute cadastrado :(
   %p
@@ -26,7 +26,7 @@
     %input{:name => "friends[3]", :type => "text", :placeholder => "O último", :value => @clubber.friends[3]}
   #buttons
     #ok
-      %input{:name => "submit", :type => "submit", :value => "OK"}
+      %input{:name => "submit", :type => "submit", :value => "OK" }
     #tweet  
       %a{:id => "twitter", :href => "https://twitter.com/share", :class => "twitter-share-button", 'data-text' => 'Party more, pay less! \o/', 'data-size' => 'large', 'data-hashtags' => 'semprenalista', 'data-url' => 'http://semprenalista.heroku.com'}Tweet  
         
@@ -36,3 +36,4 @@
     %a{:id => "edit", :href => "#"}aqu&iacute;
     &nbsp;para editar.
     
+%script{:src => "index.js"} 
