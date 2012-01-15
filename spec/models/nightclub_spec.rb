@@ -13,7 +13,7 @@ describe Nightclub do
   end
 
   it 'should have a name' do
-    @place.name.should be_eql 'Cabaret'
+    @place.name.should be == 'Cabaret'
   end
 
   it 'should use its name as identity' do
@@ -24,7 +24,7 @@ describe Nightclub do
 
   it 'should give me all the nice parties' do
     @party.stub!(:nice?).and_return true
-    @place.parties.should be_eql [@party]
+    @place.parties.should be == [@party]
   end
 
   it 'should not give me back a not nice party' do
@@ -32,12 +32,19 @@ describe Nightclub do
     @place.parties.should be_empty
   end
 
-  xit 'should know about all available nightclubs' do
+  it 'should know about all available nightclubs' do
+    mock_network_access
     beco = Nightclub.new(Beco::Navigator.new)
     cabaret = Nightclub.new(Cabaret::Navigator.new)
     laika = Nightclub.new(Laika::Navigator.new)
     Nightclub.all.should =~ [cabaret, beco, laika]
   end
-
+  
+  def mock_network_access
+    m = mock
+    m.stub!(:get).and_return mock
+    Mechanize.stub!(:new).and_return m
+  end
+  
 end
 
