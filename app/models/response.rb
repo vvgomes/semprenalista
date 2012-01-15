@@ -8,8 +8,7 @@ class Response
   end
 
   def message
-    return 'Something went wrong!' if @message.nil?
-    @message
+    @message || 'Something went wrong!'
   end
 
 end

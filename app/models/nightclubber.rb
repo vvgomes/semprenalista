@@ -47,7 +47,7 @@ class Nightclubber
   def self.parse params
     name = params[:name]
     email = params[:email]
-    friends = params[:friends].values.find_all{ |f| f if !f.empty? }
+    friends = params[:friends].values.find_all{ |f| f unless f.empty? }
     Nightclubber.new name, email, friends
   end
   
@@ -74,11 +74,11 @@ class Nightclubber
     return [] if candidates.empty?
     
     winner = candidates.first
-    return winner if winner.updated_at.nil?
+    return winner unless winner.updated_at
     
     candidates.each do |c|
-      winner = (c.updated_at.nil?) ? 
-        c : (c.updated_at < winner.updated_at) ? c : winner
+      winner = (c.updated_at) ? 
+        ((c.updated_at < winner.updated_at) ? c : winner) : c
     end
     winner
   end

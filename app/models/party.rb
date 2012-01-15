@@ -3,11 +3,11 @@ class Party
   attr_accessor :name, :url
 
   def initialize nav
-    n = nav.navigate_to_list
-    @list = n ? DiscountList.new(n) : nil
     @name = nav.find_name
     @url = nav.url
-    @nav = nav
+    
+    n = nav.navigate_to_list
+    @list = DiscountList.new(n) if n
   end
 
   def nice?

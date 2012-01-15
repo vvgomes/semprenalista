@@ -1,2 +1,4 @@
-- release like on job
+- modal
+- domain
+- casa do lado
 - functional specs

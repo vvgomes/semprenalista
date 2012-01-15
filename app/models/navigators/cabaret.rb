@@ -37,8 +37,7 @@ module Cabaret
 
     def navigate_to_list
       iframe = @page.iframe_with(:id => 'fr_lista')
-      return nil if !iframe
-      DiscountListNavigator.new(Cabaret.get(iframe.uri))
+      iframe ? DiscountListNavigator.new(Cabaret.get(iframe.uri)) : nil
     end
     
   end

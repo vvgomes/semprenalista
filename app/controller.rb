@@ -23,7 +23,7 @@ post '/' do
 end
 
 get '/done' do
-  redirect to '/' if !session[:subscribed]
+  redirect to '/' unless session[:subscribed]
   session[:subscribed] = false
   haml :done
 end

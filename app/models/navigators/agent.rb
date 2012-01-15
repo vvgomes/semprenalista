@@ -11,7 +11,7 @@ module Agent
   end
 
   def m
-    @m = Mechanize.new if !@m
+    @m = Mechanize.new unless @m
     @m
   end
   
