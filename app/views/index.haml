@@ -26,7 +26,7 @@
     %input{:name => "friends[3]", :type => "text", :placeholder => "O último", :value => @clubber.friends[3]}
   #buttons
     #ok
-      %input{:name => "submit", :type => "submit", :value => "OK" }
+      %input{:name => "submit", :type => "submit", :value => "OK", :class => "ok"}
     #tweet  
       %a{:id => "twitter", :href => "https://twitter.com/share", :class => "twitter-share-button", 'data-text' => 'Party more, pay less! \o/', 'data-size' => 'large', 'data-hashtags' => 'semprenalista', 'data-url' => 'http://semprenalista.heroku.com'}Tweet  
         
@@ -35,5 +35,15 @@
     Se voce j&aacute; se cadastrou, clique&nbsp;
     %a{:id => "edit", :href => "#"}aqu&iacute;
     &nbsp;para editar.
+    
+#overlay
+  %div
+    %p
+      &nbsp;&nbspSeu email...
+    %p
+      %input{:type => "search", :id => "email_to_search", :autosave => "unique", :results => "5"}
+    %p{:id => "close"}
+      %a{:href => "#"}Fechar
+      &nbsp;&nbsp
     
 %script{:src => "index.js"} 
