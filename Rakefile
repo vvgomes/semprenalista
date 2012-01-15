@@ -19,7 +19,7 @@ end
 
 
 task :server do
-  ruby 'app/controller.rb'
+  system 'rackup'
 end
 
 desc 'This task is called by the Heroku Scheduler add-on'

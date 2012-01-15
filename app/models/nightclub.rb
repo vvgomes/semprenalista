@@ -24,8 +24,8 @@ class Nightclub
     rescue
       @@nightclubs = [
         Nightclub.new(Beco::Navigator.new),
-        Nightclub.new(Cabaret::Navigator.new)
-        #Nightclub.new(Laika::Navigator.new)
+        Nightclub.new(Cabaret::Navigator.new),
+        Nightclub.new(Laika::Navigator.new)
       ]
       all
     end
