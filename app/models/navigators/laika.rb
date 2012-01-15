@@ -41,13 +41,14 @@ module Laika
     end
 
     def navigate_to_list
-      DiscountNavigator.new @page
+      form = @page.form_with(:action => 'index.php')
+      form ? Laika::DiscountListNavigator.new(form) : nil
     end
   end
 
-  class DiscountNavigator
-    def initialize page
-      @form = page.form_with(:action => 'index.php')
+  class DiscountListNavigator
+    def initialize form
+      @form = form
     end
 
     def fill_name name
