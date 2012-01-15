@@ -1,6 +1,2 @@
-- laika navigator spec is slow = probably not mocking network access
-- laika navigator unit test taking so long
-- laika integration tests
-- facebook like button
-- nightclubber needs a subscription custom collection
+- release like on job
 - functional specs

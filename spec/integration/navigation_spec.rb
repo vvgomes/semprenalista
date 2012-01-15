@@ -12,14 +12,12 @@ describe 'Navigators' do
     browse Nightclub.new(Beco::Navigator.new)
   end
   
-  xit 'should reflect the web site structure for Laika' do
+  it 'should reflect the web site structure for Laika' do
     browse Nightclub.new(Laika::Navigator.new)
   end
 
   def browse nightclub
     parties = nightclub.parties
-    parties.should_not be_empty
-
     parties.each do |p|
       response = p.add_to_list sabella
       response.code.should be 200
