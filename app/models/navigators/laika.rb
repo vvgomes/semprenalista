@@ -52,19 +52,16 @@ module Laika
     end
 
     def fill_name name
-      @form.first = name
-      @form.delete_field! @form.first.name
+      @form.fields[1].value = name
     end
 
     def fill_email email
-      @form.first = email
-      @form.delete_field! @form.first.name
+      @form.fields[0].value = email
     end
 
     def fill_friends friends
-      fields = @form.fields
       friends.each_with_index do |friend, i|
-        fields[i].value = friend
+        @form.fields[i+2].value = friend
       end
     end
 

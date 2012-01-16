@@ -1,4 +1,4 @@
-- modal
+- ajax
 - domain
 - casa do lado
 - functional specs
