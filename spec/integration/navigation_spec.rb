@@ -12,7 +12,7 @@ describe 'Navigators' do
     browse Nightclub.new(Beco::Navigator.new)
   end
   
-  it 'should reflect the web site structure for Laika' do
+  xit 'should reflect the web site structure for Laika' do
     browse Nightclub.new(Laika::Navigator.new)
   end
 

@@ -1,49 +1,49 @@
-$dom.onready(function(){
+$(document).ready(function(){
 	createTweetButton();
 	makeOkButtonAnimated();
-	setupEmailSearch();
+	setupSearch();
 });
 
 function makeOkButtonAnimated() {
-	var ok = $dom.get('#ok input')[0];
-
-	ok.onmouseover = function(event) {
-		$dom.style(ok, 'background-color', 'rgb(90, 90, 90)');
-	};
-
-	ok.onmouseout = function(event) {
-		$dom.style(ok, 'background-color', 'grey');
-	};
-}
-
-function setupEmailSearch() {
-	var edit = $dom.get('#edit')[0];
-	edit.onclick = openEmailSearch;
+	var ok = $('#ok input');
 	
-	var close = $dom.get('p#close a')[0];
-	close.onclick = closeEmailSearch;
+	ok.bind('mouseover', highlight)
+		.bind('mouseout', downplay);
+
+	function highlight() {
+		ok.css('background-color', 'rgb(90, 90, 90)');
+	};
+
+	function downplay() {
+		ok.css('background-color', 'grey');
+	};
 }
 
-function openEmailSearch() {
+function setupSearch() {
+	$('#edit').bind('click', openSearch);
+	$('p#close a').bind('click', closeSearch);
+	$('#email_to_search').bind('keydown', doSearch);
+}
+
+function openSearch() {
 	overlay('visible');
-	var email = $dom.get('#email_to_search')[0];
-	email.value = '';	
-	email.onkeydown = search;
-	email.focus();
+	$('#email_to_search').attr('value', '').focus();
 }
 
-function closeEmailSearch() {
+function closeSearch() {
 	overlay('hidden');
 }
 
-function search(event) {
+function doSearch(event) {
 	if(event && event.keyCode != '13') return;
-	
-	var email = $dom.get('#email_to_search')[0].value;
-	(email.trim().length > 0) && (window.location='/');
+	var email = $('#email_to_search').attr('value');
+	(email.trim().length > 0) && (sendRequest(email));
+}
+
+function sendRequest(email) {
+	alert('sending request for email: '+email)
 }
 
 function overlay(visibility) {
-	var overlay = $dom.get('#overlay')[0];
-	$dom.style(overlay, 'visibility', visibility);
+	$('#overlay').css('visibility', visibility);
 }
