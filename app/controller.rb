@@ -50,3 +50,19 @@ get '/subscriptions' do
     :missing => Nightclubber.missing_emails_with_party_urls(Party.all)
   }
 end
+
+post '/search' do
+  content_type :json
+  clubber = Nightclubber.find_by(params[:email])
+  clubber.to_json # "null" for not found
+end
+
+put '/' do
+  @clubber = Nightclubber.find_by(params[])
+  if @clubber.save
+    session[:subscribed] = true
+    redirect to '/done'
+  else
+    haml :index
+  end
+end

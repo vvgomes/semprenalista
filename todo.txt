@@ -1,4 +1,15 @@
-- ajax
+- edit
+  - search email -> json or null
+    - for null, an error message
+    - for json, change UI to edit
+      - email field disabled   
+      - delete button
+      - put to / (params?)
+        - success (update, /done)
+        - doesn't have server side validation :D
+
+- delete (with confirmation)
+
 - domain
 - casa do lado
 - functional specs

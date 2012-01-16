@@ -41,7 +41,12 @@ function doSearch(event) {
 }
 
 function sendRequest(email) {
-	alert('sending request for email: '+email)
+	$.post('/search', {'email': email}, handleResponse, 'json')
+	alert('request sent for email: '+email);
+}
+
+function handleResponse(response) {
+	console.log('response is: '+response);
 }
 
 function overlay(visibility) {
