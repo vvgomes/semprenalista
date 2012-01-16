@@ -4,11 +4,11 @@ describe 'Navigators' do
     prevent_form_submission
   end
 
-  xit 'should reflect the web site structure for Cabaret' do
+  it 'should reflect the web site structure for Cabaret' do
     browse Nightclub.new(Cabaret::Navigator.new)
   end
 
-  xit 'should reflect the web site structure for Beco' do
+  it 'should reflect the web site structure for Beco' do
     browse Nightclub.new(Beco::Navigator.new)
   end
   
