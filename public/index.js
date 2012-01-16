@@ -26,12 +26,14 @@ function setupSearch() {
 }
 
 function openSearch() {
-	overlay('visible');
-	$('#email_to_search').attr('value', '').focus();
+	var input = $('#email_to_search').get(0);
+	input.value = '';
+	$('#overlay').removeClass('invisible');
+	input.focus();
 }
 
 function closeSearch() {
-	overlay('hidden');
+	$('#overlay').addClass('invisible');
 }
 
 function doSearch(event) {
@@ -42,13 +44,16 @@ function doSearch(event) {
 
 function sendRequest(email) {
 	$.post('/search', {'email': email}, handleResponse, 'json')
-	alert('request sent for email: '+email);
 }
 
-function handleResponse(response) {
-	console.log('response is: '+response);
+function handleResponse(r) {
+	r ? closeSearch() : showError();
 }
 
-function overlay(visibility) {
-	$('#overlay').css('visibility', visibility);
+function showError() {
+	$('#overlay span.error').removeClass('invisible');
+}
+
+function hideError() {
+	$('#overlay span.error').addClass('invisible');
 }

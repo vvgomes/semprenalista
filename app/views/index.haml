@@ -10,7 +10,7 @@
   
 %form{:id => "form", :action => "/", :method => "post"}
   - unless @clubber.valid?
-    %p{:id => 'error_message'}
+    %p{:class => "error"}
       Email j&aacute cadastrado :(
   %p
     %input{:name => "name",:type => "text",:placeholder => "Seu nome",:required => "true",:value => @clubber.name}
@@ -36,10 +36,11 @@
     %a{:id => "edit", :href => "#"}aqu&iacute;
     &nbsp;para editar.
     
-#overlay
+#overlay{:class => "invisible"}
   %div
     %p
-      &nbsp;&nbspSeu email...
+      &nbsp;&nbspSeu email...&nbsp;&nbsp&nbsp;&nbsp
+      %span{:class => "error invisible" }n&atilde;o foi encontrado :(
     %p
       %input{:type => "search", :id => "email_to_search", :autosave => "unique", :results => "5"}
     %p{:id => "close"}

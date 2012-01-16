@@ -53,8 +53,8 @@ end
 
 post '/search' do
   content_type :json
-  clubber = Nightclubber.find_by(params[:email])
-  clubber.to_json # "null" for not found
+  @clubber = Nightclubber.find_by(params[:email])
+  @clubber.to_json # "null" for not found
 end
 
 put '/' do
