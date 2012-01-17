@@ -47,7 +47,16 @@ function sendRequest(email) {
 }
 
 function handleResponse(r) {
-	r ? closeSearch() : showError();
+	r ? populateFormToEdit(r) : showError();
+}
+
+function populateFormToEdit(response) {
+	$('#form input[name="name"]').get(0).value = response.name;
+	$('#form input[name="email"]').get(0).value = response.email;
+	(response.friends.length).times(function(i) {
+		$('#form input[name="friends['+i+']"]').get(0).value = response.friends[i];
+	});
+	closeSearch();
 }
 
 function showError() {

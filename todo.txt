@@ -1,15 +1,13 @@
-- edit
-  - search email -> json or null
-    - for null, an error message
-    - for json, change UI to edit
-      - email field disabled   
-      - delete button
-      - put to / (params?)
-        - success (update, /done)
-        - doesn't have server side validation :D
+- edit #3
+  - change form action
+  - email field disabled   
+  - put to / (params?)
+    - success (update, /done)
+    - doesn't have server side validation :D
 
-- delete (with confirmation)
-
+- delete (with confirmation) #2
+  - delete button on edit
+  
 - domain
 - casa do lado
 - functional specs
