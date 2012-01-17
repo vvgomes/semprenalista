@@ -43,19 +43,23 @@ function doSearch(event) {
 }
 
 function sendRequest(email) {
-	$.post('/search', {'email': email}, handleResponse, 'json')
+	$.post('/search', {'email': email}, handleSearchResponse, 'json')
 }
 
-function handleResponse(r) {
+function handleSearchResponse(r) {
 	r ? populateFormToEdit(r) : showError();
 }
 
 function populateFormToEdit(response) {
-	$('#form input[name="name"]').get(0).value = response.name;
-	$('#form input[name="email"]').get(0).value = response.email;
+	$('#form input[name="name"]').val(response.name);
+	$('#form input[name="email"]').val(response.email);
+	
 	(response.friends.length).times(function(i) {
-		$('#form input[name="friends['+i+']"]').get(0).value = response.friends[i];
+		$('#form input[name="friends['+i+']"]').val(response.friends[i]);
 	});
+	
+	$('#form').append('<input type="hidden" name="_method" value="put" />');
+	
 	closeSearch();
 }
 

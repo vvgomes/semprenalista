@@ -58,11 +58,13 @@ post '/search' do
 end
 
 put '/' do
-  @clubber = Nightclubber.find_by(params[])
-  if @clubber.save
+  @clubber = Nightclubber.find_by(params[:email])
+  "<html><head></head><body><h1>#{@clubber.name}</h1></body></html>"
+=begin  if @clubber.save
     session[:subscribed] = true
     redirect to '/done'
   else
     haml :index
   end
+=end
 end
