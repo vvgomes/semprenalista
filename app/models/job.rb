@@ -14,7 +14,7 @@ class Job
   end
   
   def subscribe clubber, parties
-    clubber.find_missing(parties).each do |party|
+    clubber.find_missing_from(parties).each do |party|
       begin
         log "Subscribing #{clubber.email} to #{party.name}..."
         response = party.add_to_list clubber

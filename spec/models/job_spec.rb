@@ -32,7 +32,7 @@ describe Job do
       @job.stub!(:log)
       @job.stub!(:find).and_return @clubber
       @clubber.stub!(:remove_expired_subscriptions)
-      @clubber.stub!(:find_missing).and_return [@party]
+      @clubber.stub!(:find_missing_from).and_return [@party]
       @clubber.stub!(:email)
       @party.stub!(:name)
       @subscription = mock
