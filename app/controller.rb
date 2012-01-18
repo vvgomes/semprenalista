@@ -22,6 +22,19 @@ post '/' do
   end
 end
 
+put '/' do
+  @clubber = Nightclubber.find_by(params[:email])
+  @clubber.parse params
+  session[:subscribed] = true
+  redirect to '/done'
+end
+
+post '/search' do
+  content_type :json
+  @clubber = Nightclubber.find_by(params[:email])
+  @clubber.to_json
+end
+
 get '/done' do
   redirect to '/' unless session[:subscribed]
   session[:subscribed] = false
@@ -49,17 +62,4 @@ get '/subscriptions' do
     :subscriptions => Nightclubber.all_subscriptions,
     :missing => Nightclubber.missing_emails_with_party_urls(Party.all)
   }
-end
-
-post '/search' do
-  content_type :json
-  @clubber = Nightclubber.find_by(params[:email])
-  @clubber.to_json
-end
-
-put '/' do
-  @clubber = Nightclubber.find_by(params[:email])
-  @clubber.parse params
-  session[:subscribed] = true
-  redirect to '/done'
 end
