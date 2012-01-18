@@ -26,7 +26,6 @@ desc 'This task is called by the Heroku Scheduler add-on'
 task :subscribe, :email do |t, args|
   if !args[:email]
     Job.new.run
-    #puts '>>> Job disabled due to maintenance.'
   else
     Mongoid.configure do |config|
       production_db = 'mongodb://heroku:iy6k13o77hxc6q5026zttd@flame.mongohq.com:27103/app525158'
