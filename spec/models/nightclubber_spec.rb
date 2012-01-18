@@ -93,17 +93,8 @@ describe Nightclubber do
   end
 
   context 'when parsing request parameters' do
+    
     before :each do
-      params = {
-        :name => 'Jose Bartiella',
-        :email => 'lipe@tw.com',
-        :friends => {
-          :f0 => 'Thiago',
-          :f1 => 'Nascimento',
-          :f2 => '',
-          :f3 => ''
-        }
-      }
       @sabella = Nightclubber.parse params
     end
 
@@ -118,6 +109,17 @@ describe Nightclubber do
     it 'should be able to extract the friends' do
       @sabella.friends.should =~ ['Thiago', 'Nascimento']
     end
+    
+  end
+  
+  context 'when updating parameters from request' do
+      
+    it 'should be able to change the name and friends' do
+      @sabella = Nightclubber.empty
+      @sabella.should_receive(:update_attributes).with(:name => 'Jose Bartiella', :friends => ['Thiago', 'Nascimento'])
+      @sabella.update params
+    end
+    
   end
 
   it 'should create an empty new instance' do
@@ -157,6 +159,19 @@ describe Nightclubber do
     response.stub!(:code).and_return 200
     response.stub!(:message).and_return 'ok'
     response
+  end
+  
+  def params
+    {
+      :name => 'Jose Bartiella',
+      :email => 'lipe@tw.com',
+      :friends => {
+        :f0 => 'Thiago',
+        :f1 => 'Nascimento',
+        :f2 => '',
+        :f3 => ''
+      }
+    }
   end
 
 end
