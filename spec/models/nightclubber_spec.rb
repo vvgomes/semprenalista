@@ -94,31 +94,35 @@ describe Nightclubber do
 
   context 'when parsing request parameters' do
     
-    before :each do
-      @sabella = Nightclubber.parse params
-    end
+    context 'for a new instance' do
+      before :each do
+        @sabella = Nightclubber.parse params
+      end
 
-    it 'should be able to extract the name' do
-      @sabella.name.should be == 'Jose Bartiella'
-    end
+      it 'should be able to extract the name' do
+        @sabella.name.should be == 'Jose Bartiella'
+      end
 
-    it 'should be able to extract the email' do
-      @sabella.email.should be == 'lipe@tw.com'
-    end
+      it 'should be able to extract the email' do
+        @sabella.email.should be == 'lipe@tw.com'
+      end
 
-    it 'should be able to extract the friends' do
-      @sabella.friends.should =~ ['Thiago', 'Nascimento']
+      it 'should be able to extract the friends' do
+        @sabella.friends.should =~ ['Thiago', 'Nascimento']
+      end
     end
     
-  end
-  
-  context 'when updating parameters from request' do
-      
-    it 'should be able to change the name and friends' do
-      @sabella = Nightclubber.empty
-      @sabella.should_receive(:update_attributes).with(:name => 'Jose Bartiella', :friends => ['Thiago', 'Nascimento'])
-      @sabella.update params
-    end
+    context 'when parsing request parameters for an existing instance' do
+      it 'should be able to change the name and friends' do
+        @sabella = Nightclubber.empty
+        
+        @sabella.should_receive(:update_attributes).with(
+          :name => 'Jose Bartiella', 
+          :friends => ['Thiago', 'Nascimento'])
+        
+        @sabella.parse params
+      end
+    end  
     
   end
 

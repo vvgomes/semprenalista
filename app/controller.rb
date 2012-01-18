@@ -59,11 +59,7 @@ end
 
 put '/' do
   @clubber = Nightclubber.find_by(params[:email])
-  
-  if @clubber.save
-    session[:subscribed] = true
-    redirect to '/done'
-  else
-    haml :index
-  end
+  @clubber.parse params
+  session[:subscribed] = true
+  redirect to '/done'
 end

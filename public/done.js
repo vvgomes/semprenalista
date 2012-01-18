@@ -1,3 +1,3 @@
-$dom.onready(function(){
+$(document).ready(function(){
 	createTweetButton();
 });

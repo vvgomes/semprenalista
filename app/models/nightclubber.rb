@@ -44,7 +44,7 @@ class Nightclubber
     # I would like it to be subscriptions.remove_expired
   end
   
-  def update params
+  def parse params
     update_attributes(
       :name => params[:name], 
       :friends => params[:friends].values.find_all{ |f| f unless f.empty? })

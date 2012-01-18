@@ -1,5 +1,4 @@
 - edit #3
-  - change form action
   - email field disabled   
   - put to / (params?)
     - success (update, /done)

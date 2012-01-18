@@ -26,10 +26,9 @@ function setupSearch() {
 }
 
 function openSearch() {
-	var input = $('#email_to_search').get(0);
-	input.value = '';
+	var input = $('#email_to_search').val('');
 	$('#overlay').removeClass('invisible');
-	input.focus();
+	input.get(0).focus();
 }
 
 function closeSearch() {
@@ -59,8 +58,10 @@ function populateFormToEdit(response) {
 	});
 	
 	$('#form').append('<input type="hidden" name="_method" value="put" />');
+	$('#form input[name="email"]').attr('readonly', 'readonly');
 	
 	closeSearch();
+	$('#form input[name="name"]').get(0).focus();
 }
 
 function showError() {
