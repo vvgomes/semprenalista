@@ -7,6 +7,7 @@ module Agent
   end
 
   def submit form
+    form.encoding = 'utf-8'
     m.submit form
   end
 
