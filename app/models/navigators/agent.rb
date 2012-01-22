@@ -7,7 +7,8 @@ module Agent
   end
 
   def submit form
-    @m.keep_alive = true
+    #@m.keep_alive = true
+    @m.agent.http.retry_change_requests = true
     form.encoding = 'utf-8'
     m.submit form
   end
