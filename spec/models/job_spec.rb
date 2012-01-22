@@ -7,7 +7,7 @@ describe Job do
     Party.stub!(:all).and_return [@party]
   end
   
-  context 'when taking a clubber to be subcribed' do
+  context 'when finding a clubber to be subcribed' do
 
     before :each do
       @clubber.stub!(:remove_expired_subscriptions)
@@ -21,6 +21,12 @@ describe Job do
   
     it 'should find the next elegible one' do
       Nightclubber.should_receive(:next_to_subscribe).and_return @clubber
+      @job.run
+    end
+    
+    it 'should skip when nobody is found' do
+      Nightclubber.should_receive(:next_to_subscribe).and_return nil
+      @job.should_receive(:log).with('Everybody is already subscribed \o/');
       @job.run
     end
 

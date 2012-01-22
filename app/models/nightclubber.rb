@@ -77,7 +77,7 @@ class Nightclubber
   
   def self.next_to_subscribe parties
     candidates = Nightclubber.need_subscription parties
-    return [] if candidates.empty?
+    return nil if candidates.empty?
     
     winner = candidates.first
     return winner unless winner.updated_at

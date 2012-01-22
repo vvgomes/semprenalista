@@ -63,12 +63,12 @@ describe Nightclubber do
         Nightclubber.need_subscription([@amnesia, @rocket]).should_not include @sabella
       end
         
-      it 'should be the next one to be subscribed when it wasnt updated yet' do
+      it 'should be the next one to be subscribed when he wasnt updated yet' do
         @sabella.stub!(:updated_at).and_return nil
         Nightclubber.next_to_subscribe([@amnesia, @rocket]).should be == @sabella
       end
       
-      it 'should be the next one to be subscribed when it has the oldest update' do
+      it 'should be the next one to be subscribed when he has the oldest update' do
         @sabella.stub!(:updated_at).and_return @ygor.updated_at - 1
         Nightclubber.next_to_subscribe([@amnesia, @rocket]).should be == @sabella
       end
@@ -150,6 +150,11 @@ describe Nightclubber do
   it 'should give me an empty result back when not able to find by email' do
     Nightclubber.stub!(:where).and_return []
     Nightclubber.find_by('lipe@gmail.com').should be_nil
+  end
+  
+  it 'should not find the next one to subscribe when everybody is in all list' do
+    Nightclubber.stub!(:need_subscription).and_return []
+    Nightclubber.next_to_subscribe([mock]).should be_nil
   end
   
   def fake_party url
