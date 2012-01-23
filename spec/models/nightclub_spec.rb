@@ -35,9 +35,10 @@ describe Nightclub do
   it 'should know about all available nightclubs' do
     mock_network_access
     beco = Nightclub.new(Beco::Navigator.new)
-    cabaret = Nightclub.new(Cabaret::Navigator.new)
     laika = Nightclub.new(Laika::Navigator.new)
-    Nightclub.all.should =~ [cabaret, beco, laika]
+    cabaret = Nightclub.new(Cabaret::Navigator.new)
+    casadolado = Nightclub.new(Casadolado::Navigator.new)
+    Nightclub.all.should =~ [cabaret, beco, laika, casadolado]
   end
   
   def mock_network_access
