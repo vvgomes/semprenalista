@@ -36,7 +36,7 @@ module Casadolado
     end
 
     def navigate_to_list
-      iframe = @page.iframes.first
+      iframe = @page.iframe_with(:src => /form-(.*).htm/)
       iframe ? DiscountListNavigator.new(Casadolado.get(iframe.uri)) : nil
     end
     

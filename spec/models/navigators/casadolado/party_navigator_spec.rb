@@ -21,14 +21,14 @@ describe Casadolado::PartyNavigator do
   context 'when navigating to discount list' do
 
     it 'should give me nothing back when there is no list' do
-      @page.stub!(:iframes).and_return [nil]
+      @page.stub!(:iframe_with).with(:src => /form-(.*).htm/).and_return nil
       @nav.navigate_to_list.should be_nil
     end
 
     it 'should create a list navigator' do
       list_page = mock
       iframe = mock
-      @page.stub!(:iframes).and_return [iframe]
+      @page.stub!(:iframe_with).with(:src => /form-(.*).htm/).and_return iframe
       iframe.stub!(:uri).and_return 'form-indiemeup.htm'
       Casadolado.stub!(:get).with('form-indiemeup.htm').and_return list_page
       Casadolado::DiscountListNavigator.should_receive(:new).with(list_page)
