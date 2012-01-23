@@ -7,7 +7,7 @@ body {
 
 fieldset {
 	background-color: white;
-	margin-top: 50px;
+	margin-top: 25px;
 	margin-left: 30%;
 	margin-right: 30%;
 	border: 4px double grey;
@@ -108,6 +108,7 @@ footer {
 }
 
 footer ul {
+	margin-top: 10px;
 	padding-left: 0px;
 }
 
@@ -144,7 +145,7 @@ p#about a:hover {
 	height: 30px;
 	padding-left: 10px;
 	text-align: left;
-	margin-bottom: 20px;
+	margin-bottom: 0px;
 }
  
 #ok {
@@ -157,6 +158,10 @@ p#about a:hover {
 #tweet {
 	width: 70px;
 	margin: 0;
+}
+
+#like {
+	padding-left: 10px;
 }
 
 #overlay {
