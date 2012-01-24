@@ -9,7 +9,10 @@
   %a{ :href => 'http://www.laikaclub.com.br' }Casadolado
   n&atilde;o esque&ccedil;a de dizer:
   %em Hey, meu nome est&aacute; na lista!
-%p{:style => 'text-align: right;'}
-  %a{:id => "twitter", :href => "https://twitter.com/share", :class => "twitter-share-button", 'data-text' => 'Party more, pay less! \o/', 'data-size' => 'large', 'data-hashtags' => 'semprenalista', 'data-url' => 'http://semprenalista.heroku.com'}Tweet
+%p{:id => "tweet", :style => "padding-left:10px;"}
+  %a{:id => "twitter", :href => "https://twitter.com/share", :class => "twitter-share-button", 'data-text' => 'Party more, pay less! \o/', 'data-size' => 'medium', 'data-hashtags' => 'semprenalista', 'data-url' => 'http://semprenalista.heroku.com'}Tweet
 
+%p{:id => "like", :style => "margin-top:5px; margin-bottom: 0px;"}
+  %iframe{ :src => "//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fsemprenalista.com&amp;send=false&amp;layout=standard&amp;width=450&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font=arial&amp;height=80&amp;appId=291277474263762", :scrolling => "no", :frameborder => "0", :style => "border:none; overflow:hidden; width:450px; height:80px;", :allowTransparency => "true" }
+  
 %script{:src => "done.js"} 
