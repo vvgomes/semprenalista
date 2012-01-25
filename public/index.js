@@ -1,22 +1,22 @@
 $(document).ready(function(){
 	createTweetButton();
-	makeOkButtonAnimated();
+	createOkHighlight();
 	setupSearch();
 });
 
-function makeOkButtonAnimated() {
+function createOkHighlight() {
 	var ok = $('#ok input');
 	
 	ok.bind('mouseover', highlight)
 		.bind('mouseout', downplay);
 
 	function highlight() {
-		ok.css('background-color', 'rgb(90, 90, 90)');
-	};
+		ok.css('background-color', 'rgb(80, 80, 80)');
+	}
 
 	function downplay() {
-		ok.css('background-color', 'grey');
-	};
+		ok.css('background-color', 'gray');
+	}
 }
 
 function setupSearch() {
@@ -37,8 +37,11 @@ function closeSearch() {
 
 function doSearch(event) {
 	if(event && event.keyCode != '13') return;
+	
 	var email = $('#email_to_search').attr('value');
 	(email.trim().length > 0) && (sendRequest(email));
+	
+	event.preventDefault();
 }
 
 function sendRequest(email) {

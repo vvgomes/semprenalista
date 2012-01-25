@@ -1,5 +1,5 @@
 body {
-	color: grey;
+	color: gray;
 	font-family: Delius, sans-serif;
 	font-size: 18px;
 	background-color: rgb(220, 220, 220);
@@ -10,7 +10,7 @@ fieldset {
 	margin-top: 25px;
 	margin-left: 30%;
 	margin-right: 30%;
-	border: 4px double grey;
+	border: 4px double gray;
 	border-radius: 15px;
 	padding-bottom: 0px;
 }
@@ -24,7 +24,7 @@ legend {
 }
 
 input {
-	border: 2px solid grey;
+	border: 2px solid gray;
 	border-radius: 15px;
 	height: 30px;
 	font-family: Delius, sans-serif;
@@ -37,7 +37,7 @@ input {
 input[type="submit"] {
 	border: 3px double rgb(240, 240, 240);
 	width: 100%;
-	background-color: grey;
+	background-color: gray;
 	font-weight: bold;
 	font-size: 100%;
 	color: white;
@@ -49,7 +49,7 @@ input[type="submit"] {
 
 input#email_to_search {
 	height: 20px;
-	border: 1px solid grey;
+	border: 1px solid gray;
 	border-radius: 15px;
 	font-family: Delius, sans-serif;
 	font-size: medium;
@@ -182,7 +182,7 @@ p#about a:hover {
 	width:300px;
 	margin: 100px auto;
 	background-color: white;
-	border: 4px double grey;
+	border: 4px double gray;
 	border-radius: 15px;
 	padding: 10px;
 	text-align: center;
