@@ -37,11 +37,8 @@ function closeSearch() {
 
 function doSearch(event) {
 	if(event && event.keyCode != '13') return;
-	
 	var email = $('#email_to_search').attr('value');
 	(email.trim().length > 0) && (sendRequest(email));
-	
-	event.preventDefault();
 }
 
 function sendRequest(email) {

@@ -1,12 +1,13 @@
 %h2
   Pr&oacute;ximas Festas
-- nightclubs.each do |n|
-  %details
-    %summary
-      = n.name
-    %ul
-      - n.parties.each do |p|
-        %li
-          %a{:href => "#{p.url}"}
-            = p.name
+#parties
+  - nightclubs.each do |n|
+    %details
+      %summary
+        = n.name
+      %ul
+        - n.parties.each do |p|
+          %li
+            %a{:href => "#{p.url}"}
+              = p.name
 

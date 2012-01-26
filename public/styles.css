@@ -16,7 +16,7 @@ fieldset {
 }
 
 legend {
-	font-size: 220%;
+	font-size: 280%;
 	font-weight: bold;
 	text-shadow: white 0px 0px, rgb(200, 200, 200) -2px -2px;
 	padding: 0px;
@@ -203,4 +203,8 @@ p#about a:hover {
 
 .invisible {
 	visibility: hidden;
+}
+
+#parties {
+	margin-bottom: 30px;
 }
