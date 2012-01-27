@@ -76,18 +76,18 @@ class Nightclubber
   end
   
   def self.next_to_subscribe parties
-    puts '>>> 1'
     candidates = Nightclubber.need_subscription parties
     puts '>>> 2'
     return nil if candidates.empty?
     puts '>>> 3'
     winner = candidates.first
     return winner unless winner.updated_at
-    
+    puts '>>> 4'
     candidates.each do |c|
       winner = (c.updated_at) ? 
         ((c.updated_at < winner.updated_at) ? c : winner) : c
     end
+    puts '>>> 5'
     winner
   end
   
