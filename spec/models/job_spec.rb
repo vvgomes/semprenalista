@@ -24,7 +24,7 @@ describe Job do
       @job.run
     end
     
-    xit 'should skip when nobody is found' do
+    it 'should skip when nobody is found' do
       Nightclubber.should_receive(:next_to_subscribe).and_return nil
       @job.should_receive(:log).with('Everybody is already subscribed \o/');
       @job.run

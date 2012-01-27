@@ -1,17 +1,11 @@
 class Job
   
   def run email=nil
-    log '1'
     parties = Party.all
-    log '2'
     clubber = find email, parties
-    log '3'
     return log('Everybody is already subscribed \o/') unless clubber
-    log '4'
     clubber.remove_expired_subscriptions parties
-    log '5'
     subscribe clubber, parties
-    log '6'
   end
   
   private

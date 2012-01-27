@@ -76,9 +76,11 @@ class Nightclubber
   end
   
   def self.next_to_subscribe parties
+    puts '>>> 1'
     candidates = Nightclubber.need_subscription parties
+    puts '>>> 2'
     return nil if candidates.empty?
-    
+    puts '>>> 3'
     winner = candidates.first
     return winner unless winner.updated_at
     
