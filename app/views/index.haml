@@ -27,8 +27,9 @@
   %p
     %input{:name => "friends[3]", :type => "text", :placeholder => "O último", :value => @clubber.friends[3]}
   #buttons
-    #ok
-      %input{:name => "submit", :type => "submit", :value => "OK", :class => "ok"}
+    #controls
+      %input{:id => "ok", :name => "submit", :type => "submit", :value => "OK"}
+      %input{:id => "delete", :name => "delete", :type => "button", :value => "Deletar", :class => "invisible"}
     #tweet  
       %a{:id => "twitter", :href => "https://twitter.com/share", :class => "twitter-share-button", 'data-text' => 'Party more, pay less! \o/', 'data-size' => 'medium', 'data-hashtags' => 'semprenalista', 'data-url' => 'http://semprenalista.heroku.com'}Tweet  
 #like

@@ -29,6 +29,12 @@ put '/' do
   redirect to '/done'
 end
 
+delete '/' do
+  #Nightclubber.find_by(params[:email]).delete
+  puts "deleting!!!! #{params[:email]}"
+  redirect to '/'
+end
+
 post '/search' do
   content_type :json
   @clubber = Nightclubber.find_by(params[:email])

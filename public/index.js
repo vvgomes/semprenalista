@@ -1,21 +1,24 @@
 $(document).ready(function(){
 	createTweetButton();
-	createOkHighlight();
+	highlightButtons();
 	setupSearch();
 });
 
-function createOkHighlight() {
-	var ok = $('#ok input');
+function highlightButtons() {	
+	highlightButton($('#ok'), '#505050', '#808080');
+	highlightButton($('#delete'), '#A02020', '#A06060');
 	
-	ok.bind('mouseover', highlight)
-		.bind('mouseout', downplay);
+	function highlightButton(e, h, d) {
+		e.bind('mouseover', highlight);
+		e.bind('mouseout', downplay);
 
-	function highlight() {
-		ok.css('background-color', 'rgb(80, 80, 80)');
-	}
+		function highlight() {
+			e.css('background-color', h);
+		}
 
-	function downplay() {
-		ok.css('background-color', 'gray');
+		function downplay() {
+			e.css('background-color', d);
+		}
 	}
 }
 
@@ -60,6 +63,8 @@ function populateFormToEdit(response) {
 	$('#form').append('<input type="hidden" name="_method" value="put" />');
 	$('#form input[name="email"]').attr('readonly', 'readonly');
 	
+	setupDeleteButton();
+	
 	closeSearch();
 	$('#form input[name="name"]').get(0).focus();
 }
@@ -70,4 +75,12 @@ function showError() {
 
 function hideError() {
 	$('#overlay span.error').addClass('invisible');
+}
+
+function setupDeleteButton() {
+	$('#delete').removeClass('invisible');
+	$('#delete').bind('click', function() {
+		$('#form input[name="_method"]').attr('value', 'delete');
+		$('#ok').get(0).click();
+	});
 }

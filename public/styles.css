@@ -35,9 +35,9 @@ input {
 }
 
 input[type="submit"] {
-	border: 3px double rgb(240, 240, 240);
-	width: 100%;
-	background-color: gray;
+	border: 4px double rgb(240, 240, 240);
+	width: 70px;
+	background-color: #808080;
 	font-weight: bold;
 	font-size: 100%;
 	color: white;
@@ -46,6 +46,18 @@ input[type="submit"] {
 	padding: 0px;
 	font-family: sans-serif;
 }
+
+input[type="button"] {
+	border: 4px double rgb(240, 240, 240);
+	width: 80px;
+	background-color: #A06060;
+	font-weight: bold;
+	font-size: 100%;
+	color: white;
+	text-align: center;
+	border-radius: 13px;
+	padding: 0px;
+	font-family: sans-serif;}
 
 input#email_to_search {
 	height: 20px;
@@ -150,11 +162,10 @@ p#about a:hover {
 	margin-bottom: 0px;
 }
  
-#ok {
+#controls input {
 	float: right;
-	width: 70px;
 	margin: 0;
-	margin-right: 10px;
+	margin-right: 8px;
 }
 
 #tweet {

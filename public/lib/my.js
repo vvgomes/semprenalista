@@ -10,6 +10,11 @@ Array.prototype.has = function(e) {
   return false;
 };
 
+Array.prototype.each = function(f) {
+	for(var i = 0; i < this.length; i++)
+		f(this[i], i);
+};
+
 Array.prototype.filter = function(f) {
 	var filtered = [];
 		for(var i = 0; i < this.length; i++)
