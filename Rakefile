@@ -24,15 +24,15 @@ end
 
 desc 'This task is called by the Heroku Scheduler add-on'
 task :subscribe, :email do |t, args|
-  #if !args[:email]
-  #  Job.new.run
-  #else
+  if !args[:email]
+    Job.new.run
+  else
     Mongoid.configure do |config|
       production_db = 'mongodb://heroku:iy6k13o77hxc6q5026zttd@flame.mongohq.com:27103/app525158'
       conn = Mongo::Connection.from_uri(production_db)
       uri = URI.parse(production_db)
       config.master = conn.db(uri.path.gsub(/^\//, ''))
     end
-    Job.new.run #args[:email]
-  #end  
+    Job.new.run args[:email]
+  end  
 end
