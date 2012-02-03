@@ -86,10 +86,56 @@ describe('search model', function() {
 	});
 });
 
-describe('search controller', function() {
+describe('index controller', function() {
+	var html = '<a id="edit" href="#"/>';
+	var model, view, search;
 	
-	it('should do something', function() {
-		
+	beforeEach(function() {
+		$('body').append(html);
+		createStubs();		
 	});
+	
+	afterEach(function() {
+		view.editLink().remove();
+	});
+	
+	it('should render search when edit link is clicked', function() {
+		spyOn(view, 'showSearch');
+		
+		indexController(model, view).takeControl();
+		
+		view.editLink().trigger('click');
+		expect(view.showSearch).toHaveBeenCalled();
+	});
+	
+	it('should give control to search controller after rendering search', function() {
+		spyOn(search, 'takeControl');
+		
+		indexController(model, view).takeControl();
+		
+		view.editLink().trigger('click');
+		expect(search.takeControl).toHaveBeenCalled();
+	});
+	
+	function createStubs() {
+		search = { 
+			takeControl: function(){}
+		};
+		
+		searchController = function(){ return search; };
+		
+		model = {
+			getSearch: function(c){ c(); }
+		};
+		
+		view = {
+			editLink: function(){ return $('#edit'); },
+			okButton: function(){},
+			deleteButton: function(){},
+			showSearch: function(){} 
+		};
+		
+		animate = function(){};
+	};
 	
 });
