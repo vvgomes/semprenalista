@@ -85,3 +85,11 @@ describe('search model', function() {
 		
 	});
 });
+
+describe('search controller', function() {
+	
+	it('should do something', function() {
+		
+	});
+	
+});

@@ -11,11 +11,7 @@ function createModel() {
 	var model = {};
 	
 	model.getSearch = function(callback) {
-		$.get('/search', after);
-		
-		function after(response) {
-			callback(response);
-		}
+		$.get('/search', callback);
 	};
 	
 	model.postSearch = function(email, success, fail) {
@@ -31,73 +27,6 @@ function createModel() {
 	return model;
 }
 
-function createView() {
-	var view = {};
-	
-	view.showSearch = function(data) {
-	  $('#overlay').html(data);
-	};
-	
-	view.resetSearch = function() {
-		$('#overlay span.error').addClass('invisible');
-		$('#search').val('');
-		$('#overlay').removeClass('invisible');
-		$('#search').get(0).focus();
-	};
-	
-	view.closeSearch = function() {
-		$('#overlay').addClass('invisible');
-	};
-	
-	view.populateForm = function(data) {
-		$('#form input[name="name"]').val(data.name);
-		$('#form input[name="email"]').val(data.email);
-
-		(data.friends.length).times(function(i) {
-			$('#form input[name="friends['+i+']"]').val(data.friends[i]);
-		});
-		
-		$('#form').append('<input type="hidden" name="_method" value="put" />');
-		$('#form input[name="email"]').attr('readonly', 'readonly');
-		$('#delete').removeClass('invisible');
-		
-		view.closeSearch();
-		
-		$('#form input[name="name"]').get(0).focus();
-	};
-	
-	view.makeItDelete = function() {
-		$('#form input[name="_method"]').attr('value', 'delete');
-		$('#ok').get(0).click();
-	};
-	
-	view.showError = function() {
-		$('#overlay span.error').removeClass('invisible');
-	};
-	
-	view.editLink = function() {
-		return $('#edit');
-	};
-	
-	view.okButton = function() {
-		return $('#go');
-	};
-	
-	view.closeButton = function() {
-		return $('#close');
-	};
-	
-	view.searchField = function() {
-		return $('#search');
-	};
-	
-	view.deleteButton = function() {
-		return $('#delete');
-	};
-	
-	return view;
-}
-
 function indexController(model, view) {
 	var controller = {};
 	
@@ -107,13 +36,13 @@ function indexController(model, view) {
 	
 	function bindEvents() {
 		view.editLink().bind('click', getSearch);
-		animate($('#ok'), '#505050');
-		animate($('#delete'), '#A02020');
+		animate(view.okButton(), '#505050');
+		animate(view.deleteButton(), '#A02020');
 	}
 	
 	function getSearch() {
-		model.getSearch(function(r) {
-			view.showSearch(r);
+		model.getSearch(function(response) {
+			view.showSearch(response);
 			searchController(model, view).takeControl();
 		});
 	}
@@ -130,14 +59,14 @@ function searchController(model, view) {
 	}
 	
 	function bindEvents() {
-		view.okButton().bind('click', postSearch);
+		view.searchButton().bind('click', postSearch);
 		view.closeButton().bind('click', view.closeSearch);
 		view.deleteButton().bind('click', view.makeItDelete);
 		view.searchField().bind('keydown', function(e) {
 			(e && e.keyCode === 13) && (postSearch());
 		});
-		animate($('#go'), '#505050');
-		animate($('#close'), '#A02020');
+		animate(view.searchButton(), '#505050');
+		animate(view.closeButton(), '#A02020');
 	}
 	
 	function postSearch() {
@@ -146,4 +75,67 @@ function searchController(model, view) {
 	}
 	
 	return controller;
+}
+
+function createView() {
+	var view = {};
+	var dom = {
+		overlay: function() { return $('#overlay'); },
+		okButton: function() { return $('#ok'); },
+		editLink: function() { return $('#edit'); },
+		searchButton: function() { return $('#go'); },
+		closeButton: function() { return $('#close'); },
+		searchField: function() {	return $('#search'); },
+		deleteButton: function() {	return $('#delete'); },
+		errorMessage: function() { return $('#overlay span.error'); },
+		nameField: function() { return $('#form input[name="name"]'); },
+		emailField: function() { return $('#form input[name="email"]'); },
+		friendField: function(i) { return $('#form input[name="friends['+i+']"]'); },
+		methodField: function() { return $('#form input[name="_method"]'); }
+	};
+	
+	view.showSearch = function(data) {
+	  dom.overlay().html(data);
+	};
+	
+	view.resetSearch = function() {
+		dom.errorMessage().addClass('invisible');
+		dom.searchField().val('');
+		dom.overlay().removeClass('invisible');
+		dom.searchField().get(0).focus();
+	};
+	
+	view.closeSearch = function() {
+		dom.overlay().addClass('invisible');
+	};
+	
+	view.populateForm = function(data) {
+		dom.nameField().val(data.name);
+		dom.emailField().val(data.email);
+		dom.emailField().attr('readonly', 'readonly');
+		(data.friends.length).times(function(i) {
+			dom.friendField(i).val(data.friends[i]);
+		});
+		dom.methodField().attr('value', 'put');
+		dom.deleteButton().removeClass('invisible');
+		view.closeSearch();
+		dom.nameField().get(0).focus();
+	};
+	
+	view.showError = function() {
+		dom.erroMessage().removeClass('invisible');
+	};
+	
+	view.makeItDelete = function() {
+		dom.methodField().attr('value', 'delete');
+		dom.okButton().get(0).click();
+	};
+	
+	view.okButton = dom.okButton;
+	view.editLink = dom.editLink;
+	view.searchButton = dom.searchButton;
+	view.closeButton = dom.closeButton;
+	view.searchField = dom.searchField;
+	view.deleteButton = dom.deleteButton;
+	return view;
 }

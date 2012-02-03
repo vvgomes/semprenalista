@@ -32,6 +32,9 @@
       %input{:id => "delete", :class => "abort invisible", :name => "delete", :type => "button", :value => "Deletar" }
     #tweet  
       %a{:id => "twitter", :href => "https://twitter.com/share", :class => "twitter-share-button", 'data-text' => 'Party more, pay less! \o/', 'data-size' => 'medium', 'data-hashtags' => 'semprenalista', 'data-url' => 'http://semprenalista.heroku.com'}Tweet  
+
+  %input{:type => "hidden", :name => "_method", :value => "post"}
+
 #like
   %iframe{ :src => "//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fsemprenalista.com&amp;send=false&amp;layout=standard&amp;width=450&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font=arial&amp;height=80&amp;appId=291277474263762", :scrolling => "no", :frameborder => "0", :style => "border:none; overflow:hidden; width:450px; height:80px;", :allowTransparency => "true" }
 %footer
