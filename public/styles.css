@@ -34,7 +34,7 @@ input {
 	background-color: rgb(240, 240, 240);
 }
 
-input[type="submit"] {
+input.proceed {
 	border: 4px double rgb(240, 240, 240);
 	width: 70px;
 	background-color: #808080;
@@ -47,7 +47,7 @@ input[type="submit"] {
 	font-family: sans-serif;
 }
 
-input[type="button"] {
+input.abort {
 	border: 4px double rgb(240, 240, 240);
 	width: 80px;
 	background-color: #A06060;
@@ -59,7 +59,7 @@ input[type="button"] {
 	padding: 0px;
 	font-family: sans-serif;}
 
-input#email_to_search {
+input#search {
 	height: 20px;
 	border: 1px solid gray;
 	border-radius: 15px;
@@ -162,7 +162,7 @@ p#about a:hover {
 	margin-bottom: 0px;
 }
  
-#controls input {
+.controls input {
 	float: right;
 	margin: 0;
 	margin-right: 8px;
@@ -191,6 +191,7 @@ p#about a:hover {
 
 #overlay div {
 	width:300px;
+	height: 90px;
 	margin: 100px auto;
 	background-color: white;
 	border: 4px double gray;
@@ -204,12 +205,6 @@ p#about a:hover {
 	padding: 2px;
 	text-align: left;
 	font-size: medium;
-}
-
-#overlay p#close {
-	margin-top: 10px;
-	text-align:right;
-	font-size: smaller;
 }
 
 .invisible {

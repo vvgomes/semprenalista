@@ -35,6 +35,10 @@ delete '/' do
   redirect to '/'
 end
 
+get '/search' do
+  erb :search
+end
+
 post '/search' do
   content_type :json
   @clubber = Nightclubber.find_by(params[:email])

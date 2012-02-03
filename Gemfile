@@ -11,6 +11,7 @@ gem 'json'
 
 group :test do
   gem 'rspec'
+  gem 'jasmine'
 end
 
 # Add your own local bundler stuff

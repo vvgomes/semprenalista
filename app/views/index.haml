@@ -27,9 +27,9 @@
   %p
     %input{:name => "friends[3]", :type => "text", :placeholder => "O último", :value => @clubber.friends[3]}
   #buttons
-    #controls
-      %input{:id => "ok", :name => "submit", :type => "submit", :value => "OK"}
-      %input{:id => "delete", :name => "delete", :type => "button", :value => "Deletar", :class => "invisible"}
+    .controls
+      %input{:id => "ok", :class => "proceed", :name => "submit", :type => "submit", :value => "OK"}
+      %input{:id => "delete", :class => "abort invisible", :name => "delete", :type => "button", :value => "Deletar" }
     #tweet  
       %a{:id => "twitter", :href => "https://twitter.com/share", :class => "twitter-share-button", 'data-text' => 'Party more, pay less! \o/', 'data-size' => 'medium', 'data-hashtags' => 'semprenalista', 'data-url' => 'http://semprenalista.heroku.com'}Tweet  
 #like
@@ -41,14 +41,5 @@
     &nbsp;para editar.
     
 #overlay{:class => "invisible"}
-  %div
-    %p
-      &nbsp;&nbspSeu email...&nbsp;
-      %span{:class => "error invisible" }n&atilde;o foi encontrado :(
-    %p
-      %input{:type => "search", :id => "email_to_search", :autosave => "unique", :results => "5"}
-    %p{:id => "close"}
-      %a{:href => "#"}Fechar
-      &nbsp;&nbsp
     
-%script{:src => "index.js"} 
+%script{:src => "javascripts/index.js"} 

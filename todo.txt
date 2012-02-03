@@ -1,1 +1,2 @@
+- make js specs run on ci
 - functional specs
