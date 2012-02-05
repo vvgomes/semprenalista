@@ -37,7 +37,6 @@ function indexController(model, view) {
 	}
 	
 	function bindEvents() {
-		//view.editLink().bind('click', getSearch);
 		view.editLink().bind('click', searchController(model, view).takeControl);
 		animate(view.okButton(), '#505050');
 		animate(view.deleteButton(), '#A02020');
@@ -114,16 +113,19 @@ function createView() {
 		noButton: function() { return $('#no'); }
 	};
 	
+	dom.overlay().hide();
+	dom.deleteButton().hide();
+	
 	view.showSearch = function(data) {
 	  dom.overlay().html(data);
-		dom.errorMessage().addClass('invisible');
+		dom.errorMessage().hide();
 		dom.searchField().val('');
-		dom.overlay().removeClass('invisible');
+		dom.overlay().show();
 		dom.searchField().get(0).focus();
 	};
 	
 	view.closeSearch = function() {
-		dom.overlay().addClass('invisible');
+		dom.overlay().hide();
 	};
 	
 	view.populateForm = function(data) {
@@ -134,22 +136,22 @@ function createView() {
 			dom.friendField(i).val(data.friends[i]);
 		});
 		dom.methodField().attr('value', 'put');
-		dom.deleteButton().removeClass('invisible');
+		dom.deleteButton().show();
 		view.closeSearch();
 		dom.nameField().get(0).focus();
 	};
 	
 	view.showError = function() {
-		dom.errorMessage().removeClass('invisible');
+		dom.errorMessage().show();
 	};
 	
 	view.showDeleteDialog = function(data) {
 		dom.overlay().html(data);
-		dom.overlay().removeClass('invisible');
+		dom.overlay().show();
 	};
 	
 	view.closeDeleteDialog = function() {
-		dom.overlay().addClass('invisible');
+		dom.overlay().hide();
 	};
 	
 	view.submitDelete = function() {

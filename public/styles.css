@@ -139,10 +139,6 @@ details {
 	color: red;
 }
 
-.invisible {
-	display: none;
-}
-
 p#about {
 	text-align: center;
 	margin-left: 0px;
@@ -207,9 +203,6 @@ p#about a:hover {
 	font-size: medium;
 }
 
-.invisible {
-	visibility: hidden;
-}
 
 #parties {
 	margin-bottom: 30px;
