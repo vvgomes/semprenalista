@@ -17,7 +17,6 @@ describe 'Navigators' do
   end
   
   it 'should reflect the web site structure for Casadolado' do
-    pending 'casadolado is currently down'
     browse Nightclub.new(Casadolado::Navigator.new)
   end
 

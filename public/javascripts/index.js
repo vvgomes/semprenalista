@@ -62,6 +62,7 @@ function searchController(model, view) {
 		view.searchButton().bind('click', postSearch);
 		view.closeButton().bind('click', view.closeSearch);
 		view.deleteButton().bind('click', view.makeItDelete);
+		//view.deleteButton().bind('click', deleteController(model, view).takeControl)
 		view.searchField().bind('keydown', function(e) {
 			(e && e.which === 13) && (postSearch());
 		});
@@ -76,6 +77,16 @@ function searchController(model, view) {
 	
 	return controller;
 }
+
+function deleteController() {
+	var controller = {};
+	
+	controller.takeControl = function() {
+		
+	};
+	
+	return controller;
+};
 
 function createView() {
 	var view = {};
