@@ -13,8 +13,13 @@ unless ENV['RACK_ENV'] == 'production'
     RSpec::Core::RakeTask.new(:integration) do |spec|
       spec.pattern = 'spec/integration/**/*_spec.rb'
     end
+    
+    task :javascript => [:require_jasmine] do
+      Rake::Task['jasmine:ci'].invoke
+    end
   end
-  task :spec => [n[:models], n[:integration]]
+  
+  task :spec => [n[:models], n[:integration], n[:javascript]]
 end
 
 
@@ -37,11 +42,13 @@ task :subscribe, :email do |t, args|
   end  
 end
 
-begin
-  require 'jasmine'
-  load 'jasmine/tasks/jasmine.rake'
-rescue LoadError
-  task :jasmine do
-    abort "Jasmine is not available. In order to run jasmine, you must: (sudo) gem install jasmine"
+task :require_jasmine do
+  begin
+    require 'jasmine'
+    load 'jasmine/tasks/jasmine.rake'
+  rescue LoadError
+    task :jasmine do
+      abort "Jasmine is not available. In order to run jasmine, you must: (sudo) gem install jasmine"
+    end
   end
 end

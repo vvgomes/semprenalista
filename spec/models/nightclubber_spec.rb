@@ -112,7 +112,7 @@ describe Nightclubber do
       end
     end
     
-    context 'when parsing request parameters for an existing instance' do
+    context 'for an existing instance' do
       it 'should be able to change the name and friends' do
         @sabella = Nightclubber.empty
         
