@@ -63,7 +63,7 @@ function searchController(model, view) {
 		view.closeButton().bind('click', view.closeSearch);
 		view.deleteButton().bind('click', view.makeItDelete);
 		view.searchField().bind('keydown', function(e) {
-			(e && e.keyCode === 13) && (postSearch());
+			(e && e.which === 13) && (postSearch());
 		});
 		animate(view.searchButton(), '#505050');
 		animate(view.closeButton(), '#A02020');
@@ -123,7 +123,7 @@ function createView() {
 	};
 	
 	view.showError = function() {
-		dom.erroMessage().removeClass('invisible');
+		dom.errorMessage().removeClass('invisible');
 	};
 	
 	view.makeItDelete = function() {
