@@ -17,6 +17,10 @@ unless ENV['RACK_ENV'] == 'production'
     task :javascript => [:require_jasmine] do
       Rake::Task['jasmine:ci'].invoke
     end
+    
+    task :jasmine => [:require_jasmine] do
+      Rake::Task['jasmine'].invoke
+    end
   end
   
   task :spec => [n[:models], n[:integration], n[:javascript]]

@@ -35,6 +35,12 @@ delete '/' do
   redirect to '/'
 end
 
+get '/done' do
+  redirect to '/' unless session[:subscribed]
+  session[:subscribed] = false
+  haml :done
+end
+
 get '/search' do
   erb :search
 end
@@ -45,10 +51,8 @@ post '/search' do
   @clubber.to_json
 end
 
-get '/done' do
-  redirect to '/' unless session[:subscribed]
-  session[:subscribed] = false
-  haml :done
+get '/delete' do
+  erb :delete
 end
 
 get '/nightclubbers' do

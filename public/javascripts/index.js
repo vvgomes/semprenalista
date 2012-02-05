@@ -14,11 +14,13 @@ function createModel() {
 		$.get('/search', callback);
 	};
 	
+	model.getDeleteDialog = function(callback) {
+		$.get('/delete', callback);
+	};
+	
 	model.postSearch = function(email, success, fail) {
 		if(!email) return;
-		
 		$.post('/search', {'email': email}, after, 'json');
-		
 		function after(response) {
 			response ? success(response) : fail();
 		}
@@ -35,16 +37,10 @@ function indexController(model, view) {
 	}
 	
 	function bindEvents() {
-		view.editLink().bind('click', getSearch);
+		//view.editLink().bind('click', getSearch);
+		view.editLink().bind('click', searchController(model, view).takeControl);
 		animate(view.okButton(), '#505050');
 		animate(view.deleteButton(), '#A02020');
-	}
-	
-	function getSearch() {
-		model.getSearch(function(response) {
-			view.showSearch(response);
-			searchController(model, view).takeControl();
-		});
 	}
 	
 	return controller;
@@ -54,15 +50,16 @@ function searchController(model, view) {
 	var controller = {};
 	
 	controller.takeControl = function() {
-		view.resetSearch();
-		bindEvents();
+		model.getSearch(function(response) {
+			view.showSearch(response);
+			bindEvents();
+		});
 	}
 	
 	function bindEvents() {
 		view.searchButton().bind('click', postSearch);
 		view.closeButton().bind('click', view.closeSearch);
-		view.deleteButton().bind('click', view.makeItDelete);
-		//view.deleteButton().bind('click', deleteController(model, view).takeControl)
+		view.deleteButton().bind('click', deleteController(model, view).takeControl)
 		view.searchField().bind('keydown', function(e) {
 			(e && e.which === 13) && (postSearch());
 		});
@@ -78,12 +75,22 @@ function searchController(model, view) {
 	return controller;
 }
 
-function deleteController() {
+function deleteController(model, view) {
 	var controller = {};
 	
 	controller.takeControl = function() {
-		
+		model.getDeleteDialog(function(response) {
+			view.showDeleteDialog(response);
+			bindEvents();
+		});
 	};
+	
+	function bindEvents() {
+		view.noButton().bind('click', view.closeDeleteDialog);
+		view.yesButton().bind('click', view.submitDelete);
+		animate(view.yesButton(), '#505050');
+		animate(view.noButton(), '#A02020');
+	}
 	
 	return controller;
 };
@@ -102,14 +109,13 @@ function createView() {
 		nameField: function() { return $('#form input[name="name"]'); },
 		emailField: function() { return $('#form input[name="email"]'); },
 		friendField: function(i) { return $('#form input[name="friends['+i+']"]'); },
-		methodField: function() { return $('#form input[name="_method"]'); }
+		methodField: function() { return $('#form input[name="_method"]'); },
+		yesButton: function() { return $('#yes'); },
+		noButton: function() { return $('#no'); }
 	};
 	
 	view.showSearch = function(data) {
 	  dom.overlay().html(data);
-	};
-	
-	view.resetSearch = function() {
 		dom.errorMessage().addClass('invisible');
 		dom.searchField().val('');
 		dom.overlay().removeClass('invisible');
@@ -137,7 +143,17 @@ function createView() {
 		dom.errorMessage().removeClass('invisible');
 	};
 	
-	view.makeItDelete = function() {
+	view.showDeleteDialog = function(data) {
+		dom.overlay().html(data);
+		dom.overlay().removeClass('invisible');
+	};
+	
+	view.closeDeleteDialog = function() {
+		dom.overlay().addClass('invisible');
+	};
+	
+	view.submitDelete = function() {
+		view.closeDeleteDialog();
 		dom.methodField().attr('value', 'delete');
 		dom.okButton().get(0).click();
 	};
@@ -148,5 +164,8 @@ function createView() {
 	view.closeButton = dom.closeButton;
 	view.searchField = dom.searchField;
 	view.deleteButton = dom.deleteButton;
+	view.yesButton = dom.yesButton;
+	view.noButton = dom.noButton;
+	
 	return view;
 }
