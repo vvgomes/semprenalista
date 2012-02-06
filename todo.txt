@@ -1,2 +1,1 @@
-- think about a better way to show/hide stuff (overlay, error message, delete button...)
 - functional specs

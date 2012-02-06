@@ -30,8 +30,7 @@ put '/' do
 end
 
 delete '/' do
-  #Nightclubber.find_by(params[:email]).delete
-  puts "deleting!!!! #{params[:email]}"
+  Nightclubber.find_by(params[:email]).delete
   redirect to '/'
 end
 
