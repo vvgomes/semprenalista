@@ -15,7 +15,6 @@ unless ENV['RACK_ENV'] == 'production'
     end
     
     RSpec::Core::RakeTask.new(:functional) do |spec|
-      system 'export DISPLAY=:99.0'
       spec.pattern = 'spec/functional/**/*_spec.rb'
     end
     
@@ -28,7 +27,7 @@ unless ENV['RACK_ENV'] == 'production'
     end
   end
   
-  task :spec => [n[:models], n[:integration], n[:javascript], n[:functional]]
+  task :spec => [n[:models], n[:integration], n[:javascript]]
 end
 
 
