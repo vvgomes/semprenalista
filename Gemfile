@@ -12,6 +12,7 @@ gem 'json'
 group :test do
   gem 'rspec'
   gem 'jasmine'
+  gem 'selenium-webdriver'
 end
 
 # Add your own local bundler stuff

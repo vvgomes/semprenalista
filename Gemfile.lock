@@ -81,4 +81,5 @@ DEPENDENCIES
   nokogiri
   rake
   rspec
+  selenium-webdriver
   sinatra
