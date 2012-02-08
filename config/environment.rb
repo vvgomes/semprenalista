@@ -12,7 +12,7 @@ Mongoid.configure do |config|
   else
     begin
       config.master = Mongo::Connection.
-        from_uri('mongodb://localhost:27017').
+        from_uri('mongodb://127.0.0.1:27017').
         db('semprenalista')
     rescue
       puts 'No DB.'
