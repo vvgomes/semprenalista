@@ -14,16 +14,20 @@ unless ENV['RACK_ENV'] == 'production'
       spec.pattern = 'spec/integration/**/*_spec.rb'
     end
     
+    RSpec::Core::RakeTask.new(:functional) do |spec|
+      spec.pattern = 'spec/functional/**/*_spec.rb'
+    end
+    
     task :javascript => [:require_jasmine] do
       Rake::Task['jasmine:ci'].invoke
     end
     
-    task :jasmine => [:require_jasmine] do
+    task :jasmine_server => [:require_jasmine] do
       Rake::Task['jasmine'].invoke
     end
   end
   
-  task :spec => [n[:models], n[:integration], n[:javascript]]
+  task :spec => [n[:models], n[:integration], n[:javascript], n[:functional]]
 end
 
 

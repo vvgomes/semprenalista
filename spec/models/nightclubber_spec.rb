@@ -108,7 +108,7 @@ describe Nightclubber do
       end
 
       it 'should be able to extract the friends' do
-        @sabella.friends.should =~ ['Thiago', 'Nascimento']
+        @sabella.friends.should =~ ['Thiago']
       end
     end
     
@@ -118,7 +118,7 @@ describe Nightclubber do
         
         @sabella.should_receive(:update_attributes).with(
           :name => 'Jose Bartiella', 
-          :friends => ['Thiago', 'Nascimento'])
+          :friends => ['Thiago'])
         
         @sabella.parse params
       end
@@ -176,7 +176,7 @@ describe Nightclubber do
       :email => 'lipe@tw.com',
       :friends => {
         :f0 => 'Thiago',
-        :f1 => 'Nascimento',
+        :f1 => '',
         :f2 => '',
         :f3 => ''
       }
