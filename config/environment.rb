@@ -6,6 +6,7 @@ Dir.glob(File.expand_path(File.dirname(__FILE__)+'/../app/models/**/*.rb')).each
 
 Mongoid.configure do |config|
   if ENV['MONGOHQ_URL']
+    puts ">>>>>>>>>> GOT A MONGOHQ_URL #{ENV['MONGOHQ_URL']}"
     conn = Mongo::Connection.from_uri(ENV['MONGOHQ_URL'])
     uri = URI.parse(ENV['MONGOHQ_URL'])
     config.master = conn.db(uri.path.gsub(/^\//, ''))
@@ -14,6 +15,7 @@ Mongoid.configure do |config|
       config.master = Mongo::Connection.
         from_uri('mongodb://127.0.0.1:27017').
         db('semprenalista')
+        puts ">>>>>>>>>> GOT A LOCALHOST CONNECTION!"
     rescue
       puts 'No DB.'
     end
