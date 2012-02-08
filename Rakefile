@@ -15,6 +15,7 @@ unless ENV['RACK_ENV'] == 'production'
     end
     
     RSpec::Core::RakeTask.new(:functional) do |spec|
+      system 'export DISPLAY=:99.0'
       spec.pattern = 'spec/functional/**/*_spec.rb'
     end
     
