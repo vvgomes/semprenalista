@@ -1,7 +1,7 @@
 require 'selenium-webdriver'
 
 describe 'A new nightclubber' do
-  HOME = 'http://localhost:9292'
+  HOME = 'http://127.0.0.1:9292'
   
   before :all do
     @driver = Selenium::WebDriver.for :firefox
