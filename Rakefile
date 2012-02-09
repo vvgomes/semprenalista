@@ -3,7 +3,6 @@ require 'rake'
 
 unless ENV['RACK_ENV'] == 'production'
   require 'rspec/core/rake_task'
-  require 'selenium/rake/server_task'
   task :default => :spec
 
   n = namespace :spec do
@@ -28,7 +27,7 @@ unless ENV['RACK_ENV'] == 'production'
     end
   end
   
-  task :spec => [n[:models], n[:integration], n[:javascript], n[:functional]]
+  task :spec => [n[:models], n[:integration], n[:javascript]]
 end
 
 task :server do
