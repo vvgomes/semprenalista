@@ -43,7 +43,7 @@ describe 'A new nightclubber', :type => :request do
             
       it 'should see the error message at /' do
         page.current_url.should_not =~ /done/
-        page.should have_content "Email j\303\241 cadastrado :("
+        page.should have_content 'Email j&aacute cadastrado :('
       end
 
     end
