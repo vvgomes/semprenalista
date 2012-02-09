@@ -125,6 +125,16 @@ describe Nightclubber do
     end  
     
   end
+  
+  it 'should not be valid without name' do
+    unamed = Nightclubber.new '', 'lipe@gmail.com', ['Marano']
+    unamed.should_not be_valid
+  end
+  
+  it 'should not be valid without email' do
+    unamed = Nightclubber.new 'Filipe Sabella', '', ['Marano']
+    unamed.should_not be_valid
+  end
 
   it 'should create an empty new instance' do
     empty = Nightclubber.empty

@@ -11,7 +11,7 @@
   &nbsp;pra sempre :)
   
 %form{:id => "form", :action => "/", :method => "post"}
-  - unless @clubber.valid?
+  - if error
     %p{:class => "error"}
       Email j&aacute cadastrado :(
   %p

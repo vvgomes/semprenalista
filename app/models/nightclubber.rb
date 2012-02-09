@@ -9,7 +9,9 @@ class Nightclubber
   field :friends, :type => Array, :default => []
   
   embeds_many :subscriptions
-
+  
+  validates_presence_of :name
+  validates_presence_of :email
   validates_uniqueness_of :email
 
   def initialize name, email, friends

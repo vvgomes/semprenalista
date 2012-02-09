@@ -9,7 +9,7 @@ end
 
 get '/' do
   @clubber = Nightclubber.empty
-  haml :index
+  haml :index, :locals => { :error => false }
 end
 
 post '/' do
@@ -18,7 +18,7 @@ post '/' do
     session[:subscribed] = true
     redirect to '/done'
   else
-    haml :index
+    haml :index, :locals => { :error => true }
   end
 end
 
