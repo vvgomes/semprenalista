@@ -3,6 +3,7 @@ require 'rake'
 
 unless ENV['RACK_ENV'] == 'production'
   require 'rspec/core/rake_task'
+  require 'selenium/rake/server_task'
   task :default => :spec
 
   n = namespace :spec do
@@ -16,7 +17,7 @@ unless ENV['RACK_ENV'] == 'production'
     
     RSpec::Core::RakeTask.new(:functional) do |spec|
       spec.pattern = 'spec/functional/**/*_spec.rb'
-    end
+    end    
     
     task :javascript => [:require_jasmine] do
       Rake::Task['jasmine:ci'].invoke
@@ -29,7 +30,6 @@ unless ENV['RACK_ENV'] == 'production'
   
   task :spec => [n[:models], n[:integration], n[:javascript], n[:functional]]
 end
-
 
 task :server do
   system 'rackup'
