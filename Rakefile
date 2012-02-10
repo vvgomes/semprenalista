@@ -27,7 +27,7 @@ unless ENV['RACK_ENV'] == 'production'
     end
   end
   
-  task :spec => [n[:models], n[:integration], n[:requests], n[:javascript]]
+  task :spec => [n[:models], n[:integration], n[:javascript], n[:requests]]
 end
 
 task :server do
