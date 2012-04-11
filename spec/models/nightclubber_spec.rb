@@ -131,11 +131,53 @@ describe Nightclubber do
     unamed.should_not be_valid
   end
   
-  it 'should not be valid without email' do
-    unamed = Nightclubber.new 'Filipe Sabella', '', ['Marano']
-    unamed.should_not be_valid
+  it 'should be fine without friends' do
+    lonely = Nightclubber.new 'Filipe Sabella', 'lipe@gmail.com', []
+    lonely.should be_valid
   end
-
+  
+  context 'when validating names' do
+    
+    before do
+      @illegal = ['.', '"', '\'', '\\', '/', '<', '>', '&', '%']
+    end
+    
+    it 'should not accept illegal characters in his name' do
+      @illegal.each do |name|
+        troll = Nightclubber.new name, 'lipe@gmail.com', ['Marano']
+        troll.should_not be_valid 
+      end
+    end
+    
+    it 'should not accept illegal characters in his friends names' do
+      @illegal.each do |name|
+        troll = Nightclubber.new 'Filipe Sabella', 'lipe@gmail.com', [name]
+        troll.should_not be_valid 
+      end
+    end
+    
+  end
+  
+  it 'should not be valid without email' do
+    emailess = Nightclubber.new 'Filipe Sabella', '', ['Marano']
+    emailess.should_not be_valid
+  end
+  
+  context 'when validating email' do
+    
+    before do
+      @illegal = ['"', '\'', '\\', '/', '<', '>', '&', '%']
+    end
+    
+    it 'should not accept illegal characters in his email' do
+      @illegal.each do |email|
+        troll = Nightclubber.new 'Filipe Sabella', email, ['Marano']
+        troll.should_not be_valid 
+      end
+    end
+    
+  end
+  
   it 'should create an empty new instance' do
     empty = Nightclubber.empty
     empty.name.should be == ''
