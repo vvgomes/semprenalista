@@ -14,13 +14,13 @@ class Nightclubber
   validates_presence_of :email
   validates_uniqueness_of :email
   
-  validates_format_of :name, :with => /^([a-zA-ZÀ-ÿ]+\s?)+[a-zA-ZÀ-ÿ]+$/
+  validates_format_of :name, :with => /#{'^([a-zA-ZÀ-ÿ]+\s?)+[a-zA-ZÀ-ÿ]+$'}/
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
   validate :validate_friends
 
   def validate_friends
     return if friends.empty?
-    invalids = friends.map{|f|f.match(/^([a-zA-ZÀ-ÿ]+\s?)+[a-zA-ZÀ-ÿ]+$/)}.select{|e|e.nil?}
+    invalids = friends.map{|f|f.match(/#{'^([a-zA-ZÀ-ÿ]+\s?)+[a-zA-ZÀ-ÿ]+$'}/)}.select{|e|e.nil?}
     errors.add(:friends, 'Invalid friend(s) name') unless invalids.empty?
   end
   
