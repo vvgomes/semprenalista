@@ -8,7 +8,7 @@ describe 'An existing nightclubber', :type => :request, :js => true do
     Nightclubber.new('Filipe Sabella', 'lipe@gmail.com', ['Marano', 'Pedro']).save
     visit '/'
     click_link 'edit'
-    sleep 1
+    sleep 2
     within('#overlay') do
       fill_in 'search', :with => 'lipe@gmail.com'
       click_button 'OK'
