@@ -14,13 +14,13 @@ class Nightclubber
   validates_presence_of :email
   validates_uniqueness_of :email
   
-  validates_format_of :name, :with => /#{'^([a-zA-ZÀ-ú]+\s?)+[a-zA-ZÀ-ú]+$'}/
+  validates_format_of :name, :with => /^([a-zA-ZÁÀÃÂáàãâÉÈÊêÍÌíìÓÒÔÕóòôõÚÙÜúùüÇçÑñ]+\s?)+[a-zA-ZÁÀÃÂáàãâÉÈÊêÍÌíìÓÒÔÕóòôõÚÙÜúùüÇçÑñ]+$/
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
   validate :validate_friends
 
   def validate_friends
     return if friends.empty?
-    invalids = friends.map{|f|f.match(/#{'^([a-zA-ZÀ-ú]+\s?)+[a-zA-ZÀ-ú]+$'}/)}.select{|e|e.nil?}
+    invalids = friends.map{|f|f.match(/^([a-zA-ZÁÀÃÂáàãâÉÈÊêÍÌíìÓÒÔÕóòôõÚÙÜúùüÇçÑñ]+\s?)+[a-zA-ZÁÀÃÂáàãâÉÈÊêÍÌíìÓÒÔÕóòôõÚÙÜúùüÇçÑñ]+$/)}.select{|e|e.nil?}
     errors.add(:friends, 'Invalid friend(s) name') unless invalids.empty?
   end
   
@@ -114,7 +114,7 @@ class Nightclubber
     end
     result
   end
-
+  
   private
   
   def subscribed_urls
