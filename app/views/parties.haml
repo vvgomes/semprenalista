@@ -1,13 +1,24 @@
-%h2
-  Pr&oacute;ximas Festas
-#parties
-  - nightclubs.each do |n|
-    %details
-      %summary
-        = n.name
-      %ul
-        - n.parties.each do |p|
-          %li
-            %a{:href => "#{p.url}"}
-              = p.name
+%link{:rel => "stylesheet", :type => "text/css", :href => "css/parties.css"}
 
+%h2
+  Próximas Festas
+
+- nightclubs.each do |n|
+  #accordion2.accordion
+    .accordion-group
+      .accordion-heading
+        %a.accordion-toggle{"data-parent" => "#accordion2", "data-toggle" => "collapse", :href => "#collapse#{n.name}"}
+          %i.icon-hand-right
+          &nbsp;
+          %strong
+            = n.name
+      .accordion-body.collapse{:id => "collapse#{n.name}"}
+        .accordion-inner
+          %ul
+          - n.parties.each do |p|
+            %li
+              %a{:href => "#{p.url}"}
+                = p.name
+
+%script{:src => "js/lib/bootstrap-collapse.js"}
+%script{:src => "js/parties.js"} 

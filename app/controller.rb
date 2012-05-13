@@ -3,76 +3,66 @@ require File.expand_path(File.dirname(__FILE__) + '/../config/environment')
 configure do
   enable :sessions
   set :app_file, __FILE__
-  set :public_folder, File.dirname(__FILE__)+'/../public'
   set :views, File.dirname(__FILE__)+'/views'
+  set :public_folder, File.dirname(__FILE__)+'/../public'
+end
+
+helpers do
+  def load_clubber email
+    Nightclubber.where(:email => email).first
+  end
+
+  def feedback_after operation 
+    { :create => '<strong>Feito!</strong> Voce está em todas as listas para sempre :)',
+      :update => 'Inscrição alterada com sucesso.',
+      :delete => 'Inscrição removida com sucesso.'
+    }[operation]
+  end
 end
 
 get '/' do
   @clubber = Nightclubber.empty
-  haml :index, :locals => { :error => false }
+  haml :index
 end
 
 post '/' do
   @clubber = Nightclubber.parse(params)
   if @clubber.save
-    session[:subscribed] = true
-    redirect to '/done'
+    flash[:notice] = feedback_after :create
+    redirect to '/'
   else
-    haml :index, :locals => { :error => true }
+    haml :index 
   end
 end
 
 put '/' do
-  @clubber = Nightclubber.find_by(params[:email])
+  @clubber = load_clubber params[:email]
   @clubber.parse params
-  session[:subscribed] = true
-  redirect to '/done'
+  if @clubber.save
+    flash[:notice] = feedback_after :update
+    redirect to '/'
+  else
+    haml :index  
+  end
 end
 
 delete '/' do
-  Nightclubber.find_by(params[:email]).delete
+  @clubber = load_clubber params[:email]
+  @clubber.delete
+  flash[:notice] = feedback_after :delete
   redirect to '/'
 end
 
-get '/done' do
-  redirect to '/' unless session[:subscribed]
-  session[:subscribed] = false
-  haml :done
-end
-
 get '/search' do
-  erb :search
-end
-
-post '/search' do
   content_type :json
-  @clubber = Nightclubber.find_by(params[:email])
+  @clubber = load_clubber params[:email]
   @clubber.to_json
 end
 
-get '/delete' do
-  erb :delete
-end
-
-get '/nightclubbers' do
-  haml :nightclubbers, :locals => {
-    :names => Nightclubber.sorted_names
-  }
-end
-
 get '/parties' do
-  haml :parties, :locals => {
-    :nightclubs => Nightclub.all
-  }
+  haml :parties, :locals => { :nightclubs => Nightclub.all }
 end
 
 get '/about' do
   haml :about
-end
-
-get '/subscriptions' do
-  erb :subscriptions, :locals => {
-    :subscriptions => Nightclubber.all_subscriptions,
-    :missing => Nightclubber.missing_emails_with_party_urls(Party.all)
-  }
 end

@@ -1,9 +1,26 @@
-%article
-  %h2 
-    Sobre...
-  %p{:id => "about"}
-    %a{:href => "http://github.com/vvgomes/semprenalista"}
-      %img{:src => "images/gh.png"}
-    %a{:href => "http://about.me/vvgomes"}
-      %img{:src => "images/me.png"}  
+%link{:rel => "stylesheet", :type => "text/css", :href => "css/about.css"}
 
+%h2
+  Sobre...
+
+.row
+  .span3
+    .well
+      %p.name
+        Vinicius Gomes
+      %p.links  
+        %a{:href => "http://github.com/vvgomes"}
+          %img{:src => "img/gh.png"}
+        %a{:href => "http://about.me/vvgomes"}
+          %img{:src => "img/me.png"}
+  .span3
+    .well
+      %p.name
+        Pedro Nascimento
+      %p.links  
+        %a{:href => "http://github.com/lunks"}
+          %img{:src => "img/gh.png"}
+        %a{:href => "http://about.me/lunks"}
+          %img{:src => "img/me.png"}        
+
+%script{:src => "js/about.js"} 

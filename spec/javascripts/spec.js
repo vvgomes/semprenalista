@@ -1,33 +1,4 @@
-describe('highlight animation', function() {
-	var animation, button;
-	var html = '<input id="ok" type="button"/>';
-	var darker = 'rgb(80, 80, 80)';
-	var normal = 'rgb(128, 128, 128)';
-
-	beforeEach(function() {
-		$('body').append(html);
-		button = $('#ok');
-		button.css('background-color', normal);
-		animate(button, darker);
-	});
-
-	afterEach(function() {
-		button.remove();
-	});
-	
-	it('should highlight the button on mouse over', function() {
-		button.trigger('mouseover');
-		expect(button.css('background-color')).toBe(darker);
-	});
-
-	it('should restore the button on mouse out', function() {
-		button.trigger('mouseout');
-		expect(button.css('background-color')).toBe(normal);
-	});
-
-});
-
-describe('search model', function() {
+/*describe('search model', function() {
 	var model, view;
 	
 	beforeEach(function() {
@@ -147,8 +118,8 @@ describe('search controller', function() {
 	var model, view, fakeDeleteController, realDeleteController, realAnimate;
 	var html = 
 		'<input type="search" id="search" value="foo"/>'+
-    '<input type="button" id="go"/>'+
-    '<input type="button" id="close"/>'+
+    	'<input type="button" id="go"/>'+
+    	'<input type="button" id="close"/>'+
 		'<input type="button" id="delete"/>';
 	
 	beforeEach(function() {
@@ -298,4 +269,4 @@ describe('delete controller', function() {
 		animate = realAnimate;
 	}
 	
-});
+});*/

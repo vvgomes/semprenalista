@@ -1,0 +1,17 @@
+h2 {
+	margin-bottom: 5px;
+}
+
+div.row {
+	margin: 0px;
+}
+
+div.row p {
+	font-size: 16px;
+	text-align: right;
+}
+
+div.well {
+	width: 130px;
+}
+

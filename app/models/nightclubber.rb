@@ -10,18 +10,17 @@ class Nightclubber
   
   embeds_many :subscriptions
   
-  validates_presence_of :name
-  validates_presence_of :email
-  validates_uniqueness_of :email
-  
-  validates_format_of :name, :without => /\.|"|\'|\\|\/|<|>|\&|\%/
-  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
+  validates_presence_of :name, :message => 'Nome é necessário.'
+  validates_presence_of :email, :message => 'Email é necessário.'
+  validates_uniqueness_of :email, :message => 'Este email já foi utilizado.'
+  validates_format_of :name, :without => /\.|"|\'|\\|\/|<|>|\&|\%/, :message => 'Nome inválido.'
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :message => 'Email inválido.'
   validate :validate_friends
 
   def validate_friends
     return if friends.empty?
     invalids = friends.map{|f|f.match(/\.|"|\'|\\|\/|<|>|\&|\%/)}.select{|e|!e.nil?}
-    errors.add(:friends, 'Invalid friend(s) name') unless invalids.empty?
+    errors.add(:friends, 'Nome de amigo inválido.') unless invalids.empty?
   end
   
   def initialize name, email, friends
@@ -71,14 +70,6 @@ class Nightclubber
   
   def self.empty
     Nightclubber.new('', '', ['', '', '', ''])
-  end
-
-  def self.sorted_names
-    Nightclubber.all.to_a.inject([]){|names, dude|names+[dude.name]+dude.friends}.sort
-  end
-  
-  def self.find_by email
-    Nightclubber.where(:email => email).to_a.first
   end
   
   def self.all_subscriptions

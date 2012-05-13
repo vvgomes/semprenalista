@@ -15,7 +15,7 @@ describe Job do
     end
 
     it 'should find by email' do
-      Nightclubber.should_receive(:find_by).with('lipe@gmail.com').and_return @clubber
+      Nightclubber.should_receive(:where).with(:email => 'lipe@gmail.com').and_return [@clubber]
       @job.run 'lipe@gmail.com'
     end
   

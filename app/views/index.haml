@@ -1,48 +1,91 @@
+%link{:rel => "stylesheet", :type => "text/css", :href => "css/index.css"}
+
+%h1
+  Sempre na Lista
 %p
-  Oi! Preencha o formulario abaixo para colocar voce e seus amigos
-  na lista de descontos de todas as festas do&nbsp;
-  %a{:href => "http://www.cabaretpoa.com.br"}Cabaret
-  ,&nbsp;
-  %a{:href => "http://www.beco203.com.br"}Beco
-  ,&nbsp;
-  %a{:href => "http://www.laikaclub.com.br/"}Laika
-  &nbsp;e da
-  %a{ :href => 'http://www.casadolado.com.br' }Casadolado
-  &nbsp;pra sempre :)
+  Esteja na lista de descontos de todas as festas do 
+  = succeed ',' do
+    %a{:href => "http://www.cabaretpoa.com.br"} Cabaret
+  = succeed ',' do
+    %a{:href => "http://www.beco203.com.br"} Beco
+  = succeed ',' do
+    %a{:href => "http://www.laikaclub.com.br"} Laika
+  e da
+  %a{ :href => "http://www.casadolado.com.br"} Casadolado
+  pra sempre :)
+
+#content
   
-%form{:id => "form", :action => "/", :method => "post"}
-  - if error
-    %p{:class => "error"}
-      Email j&aacute cadastrado :(
-  %p
-    %input{:name => "name",:type => "text",:placeholder => "Seu nome",:required => "true",:value => @clubber.name}
-  %p
-    %input{:name => "email",:type => "email",:placeholder =>"Seu email",:required => "true",:value => @clubber.email}
-  %p
-    %input{:name => "friends[0]", :type => "text", :placeholder => "Um amigo", :value => @clubber.friends[0]}
-  %p
-    %input{:name => "friends[1]", :type => "text", :placeholder => "Outro amigo", :value => @clubber.friends[1]}
-  %p
-    %input{:name => "friends[2]", :type => "text", :placeholder => "Mais um", :value => @clubber.friends[2]}
-  %p
-    %input{:name => "friends[3]", :type => "text", :placeholder => "O último", :value => @clubber.friends[3]}
-  #buttons
-    .controls
-      %input{:id => "ok", :class => "proceed", :name => "submit", :type => "submit", :value => "OK"}
-      %input{:id => "delete", :class => "abort invisible", :name => "delete", :type => "button", :value => "Deletar" }
+  - if @clubber.errors.any?
+    #flash.alert.fade.in.alert-error
+      %button.close{"data-dismiss" => "alert"} ×
+      %strong Ops! 
+      = @clubber.errors.messages.keys.map{|k|@clubber.errors.messages[k].join(' ')}.join(' ')
+
+  - if flash[:notice]
+    #flash.alert.fade.in.flash
+      %button.close{"data-dismiss" => "alert"} ×
+      = flash[:notice]
+
+  #social
     #tweet  
-      %a{:id => "twitter", :href => "https://twitter.com/share", :class => "twitter-share-button", 'data-text' => 'Party more, pay less! \o/', 'data-size' => 'medium', 'data-hashtags' => 'semprenalista', 'data-url' => 'http://semprenalista.com'}Tweet  
+      %a#twitter.twitter-share-button{:href => "https://twitter.com/share", 'data-text' => 'Party more, pay less! \o/', 'data-size' => 'medium', 'data-hashtags' => 'semprenalista', 'data-url' => 'http://semprenalista.com'} Tweet
+    #like
+      %iframe{:src => "//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fsemprenalista.com&amp;send=false&amp;layout=standard&amp;width=450&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font=arial&amp;height=80&amp;appId=291277474263762", :scrolling => "no", :frameborder => "0", :style => "border:none; overflow:hidden; width:450px; height:80px;", :allowTransparency => "true"}
 
-  %input{:type => "hidden", :name => "_method", :value => "post"}
+  %form.well#main-form{:action => "/", :method => "post"}
+    %p
+      %input{:name => "name", :type => "text", :placeholder => "Seu nome", :required => "true", :value => @clubber.name, :autofocus => true}
+    %p
+      %input{:name => "email", :type => "email", :placeholder => "Seu email", :required => "true", :value => @clubber.email}
+    %p
+      %input{:name => "friends[0]", :type => "text", :placeholder => "Um amigo", :value => @clubber.friends[0]}
+    %p
+      %input{:name => "friends[1]", :type => "text", :placeholder => "Outro amigo", :value => @clubber.friends[1]}
+    %p
+      %input{:name => "friends[2]", :type => "text", :placeholder => "Mais um", :value => @clubber.friends[2]}
+    %p
+      %input{:name => "friends[3]", :type => "text", :placeholder => "O último", :value => @clubber.friends[3]}
+    %p
+      %button.btn.btn-success#submit{:type => "submit", :name => "submit"}
+        %i.icon-ok.icon-white
+        OK
+      
+      %button.btn.btn-danger.invisible#delete{:href => "#delete-box", "data-toggle" => "modal"}
+        %i.icon-trash.icon-white
+        Deletar
 
-#like
-  %iframe{ :src => "//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fsemprenalista.com&amp;send=false&amp;layout=standard&amp;width=450&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font=arial&amp;height=80&amp;appId=291277474263762", :scrolling => "no", :frameborder => "0", :style => "border:none; overflow:hidden; width:450px; height:80px;", :allowTransparency => "true" }
-%footer
-  %small
-    Se voce j&aacute; se cadastrou, clique&nbsp;
-    %a{:id => "edit", :href => "#"}aqu&iacute;
-    &nbsp;para editar.
-    
-#overlay{:class => "invisible"}
-    
-%script{:src => "javascripts/index.js"} 
+    %input{:type => "hidden", :name => "_method", :value => "post"}  
+
+  %footer
+    %small
+      Se voce já se cadastrou, clique 
+      %a#edit{:href => "#search-box", "data-toggle" => "modal"} aquí
+      para editar.
+
+#search-box.modal.hide.fade
+  .modal-header
+    %button.close{"data-dismiss" => "modal"} ×
+    %h3 
+      Buscar
+  .modal-body
+    #search-alert.alert.alert-block.alert-error.fade.in.invisible
+      Não encontrado :(
+    .input-append
+      %input#search-email.span6{:size => "50", :type => "text", :placeholder => "email", :autofocus => true}
+      %button#search-button.btn.btn-primary{:type => "button"} OK
+
+#delete-box.modal.hide.fade
+  .modal-header
+    %button.close{"data-dismiss" => "modal"} ×
+    %h3 
+      Deletar
+  .modal-body
+    %p
+      Quer realmente remover sua inscrição?&nbsp;&nbsp;
+      %button.btn#delete-no{"data-dismiss" => "modal", :href => "#"} Não
+      %button.btn.btn-primary#delete-yes{"data-dismiss" => "modal", :href => "#"} Sim
+
+%script{:src => "js/lib/bootstrap-modal.js"}
+%script{:src => "js/lib/bootstrap-alert.js"}
+%script{:src => "js/index.js"}

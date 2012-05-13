@@ -1,0 +1,14 @@
+#nav {
+	background-color: #2c2c2c;
+}
+
+.container-fluid {
+	padding: 20px;
+	padding-top: 0px;
+}
+
+.hero-unit {
+	margin: 120px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}

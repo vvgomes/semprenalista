@@ -185,25 +185,6 @@ describe Nightclubber do
     empty.friends.each{|f| f.should be == ''}
   end
   
-  it 'should give me all people names sorted' do
-    Nightclubber.stub!(:all).and_return [
-      Nightclubber.new('Daniela', 'mail', ['Alberto']),
-      Nightclubber.new('Carla', 'mail', ['Borges'])
-    ]
-    Nightclubber.sorted_names.should be == ['Alberto', 'Borges', 'Carla', 'Daniela']
-  end
-  
-  it 'should find by email' do
-    sabella = Nightclubber.new 'Filipe Sabella', 'lipe@gmail.com', ['Marano', 'Pedro']
-    Nightclubber.stub!(:where).with(:email => 'lipe@gmail.com').and_return sabella
-    Nightclubber.find_by('lipe@gmail.com').should be == sabella
-  end
-  
-  it 'should give me an empty result back when not able to find by email' do
-    Nightclubber.stub!(:where).and_return []
-    Nightclubber.find_by('lipe@gmail.com').should be_nil
-  end
-  
   it 'should not find the next one to subscribe when everybody is in all list' do
     Nightclubber.stub!(:need_subscription).and_return []
     Nightclubber.next_to_subscribe([mock]).should be_nil

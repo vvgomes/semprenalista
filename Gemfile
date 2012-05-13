@@ -8,6 +8,7 @@ gem 'mechanize'
 gem 'mongoid',  '2.0'
 gem 'bson_ext', '~>1.3'
 gem 'json'
+gem 'sinatra-flash', :require => 'sinatra/flash'
 
 group :test do
   gem 'rspec'
