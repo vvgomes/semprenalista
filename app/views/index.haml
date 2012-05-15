@@ -17,13 +17,13 @@
 #content
   
   - if @clubber.errors.any?
-    #flash.alert.fade.in.alert-error
+    #error.alert.fade.in.alert-error
       %button.close{"data-dismiss" => "alert"} ×
       %strong Ops! 
       = @clubber.errors.messages.keys.map{|k|@clubber.errors.messages[k].join(' ')}.join(' ')
 
   - if flash[:notice]
-    #flash.alert.fade.in.flash
+    #notice.alert.fade.in.flash
       %button.close{"data-dismiss" => "alert"} ×
       = flash[:notice]
 
@@ -88,4 +88,5 @@
 
 %script{:src => "js/lib/bootstrap-modal.js"}
 %script{:src => "js/lib/bootstrap-alert.js"}
+%script{:src => "js/lib/EventEmitter.min.js"}
 %script{:src => "js/index.js"}

@@ -8,3 +8,20 @@ function createTweetButton() {
 	  }
 	}(document, "script", "twitter-wjs");
 }
+
+function activateLink(page) {
+	$('li#'+page).toggleClass('active');
+}
+
+function e(selector) {
+	return function() { 
+		return $(selector); 
+	};
+}
+
+function when(key, callback) {
+	return function(event) {
+		if(event.which != key) return; 
+		callback(event);
+	};
+}
