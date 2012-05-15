@@ -10,10 +10,10 @@ function createSearch(emitter) {
 			dom.box = e('#search-box');
 			dom.email = e('#search-email');
 			dom.alert = e('#search-alert');
-			dom.ok = e('#search-button');
+			dom.ok = e('#search-ok');
 			return dom;
 		},
-
+		
 		createController: function(dom, sendRequest) {
 			var controller = {};
 
@@ -107,17 +107,19 @@ $(document).ready(function(){
 	createTweetButton();
 	activateLink('home');
 
-	(function(emitter) {
+	var emitter = new EventEmitter();
+	
+	(function() {
 		var search = createSearch(emitter);
 		var dom = search.createDom();
 		var controller = search.createController(dom, search.sendRequest);
 		search.bindEvents(dom, controller);
-	})(new EventEmitter());
+	})();
 
-	(function(emitter) {
+	(function() {
 		var form = createForm(emitter);
 		var dom = form.createDom();
 		var controller = form.createController(dom);
 		form.bindEvents(dom, controller);
-	})(new EventEmitter());
+	})();
 });

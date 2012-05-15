@@ -141,7 +141,7 @@ describe('form', function() {
 			expect(controller.populate).toHaveBeenCalled();
 		});
 
-		xit('should trigger controller.confirmDelete when "yes" button is clicked', function() {
+		it('should trigger controller.confirmDelete when "yes" button is clicked', function() {
 			spyOn(controller, 'confirmDelete');
 			form.bindEvents(dom, controller);
 			dom.delYes().trigger('click');
@@ -159,8 +159,8 @@ describe('form', function() {
 			box: e($('<div/>')),
 			ok: e($('<button/>')),
 			del: e($('<button/>')),
-			delBox: e($('#delete-box')),
-			delYes: e($('#delete-yes')),
+			delBox: e($('<div/>')),
+			delYes: e($('<button/>')),
 			error: e($('<div/>')),
 			notice: e($('<div/>'))
 		};

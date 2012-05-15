@@ -22,6 +22,7 @@ describe 'An existing nightclubber', :type => :request, :js => true do
 
   it 'should be able to see his current info' do
     search
+    sleep 3
     find_field('name').value.should be == 'Filipe Sabella'
     find_field('email').value.should be == 'lipe@gmail.com'
     find_field('friends[0]').value.should be == 'Marano'
@@ -65,7 +66,7 @@ describe 'An existing nightclubber', :type => :request, :js => true do
     visit '/'
     click_link 'edit'
     fill_in 'search-email', :with => 'lipe@gmail.com'
-    click_button 'search-button'
+    click_button 'search-ok'
   end
 
 end
