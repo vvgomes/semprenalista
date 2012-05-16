@@ -1,3 +1,4 @@
+# encoding: utf-8
 describe 'A new nightclubber', :type => :request do
 
   before :all do

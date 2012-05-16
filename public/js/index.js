@@ -13,7 +13,7 @@ function createSearch(emitter) {
 			dom.ok = e('#search-ok');
 			return dom;
 		},
-		
+
 		createController: function(dom, sendRequest) {
 			var controller = {};
 
@@ -107,19 +107,21 @@ $(document).ready(function(){
 	createTweetButton();
 	activateLink('home');
 
-	var emitter = new EventEmitter();
-	
-	(function() {
-		var search = createSearch(emitter);
-		var dom = search.createDom();
-		var controller = search.createController(dom, search.sendRequest);
-		search.bindEvents(dom, controller);
-	})();
+	(function(emitter) {
 
-	(function() {
-		var form = createForm(emitter);
-		var dom = form.createDom();
-		var controller = form.createController(dom);
-		form.bindEvents(dom, controller);
-	})();
+		(function() {
+			var search = createSearch(emitter);
+			var dom = search.createDom();
+			var controller = search.createController(dom, search.sendRequest);
+			search.bindEvents(dom, controller);
+		})();
+
+		(function() {
+			var form = createForm(emitter);
+			var dom = form.createDom();
+			var controller = form.createController(dom);
+			form.bindEvents(dom, controller);
+		})();
+
+	})(new EventEmitter());
 });

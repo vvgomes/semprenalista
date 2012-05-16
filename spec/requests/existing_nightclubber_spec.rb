@@ -1,3 +1,4 @@
+# encoding: utf-8
 describe 'An existing nightclubber', :type => :request, :js => true do
 
   before :all do
