@@ -134,7 +134,6 @@ describe('form', function() {
 	describe('event binding', function() {
 
 		it('should trigger controller.populate when "populate" event is fired', function() {
-			console.log('form is ', form);
 			spyOn(controller, 'populate');
 			form.bindEvents(dom, controller);
 			emitter.emit('populate');
