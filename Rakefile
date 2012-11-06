@@ -14,9 +14,9 @@ unless ENV['RACK_ENV'] == 'production'
       spec.pattern = 'spec/integration/**/*_spec.rb'
     end
     
-    RSpec::Core::RakeTask.new(:requests) do |spec|
-      spec.pattern = 'spec/requests/**/*_spec.rb'
-    end    
+    #RSpec::Core::RakeTask.new(:requests) do |spec|
+    # spec.pattern = 'spec/requests/**/*_spec.rb'
+    #end    
     
     task :javascripts => [:require_jasmine] do
       Rake::Task['jasmine:ci'].invoke
@@ -27,7 +27,7 @@ unless ENV['RACK_ENV'] == 'production'
     end
   end
   
-  task :spec => [n[:models], n[:integration], n[:javascripts], n[:requests]]
+  task :spec => [n[:models], n[:integration], n[:javascripts]]#, n[:requests]]
 end
 
 task :server do

@@ -22,6 +22,7 @@ describe 'Navigators' do
 
   def browse nightclub
     parties = nightclub.parties
+    #parties.should_not be_empty
     parties.each do |p|
       response = p.add_to_list sabella
       response.code.should be 200
