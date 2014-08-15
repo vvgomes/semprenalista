@@ -1,23 +1,5 @@
-source :rubygems
+source 'https://rubygems.org'
+ruby '2.1.1'
 
-gem 'rake'
-gem 'sinatra'
-gem 'haml'
-gem 'nokogiri'
-gem 'mechanize'
-gem 'mongoid',  '2.0'
-gem 'bson_ext', '~>1.3'
-gem 'json'
-gem 'sinatra-flash', :require => 'sinatra/flash'
-
-group :test do
-  gem 'rspec'
-  gem 'selenium-webdriver', '~> 2.22.0'
-  gem 'capybara'
-  gem 'jasmine'
-end
-
-# Add your own local bundler stuff
-local_gemfile = File.dirname(__FILE__) + "/.Gemfile"
-instance_eval File.read local_gemfile if File.exists? local_gemfile
+gem 'rails'
 

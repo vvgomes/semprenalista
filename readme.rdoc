@@ -1,4 +1,0 @@
-= Sempre na lista! {<img src="https://secure.travis-ci.org/vvgomes/semprenalista.png"/>}[http://travis-ci.org/vvgomes/semprenalista]
-It aims to help people to party more and spending less money.
-
-Running at: http://semprenalista.com
