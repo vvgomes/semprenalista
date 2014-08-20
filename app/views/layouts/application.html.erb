@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Semprenalista</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <meta property="og:title" content="semprenalista" />
+  <meta property="og:type" content="other" />
+  <meta property="og:url" content="http://semprenalista.com" />
+  <meta property="og:site_name" content="semprenalista" />
+  <meta property="fb:admins" content="viniciusvgomes" />
+</head>
+<body>
+
+<header>
+  <% if current_user %>
+    Welcome <strong><%= current_user.name %></strong>!
+    <%= link_to "Sign out", signout_path, id: "sign_out" %>
+  <% else %>
+    <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
+  <% end %>
+</header>
+
+<%= yield %>
+
+</body>
+</html>
