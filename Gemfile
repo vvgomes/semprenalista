@@ -13,5 +13,4 @@ gem 'spring', :group => :development
 gem 'unicorn'
 gem 'debugger', :group => [:development, :test]
 gem 'omniauth-facebook'
-gem 'flatui-rails'
 
