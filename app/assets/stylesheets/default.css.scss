@@ -1,29 +1,81 @@
+// colors
 $body-color: #ffffff;
 $title-color: #1abc9c;
 $text-color: #34495e;
+$link-color: #2980b9;
+$link-hover-color: #3498db;
+
+// screens
+$screen-xs: 480px;
+$screen-sm: 768px;
+$screen-md: 992px;
+
+html, body {
+  height: 100%;
+}
 
 body {
   margin: 0;
-  padding: 0;
-  text-align: center;
+  padding: 80px 10% 30px;
+  text-align: left;
+  font-family: 'Times', serif;
+  font-weight: lighter;
   background-color: $body-color;
   color: $text-color;
-  font-family: sans-serif;
+}
 
-  h1, p {
-    font-weight: lighter;
+a {
+  color: $link-color;
+  text-decoration: underline;
+
+  &:hover {
+    color: $link-hover-color;
+  }
+
+  &.fa {
+    text-decoration: none;
   }
 }
 
+h1, p, ul {
+  padding: 0;
+  margin: 10px 0 10px;
+}
+
 h1 {
-  margin: 50px 0 20px;
-  padding: 2px 0 2px;
-  font-size: 2em;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-weight: lighter;
+  font-size: 2.5em;
   letter-spacing: -1px;
   color: $title-color; 
 }
 
 p {
-  margin: 5px 5%;
-  text-align: justify;
+  letter-spacing: 1px;
 }
+
+ul#links {
+  list-style: none;
+
+  & > li {
+    display: inline;
+
+    & + li {
+      margin-left: 10px;
+    }
+  }
+}
+
+@media(min-width: $screen-sm) {
+  body {
+    padding-left: 20%;
+    padding-right: 20%;
+  }
+}
+
+@media(min-width: $screen-md) {
+  body {
+    padding-right: 25%;
+  }
+}
+
