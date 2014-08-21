@@ -1,0 +1,27 @@
+$body-color: #ffffff;
+$title-color: #1abc9c;
+$text-color: #34495e;
+
+body {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  background-color: $body-color;
+  color: $text-color;
+  font-family: sans-serif;
+  h1, p {
+    font-weight: lighter;
+  }
+}
+
+h1 {
+  margin: 50px 0 20px;
+  padding: 2px 0 2px;
+  font-size: 2em;
+  color: $title-color; 
+}
+
+p {
+  margin: 5px 5%;
+  text-align: justify;
+}
