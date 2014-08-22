@@ -36,6 +36,15 @@ a {
   &.fa {
     text-decoration: none;
   }
+
+  &#sign_in {
+    letter-spacing: -1px;
+    font-weight: 100;
+
+    &:before {
+      padding-right: 5px;
+    }
+  }
 }
 
 h1, p, ul {
