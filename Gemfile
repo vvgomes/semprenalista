@@ -10,7 +10,6 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'unicorn'
 gem 'omniauth-facebook'
-gem 'pg'
 
 group :development, :test do
   gem 'sqlite3'
@@ -20,4 +19,9 @@ end
 
 group :development do
   gem 'spring'
+end
+
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
 end
