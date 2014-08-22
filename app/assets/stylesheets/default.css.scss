@@ -17,6 +17,7 @@ html, body {
 body {
   margin: 0;
   padding: 80px 10% 30px;
+  max-width: 600px;
   text-align: left;
   font-family: 'Times', serif;
   font-weight: lighter;
@@ -67,12 +68,6 @@ ul#links {
   body {
     padding-left: 20%;
     padding-right: 20%;
-  }
-}
-
-@media(min-width: $screen-md) {
-  body {
-    padding-right: 25%;
   }
 }
 
