@@ -9,5 +9,7 @@ deploy:
   on:
     repo: vvgomes/semprenalista
   run:
+    - "maintenace:on"
     - "rake db:migrate"
     - restart
+    - "maintenace:off"
