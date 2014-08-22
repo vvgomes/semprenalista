@@ -17,3 +17,4 @@ dump.rdb
 .rspec
 .keep
 *.sqlite3
+.dpl/
