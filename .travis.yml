@@ -5,7 +5,6 @@ deploy:
   provider: heroku
   api_key:
     secure: JI0unxBL2S33sV743V7EKZYJlPxkv2CQuy7evFr5h9LZxM+8KK9l1qLvW/nkkNolT0U4HSGT8nXrar955GMQqvy9+xaXGdDE6VhsZgts1pCL04xQib763Zxcnc42IxM5mdi6o7epO1MVkh1oHvSqX9q6n2fcPpJx/ivOzIfCfyk=
-  strategy: git
   on:
     repo: vvgomes/semprenalista
   run:

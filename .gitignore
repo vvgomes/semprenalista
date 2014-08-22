@@ -18,3 +18,4 @@ dump.rdb
 .keep
 *.sqlite3
 .dpl/
+.anvil/
