@@ -14,7 +14,6 @@
   <meta property="fb:admins" content="viniciusvgomes" />
 </head>
 <body>
-
 <header>
   <% unless ENV['RAILS_ENV'] == 'production' %>
     <% if current_user %>
@@ -26,8 +25,6 @@
     <% end %>
   <% end %>
 </header>
-
 <%= yield %>
-
 </body>
 </html>
