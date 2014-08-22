@@ -21,7 +21,7 @@
     Welcome <strong><%= current_user.name %></strong>!
     <%= link_to 'Sign out', signout_path, :id => 'sign_out'%>
   <% else %>
-    <%= link_to 'Entre com Facebook', '/auth/facebook', :id => 'sign_in', :class => 'fa fa-facebook-square fa-2x' %>
+    <%= link_to 'Entre com Facebook', '/auth/facebook', :id => 'sign_in', :class => 'fa fa-facebook-square fa-lg' %>
   <% end %>
 <% end %>
 </header>
