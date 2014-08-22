@@ -50,11 +50,8 @@ h1 {
   color: $title-color; 
 }
 
-p {
-  letter-spacing: 1px;
-}
-
 ul#links {
+  margin-top: 20px;
   list-style: none;
 
   & > li {
