@@ -8,9 +8,9 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
-gem 'spring', :group => :development
 gem 'unicorn'
 gem 'omniauth-facebook'
+gem 'pg'
 
 group :development, :test do
   gem 'sqlite3'
@@ -18,3 +18,6 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
 end
 
+group :development do
+  gem 'spring'
+end
