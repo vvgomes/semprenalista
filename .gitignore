@@ -19,3 +19,4 @@ dump.rdb
 *.sqlite3
 .dpl/
 .anvil/
+private
