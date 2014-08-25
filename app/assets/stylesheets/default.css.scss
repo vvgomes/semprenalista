@@ -27,13 +27,14 @@ body {
 
 a {
   color: $link-color;
-  text-decoration: underline;
+  text-decoration: none;
 
   &:hover {
     color: $link-hover-color;
+    text-decoration: underline;
   }
 
-  &.fa {
+  &.fa:hover {
     text-decoration: none;
   }
 
