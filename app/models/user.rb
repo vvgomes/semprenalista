@@ -11,4 +11,12 @@ class User < ActiveRecord::Base
       user.save!
     end
   end
+
+  def ==(other)
+    self.email == other.email
+  end
+
+  def to_h
+    { :name => name, :email => email }
+  end
 end
