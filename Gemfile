@@ -10,6 +10,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'unicorn'
 gem 'omniauth-facebook'
+gem 'httparty'
 
 group :development, :test do
   gem 'sqlite3'
