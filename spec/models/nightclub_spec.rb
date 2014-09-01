@@ -65,13 +65,4 @@ describe Nightclub, :type => :model do
       with({ :name => 'Dude', :email => 'dude@gmail.com'}, ['foo', 'bar'])
     end
   end
-
-  describe '.all' do
-    let(:lab) { Nightclub.new('Lab', partybot) }
-    let(:cucko) { Nightclub.new('Cucko', partybot) }
-
-    specify do
-      expect(Nightclub.all).to eq([beco, cucko, lab])
-    end
-  end
 end

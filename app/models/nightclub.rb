@@ -16,12 +16,4 @@ class Nightclub
   def ==(other)
     self.name == other.name
   end
-
-  class << self
-    def all
-      @all ||= ['Beco', 'Cucko', 'Lab'].map do |name|
-        new(name, ENV[name.upcase]+'.herokuapp.com')
-      end
-    end
-  end
 end
