@@ -1,4 +1,6 @@
 class Nightclub < ActiveRecord::Base
+  has_many :tickets
+  
   def parties(filters={})
     partybot.parties(filters).map{ |raw| Party.new(raw) }
   end

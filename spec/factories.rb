@@ -5,5 +5,9 @@ FactoryGirl.define do
     uid '666'
     provider 'facebook'
   end
+
+  factory :nightclub do
+    name 'Beco'
+  end
 end
 
