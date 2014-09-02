@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140827173052) do
+ActiveRecord::Schema.define(version: 20140901172706) do
+
+  create_table "nightclubs", force: true do |t|
+    t.string "name"
+  end
 
   create_table "users", force: true do |t|
     t.string   "provider"

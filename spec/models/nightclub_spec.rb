@@ -1,21 +1,25 @@
 require 'rails_helper'
 
 describe Nightclub, :type => :model do
-  subject(:beco) { Nightclub.new('Beco', partybot) }
+  subject(:beco) { Nightclub.new(:name => 'Beco') }
   let(:partybot) { double.as_null_object }
 
-  describe '#==' do
-    specify 'same name' do
-      expect(beco).to eq(Nightclub.new('Beco', partybot))
-    end
-
-    specify 'different name' do
-      expect(beco).not_to eq(Nightclub.new('Lab', partybot))
-    end
+  before do
+    allow(PartybotClient).to receive(:new).and_return(partybot)
   end
 
   describe '#name' do
     specify { expect(beco.name).to eq('Beco') }
+  end
+
+  describe '#==' do
+    specify 'same name' do
+      expect(beco).to eq(Nightclub.new(:name => 'Beco'))
+    end
+
+    specify 'different name' do
+      expect(beco).not_to eq(Nightclub.new(:name => 'Lab'))
+    end
   end
 
   describe '#parties' do
@@ -61,8 +65,9 @@ describe Nightclub, :type => :model do
     before { beco.subscribe(user, [p1, p2]) }
 
     specify do
-      expect(partybot).to have_received(:subscribe).
-      with({ :name => 'Dude', :email => 'dude@gmail.com'}, ['foo', 'bar'])
+      expect(partybot).to have_received(:subscribe).with(
+        { :name => 'Dude', :email => 'dude@gmail.com'}, ['foo', 'bar']
+      )
     end
   end
 end
