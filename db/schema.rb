@@ -27,7 +27,6 @@ ActiveRecord::Schema.define(version: 20140901172706) do
     t.datetime "oauth_expires_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.datetime "subscribed_at"
   end
 
 end
