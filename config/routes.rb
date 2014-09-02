@@ -54,8 +54,14 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
-  match 'auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
-  match 'signout', to: 'sessions#destroy', as: 'signout', via: [:get, :post]
+  match 'auth/:provider/callback',
+    to: 'sessions#create',
+    via: [:get, :post]
+
+  match 'signout',
+    to: 'sessions#destroy',
+    as: 'signout',
+    via: [:get, :post]
 
   root to: 'application#index'
 end
