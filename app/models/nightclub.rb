@@ -13,10 +13,10 @@ class Nightclub < ActiveRecord::Base
 
   private
   def partybot
-    @client ||= PartybotClient.new("#{ENV[name.upcase]}.herokuapp.com")
+    @client ||= PartybotClient.new(partybot_server)
   end
 
-  def partybot_uri
+  def partybot_server
     app = ENV[name.upcase]
     "#{app}.herokuapp.com" if app
   end
