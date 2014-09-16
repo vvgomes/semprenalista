@@ -9,5 +9,10 @@ FactoryGirl.define do
   factory :nightclub do
     name 'Beco'
   end
+
+  factory :subscription do
+    user
+    nightclub
+  end
 end
 

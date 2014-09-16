@@ -1,12 +1,13 @@
 class Nightclub < ActiveRecord::Base
   has_many :tickets
   
-  def parties(filters={})
-    partybot.parties(filters).map{ |raw| Party.new(raw) }
+  def parties
+    partybot.parties.map{ |raw| Party.new(raw) }
   end
 
-  def subscribe(user, parties)
-    partybot.subscribe(user.to_h, parties.map(&:public_id))
+  def add_guest(user)
+    user.update_subscription(self)
+    partybot.add_guest(user.to_h)
   end
 
   def ==(other)
@@ -14,6 +15,7 @@ class Nightclub < ActiveRecord::Base
   end
 
   private
+
   def partybot
     @client ||= PartybotClient.new(partybot_server)
   end

@@ -5,15 +5,13 @@ class PartybotClient
     agent.base_uri(partybot_server)
   end
 
-  def parties(filters={})
-    res = agent.get('/parties', filters)
-    res.parsed_response
+  def parties
+    agent.get('/parties').parsed_response
   end
 
-  def subscribe(user, parties)
-    payload = { :user => user, :parties => parties }
-    res = agent.post('/subscriptions', payload)
-    res.parsed_response
+  def add_guest(user)
+    payload = { :name => user.name, :email => user.email }
+    agent.post('/guests', payload).code
   end
 
   private
