@@ -1,9 +1,8 @@
-task :subscribe => :environment do
-  Nightclub.all.each do |club|
-    user = Ticket.next(club).user
-    parties = club.parties(:missing => user)
-    puts club.subscribe(user, parties)
-    user.issue_ticket(club)
+namespace :add_guest do
+  [:beco, :cucko, :lab].each do |name| 
+    task name => :environment do
+      AddGuestJob.new(Nightclub.find_by(:name => name)).run
+    end
   end
 end
 

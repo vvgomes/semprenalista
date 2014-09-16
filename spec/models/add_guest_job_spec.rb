@@ -1,9 +1,11 @@
 require 'rails_helper'
 
 describe AddGuestJob, :type => :model do
-  describe '.run' do
-    let(:beco) { build(:nightclub) }
+  let(:beco) { build(:nightclub) }
 
+  subject { AddGuestJob.new(beco) }
+
+  describe '#run' do
     let(:bro) { build(:user) }
     let(:sis) { build(:user) }
     let(:dude) { build(:user) }
@@ -13,7 +15,7 @@ describe AddGuestJob, :type => :model do
       allow(beco).to receive(:add_guest).with(bro).and_return(bro_status)
       allow(beco).to receive(:add_guest).with(sis).and_return(sis_status)
       allow(beco).to receive(:add_guest).with(dude).and_return(dude_status)
-      AddGuestJob.run(beco)
+      subject.run
     end
 
     context 'bro is not a guest' do
