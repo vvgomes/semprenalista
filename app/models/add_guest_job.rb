@@ -16,7 +16,7 @@ class AddGuestJob
   private
 
   def log(msg)
-    Rails.logger.info("[AddGuestJob.run(#{@club.name})]: #{msg}")
+    Rails.logger.info("AddGuestJob[#{@club.name}]: #{msg}")
   end
 end
 
