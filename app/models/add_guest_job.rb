@@ -4,18 +4,18 @@ class AddGuestJob
   end
 
   def run
-    info "starting..."
+    log "starting..."
     User.guest_line(@club).each do |user|
       status = @club.add_guest(user)
-      info "#{user.email} => #{status}"
+      log "#{user.email} => #{status}"
       status == 204 ? next : break
     end
-    info "done."
+    log "done."
   end
 
   private
 
-  def info(msg)
+  def log(msg)
     Rails.logger.info("[AddGuestJob.run(#{@club.name})]: #{msg}")
   end
 end
