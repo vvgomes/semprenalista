@@ -1,4 +1,4 @@
 task :wakeup => :environment do
-  HTTParty.get(ENV['URL'])
+  HTTParty.get("http://#{ENV['URL']}/")
 end
 
