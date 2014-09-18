@@ -1,3 +1,3 @@
 ['beco', 'cucko', 'lab'].each do |name|
-  Nightclub.create(:name => name)
+  Club.create(:name => name)
 end

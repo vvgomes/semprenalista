@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe AddGuestJob, :type => :model do
-  let(:beco) { build(:nightclub) }
+  let(:beco) { build(:club) }
 
   subject { AddGuestJob.new(beco) }
 

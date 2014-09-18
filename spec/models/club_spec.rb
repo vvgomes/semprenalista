@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe Nightclub, :type => :model do
-  subject { Nightclub.new(:name => 'beco') }
+describe Club, :type => :model do
+  subject { Club.new(:name => 'beco') }
   let(:partybot) { double.as_null_object }
 
   before do
@@ -14,11 +14,11 @@ describe Nightclub, :type => :model do
 
   describe '#==' do
     specify 'same name' do
-      expect(subject).to eq(Nightclub.new(:name => 'beco'))
+      expect(subject).to eq(Club.new(:name => 'beco'))
     end
 
     specify 'different name' do
-      expect(subject).not_to eq(Nightclub.new(:name => 'lab'))
+      expect(subject).not_to eq(Club.new(:name => 'lab'))
     end
   end
 

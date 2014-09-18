@@ -24,8 +24,8 @@ class User < ActiveRecord::Base
   end
 
   def subscribe_to_all_clubs
-    Nightclub.all.each do |club|
-      Subscription.create(:nightclub => club, :user => self)
+    Club.all.each do |club|
+      Subscription.create(:club => club, :user => self)
     end
   end
 
@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
 
   def self.guest_line(club)
     Subscription.
-      where(:nightclub => club).
+      where(:club => club).
       order(:updated_at => :asc).
       map(&:user)
   end

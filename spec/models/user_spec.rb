@@ -62,15 +62,15 @@ describe User, :type => :model do
     end
 
     describe '#subscribe_to_all_clubs!' do
-      let(:club) { build(:nightclub)  }
+      let(:club) { build(:club)  }
 
       before do
-        allow(Nightclub).to receive(:all).and_return [club]
+        allow(Club).to receive(:all).and_return [club]
       end
 
       specify do
         expect(Subscription).to receive(:create).with({
-          :nightclub => club,
+          :club => club,
           :user => subject
         })
         subject.subscribe_to_all_clubs
@@ -78,8 +78,8 @@ describe User, :type => :model do
     end
 
     describe '#update_subscription' do
-      let(:club) { build(:nightclub) }
-      let(:subs) { build(:subscription, :nightclub => club) }
+      let(:club) { build(:club) }
+      let(:subs) { build(:subscription, :club => club) }
 
       before do
         allow(subject).to receive(:subscription_for).and_return(subs)

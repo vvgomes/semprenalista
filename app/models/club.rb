@@ -1,4 +1,4 @@
-class Nightclub < ActiveRecord::Base
+class Club < ActiveRecord::Base
   has_many :tickets
   
   def parties
@@ -12,6 +12,9 @@ class Nightclub < ActiveRecord::Base
 
   def ==(other)
     self.name == other.name
+  end
+
+  def import
   end
 
   private

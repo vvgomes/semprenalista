@@ -6,13 +6,13 @@ FactoryGirl.define do
     provider 'facebook'
   end
 
-  factory :nightclub do
+  factory :club do
     name 'Beco'
   end
 
   factory :subscription do
     user
-    nightclub
+    club
   end
 end
 
