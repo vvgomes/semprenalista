@@ -11,6 +11,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'unicorn'
 gem 'omniauth-facebook'
 gem 'httparty'
+gem 'actionpack-action_caching'
 
 group :development, :test do
   gem 'sqlite3'
