@@ -5,6 +5,10 @@ class Club < ActiveRecord::Base
     partybot.parties.map{ |raw| Party.new(raw) }
   end
 
+  def self.parties
+    Club.all.map(&:parties).flatten
+  end
+
   def add_guest(user)
     user.update_subscription(self)
     partybot.add_guest(user.to_h)
@@ -12,9 +16,6 @@ class Club < ActiveRecord::Base
 
   def ==(other)
     self.name == other.name
-  end
-
-  def import
   end
 
   private

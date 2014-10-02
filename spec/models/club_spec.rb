@@ -39,6 +39,23 @@ describe Club, :type => :model do
     end
   end
 
+  describe '.parties' do
+    let(:clubs) do
+      [
+        double(:name => 'beco', :parties => [:fuckrehab, :discorock]),
+        double(:name => 'cucko', :parties => [:london, :rockwork])
+      ]
+    end
+
+    before do
+      allow(Club).to receive(:all).and_return(clubs)
+    end
+
+    specify do
+      expect(Club.parties).to eq([:fuckrehab, :discorock, :london, :rockwork])
+    end
+  end
+
   describe '#add_guest' do
     let(:dude) { build(:user, :name => 'Dude', :email => 'dude@gmail.com') }
 
