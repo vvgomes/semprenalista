@@ -14,17 +14,19 @@
   <meta property="fb:admins" content="viniciusvgomes" />
 </head>
 <body>
-<header>
-  <% unless ENV['RAILS_ENV'] == 'production' %>
-    <% if current_user %>
-      Welcome <strong><%= current_user.name %></strong>!
-      <%= link_to 'Sign out', signout_path, :id => 'sign_out'%>
-    <% else %>
-      <%= link_to 'Entre com Facebook', '/auth/facebook',
-        :id => 'sign_in', :class => 'fa fa-facebook-square fa-lg' %>
+  <header>
+    <% unless ENV['RAILS_ENV'] == 'production' %>
+      <% if current_user %>
+        Welcome <strong><%= current_user.name %></strong>!
+        <%= link_to 'Sign out', signout_path, :id => 'sign_out'%>
+      <% else %>
+        <%= link_to 'Entre com Facebook', '/auth/facebook',
+          :id => 'sign_in', :class => 'fa fa-facebook-square fa-lg' %>
+      <% end %>
     <% end %>
-  <% end %>
-</header>
-<%= yield %>
+  </header>
+  <main>
+    <%= yield %>
+  </main>
 </body>
 </html>
